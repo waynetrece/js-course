@@ -74,6 +74,36 @@
         "字串 + 數學運算的結果會自動轉為字串拼接",
         "total * 0.8 就是打 8 折的計算方式"
       ]
+    },
+    {
+      "id": "ch15-c06",
+      "title": "巢狀 vs 扁平化寫法對比",
+      "explanation": "巢狀 if（if 包 if）層數太多時，程式碼會變得很難讀，俗稱「箭頭地獄」。可以用 && 把多層條件合併成一層，讓程式碼更扁平、好讀。例如「有票 && 身高 >= 120」可以取代先判斷有票再判斷身高的巢狀寫法。但兩種寫法結果一樣，哪種更好讀就用哪種，沒有絕對的對錯。",
+      "codeExamples": [
+        {
+          "code": "// 巢狀寫法\nif (hasTicket) {\n  if (height >= 120) {\n    console.log(\"可以玩\");\n  }\n}\n\n// 扁平化寫法（用 && 合併）\nif (hasTicket && height >= 120) {\n  console.log(\"可以玩\");\n}",
+          "output": "（兩種寫法結果相同）"
+        }
+      ],
+      "tips": [
+        "能用 && 合併的情況：兩個條件都要成立才執行同一件事",
+        "不能合併的情況：兩個分支要做不同的事"
+      ]
+    },
+    {
+      "id": "ch15-c07",
+      "title": "Guard Clause（提前返回）模式",
+      "explanation": "Guard Clause 是一種寫法技巧：把不符合的條件放前面先處理掉（提前 return 或提前結束），剩下的就是正常流程。這樣可以避免層層巢狀，讓主要邏輯保持在最外層。雖然現在還沒學到函式的 return，但概念可以先理解：「先排除例外，再處理正常」。",
+      "codeExamples": [
+        {
+          "code": "// 巢狀寫法（層層包裹）\nif (age >= 18) {\n  if (hasID) {\n    if (hasTicket) {\n      console.log(\"可以進場\");\n    } else {\n      console.log(\"請先購票\");\n    }\n  } else {\n    console.log(\"請出示證件\");\n  }\n} else {\n  console.log(\"未成年禁止進入\");\n}\n\n// Guard Clause 概念（提前處理例外）\nif (age < 18) {\n  console.log(\"未成年禁止進入\");\n} else if (!hasID) {\n  console.log(\"請出示證件\");\n} else if (!hasTicket) {\n  console.log(\"請先購票\");\n} else {\n  console.log(\"可以進場\");\n}",
+          "output": "（兩種寫法結果相同，Guard Clause 更扁平好讀）"
+        }
+      ],
+      "tips": [
+        "Guard Clause 口訣：先擋掉不行的，最後才是可以的",
+        "巢狀不超過 3 層，超過就考慮扁平化或 Guard Clause"
+      ]
     }
   ],
   "quizzes": [
@@ -183,6 +213,56 @@
       ],
       "correctIndex": 1,
       "explanation": "這段程式碼語法上沒有錯誤，可以正常執行。但它缺少 else 分支：沒有處理「有票但身高不夠」的情況，也沒有處理「沒票」的情況。在流程圖中，這些路徑都沒有對應的終點處理，代表邏輯不完整。"
+    },
+    {
+      "id": "ch15-q11",
+      "type": "multiple-choice",
+      "difficulty": 2,
+      "question": "以下兩種寫法，結果是否相同？\n\n寫法A：if (a) { if (b) { console.log(\"OK\"); } }\n寫法B：if (a && b) { console.log(\"OK\"); }",
+      "options": [
+        "結果不同，寫法A是巢狀，寫法B是合併",
+        "結果相同，兩種都是「a 和 b 都成立才印 OK」",
+        "結果相同，但寫法A效能比較好",
+        "結果不同，寫法B會同時檢查兩個條件"
+      ],
+      "correctIndex": 1,
+      "explanation": "兩種寫法的結果完全相同，都是「a 和 b 都成立時才會印出 OK」。寫法A用巢狀 if 逐層判斷，寫法B用 && 把兩個條件合併成一層。差別只在可讀性，結果是一樣的。"
+    },
+    {
+      "id": "ch15-q12",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "let isMember = false;\nlet total = 1500;\n\nif (isMember) {\n  if (total >= 1000) {\n    console.log(\"VIP 折扣\");\n  } else {\n    console.log(\"會員折扣\");\n  }\n} else {\n  console.log(\"原價\");\n}",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "原價",
+      "explanation": "isMember 是 false，所以外層 if 條件不成立，直接進入 else 區塊，印出「原價」。即使 total 是 1500（>= 1000），但因為外層條件就不成立了，內層的金額判斷根本不會執行。這跟 q01 的概念一樣：外層不過，內層不執行。"
+    },
+    {
+      "id": "ch15-q13",
+      "type": "code-prediction",
+      "difficulty": 3,
+      "code": "let age = 20;\nlet hasID = true;\nlet hasTicket = false;\n\nif (age < 18) {\n  console.log(\"未成年\");\n} else if (!hasID) {\n  console.log(\"請出示證件\");\n} else if (!hasTicket) {\n  console.log(\"請先購票\");\n} else {\n  console.log(\"可以進場\");\n}",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "請先購票",
+      "explanation": "這是 Guard Clause 模式，從上往下逐一檢查。age 是 20，20 < 18 不成立，跳過。hasID 是 true，!hasID 是 false，不成立，跳過。hasTicket 是 false，!hasTicket 是 true，成立，印出「請先購票」。年齡和證件都通過了，但沒有票所以被擋下來。"
+    },
+    {
+      "id": "ch15-q14",
+      "type": "true-false",
+      "difficulty": 2,
+      "statement": "巢狀 if 層數越多，程式碼越好讀，因為每個條件都分得很清楚。",
+      "question": "這個說法正確嗎？",
+      "correctAnswer": false,
+      "explanation": "巢狀 if 層數越多，程式碼反而越難讀，因為縮排會越來越深，形成所謂的「箭頭地獄」。雖然每個條件確實分得很清楚，但人類閱讀多層巢狀時容易搞混哪個 else 對應哪個 if。層數太多時，可以考慮用 && 合併或 Guard Clause 來扁平化。"
+    },
+    {
+      "id": "ch15-q15",
+      "type": "code-prediction",
+      "difficulty": 3,
+      "code": "let hasTicket = true;\nlet height = 115;\nlet hasParent = true;\n\nif (hasTicket) {\n  if (height >= 120) {\n    console.log(\"可以獨自搭乘\");\n  } else if (hasParent) {\n    console.log(\"需要家長陪同\");\n  } else {\n    console.log(\"無法搭乘\");\n  }\n} else {\n  console.log(\"請先購票\");\n}",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "需要家長陪同",
+      "explanation": "hasTicket 是 true，進入外層 if 區塊。height 是 115，115 >= 120 不成立，跳到 else if。hasParent 是 true，成立，印出「需要家長陪同」。這個範例的內層用了 if-else if-else 三段式判斷：身高夠可以自己玩、身高不夠但有家長可以陪同、身高不夠又沒家長就無法搭乘。"
     }
   ]
 }

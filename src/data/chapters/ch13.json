@@ -127,6 +127,34 @@
         "數字條件排序：嚴格（範圍小）放前面，寬鬆（範圍大）放後面",
         "字串條件不用特別排序，但建議照邏輯順序寫，方便閱讀"
       ]
+    },
+    {
+      "id": "ch13-c08",
+      "title": "初學者常見的判斷錯誤模式",
+      "explanation": "整理初學者在寫 if/else 時最常犯的 4 種錯誤：(1) 漏寫大括號：只有一行時可以省略大括號，但初學者容易因此出錯，加上第二行卻忘記補大括號，導致第二行不在判斷範圍內，建議永遠加大括號。(2) 條件裡用 = 而非 == 或 ===：if (x = 5) 是賦值不是比較，x 會被改成 5，而且因為 5 是 truthy，條件永遠成立。(3) 順序寫反：把寬鬆條件放前面，嚴格條件放後面，導致嚴格條件永遠不會被執行到。(4) 忘記 else 保底：沒有處理「以上皆非」的情況，當所有條件都不符合時，程式什麼都不做，容易產生預期外的結果。",
+      "codeExamples": [
+        {
+          "code": "// 錯誤 1：漏寫大括號\nlet score = 80;\n\nif (score >= 60)\n  console.log(\"及格\");\n  console.log(\"恭喜你\"); // 這行不在 if 裡面，永遠會執行\n\n// 正確寫法：永遠加大括號\nif (score >= 60) {\n  console.log(\"及格\");\n  console.log(\"恭喜你\");\n}",
+          "output": "及格\n恭喜你\n及格\n恭喜你"
+        },
+        {
+          "code": "// 錯誤 2：用 = 而非 ===\nlet x = 3;\n\nif (x = 5) {\n  console.log(\"x 等於 5\"); // 永遠會執行！\n}\nconsole.log(x); // x 被改成 5 了\n\n// = 是賦值，把 5 存進 x\n// 5 是 truthy，所以條件永遠成立",
+          "output": "x 等於 5\n5"
+        },
+        {
+          "code": "// 錯誤 3：順序寫反\nlet score = 95;\n\nif (score >= 60) {\n  console.log(\"及格\"); // 95 >= 60 是 true，到這就停了\n} else if (score >= 90) {\n  console.log(\"優秀\"); // 永遠執行不到\n}",
+          "output": "及格"
+        },
+        {
+          "code": "// 錯誤 4：忘記 else 保底\nlet fruit = \"榴槤\";\n\nif (fruit === \"蘋果\") {\n  console.log(\"30 元\");\n} else if (fruit === \"香蕉\") {\n  console.log(\"15 元\");\n}\n// 榴槤不在選項中，什麼都不會發生\n// 加上 else 就能處理這種情況",
+          "output": "（沒有輸出）"
+        }
+      ],
+      "tips": [
+        "養成好習慣：永遠加大括號、永遠用三等號、嚴格放前面、記得 else 保底",
+        "if (x = 5) 是賦值，if (x === 5) 才是比較，一個等號差很多",
+        "寫完判斷後自我檢查：有沒有漏掉什麼情況沒處理到？"
+      ]
     }
   ],
   "quizzes": [
@@ -231,6 +259,56 @@
       "question": "console.log 會印出什麼？",
       "correctAnswer": "免費入場",
       "explanation": "age 是 5，第一個條件是 age < 6 || age >= 65。5 < 6 是 true，|| 只要其中一個是 true 整個就是 true，所以第一個條件成立，印出「免費入場」，後面全部跳過。"
+    },
+    {
+      "id": "ch13-q11",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "let x = 5;\n\nif (x = 10) {\n  console.log(\"成立\");\n} else {\n  console.log(\"不成立\");\n}\nconsole.log(x);",
+      "question": "console.log 會依序印出什麼？（提示：注意 if 小括號裡是一個等號還是三個等號）",
+      "correctAnswer": "成立\n10",
+      "explanation": "這是一個經典陷阱！if (x = 10) 裡面用的是一個等號 =，這是「賦值」不是「比較」。所以 x 會被改成 10，而賦值運算的結果就是 10。因為 10 是 truthy（非零數字都是 truthy），條件成立，印出「成立」。接著第二個 console.log(x) 印出被改過的 x，也就是 10。正確的比較應該寫 if (x === 10)。"
+    },
+    {
+      "id": "ch13-q12",
+      "type": "multiple-choice",
+      "difficulty": 2,
+      "question": "switch 語句最適合用在什麼情境？",
+      "options": [
+        "判斷數字大小範圍（例如成績等級）",
+        "判斷一個變數等於多個固定值中的哪一個（例如星期幾）",
+        "判斷多個不同變數的條件",
+        "只有兩種情況的簡單判斷"
+      ],
+      "correctIndex": 1,
+      "explanation": "switch 最適合用在「一個變數要跟多個固定值做比對」的情境，例如判斷星期幾、月份、選單選項等。如果是判斷數字大小範圍（例如成績 >= 90），用 if / else if 會更方便；如果只有兩種情況，用 if / else 就夠了；如果要判斷多個不同變數，switch 也不適合。"
+    },
+    {
+      "id": "ch13-q13",
+      "type": "code-prediction",
+      "difficulty": 3,
+      "code": "let age = 25;\nlet hasLicense = false;\n\nif (age >= 18 && hasLicense) {\n  console.log(\"可以開車\");\n} else if (age >= 18) {\n  console.log(\"可以考駕照\");\n} else {\n  console.log(\"未成年\");\n}",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "可以考駕照",
+      "explanation": "age 是 25，hasLicense 是 false。第一個條件 age >= 18 && hasLicense，25 >= 18 是 true，但 hasLicense 是 false，&& 要兩個都是 true 才成立，所以第一個條件是 false。接著看第二個條件 age >= 18，25 >= 18 是 true，條件成立，印出「可以考駕照」。這題的重點是 && 的運作方式：只要其中一個是 false，整個就是 false。"
+    },
+    {
+      "id": "ch13-q14",
+      "type": "true-false",
+      "difficulty": 2,
+      "statement": "在 if 判斷中，if (score >= 60) 和 if (60 <= score) 的判斷結果完全相同。",
+      "question": "這個說法正確嗎？",
+      "correctAnswer": true,
+      "explanation": "正確。score >= 60 和 60 <= score 只是寫法順序不同，邏輯意思完全一樣，都是「score 大於等於 60」。不管 score 是什麼值，兩種寫法的判斷結果都會相同。一般習慣寫 score >= 60（變數在前面），比較直覺好讀。"
+    },
+    {
+      "id": "ch13-q15",
+      "type": "code-prediction",
+      "difficulty": 3,
+      "code": "let hour = 14;\nlet greeting;\n\nif (hour < 12) {\n  greeting = \"早安\";\n} else if (hour < 18) {\n  greeting = \"午安\";\n} else {\n  greeting = \"晚安\";\n}\n\nconsole.log(greeting);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "午安",
+      "explanation": "hour 是 14。第一個條件 hour < 12，14 < 12 是 false，跳過。第二個條件 hour < 18，14 < 18 是 true，條件成立，greeting 被設定為「午安」，後面的 else 跳過。最後 console.log(greeting) 印出「午安」。這題也展示了用 if/else if/else 搭配變數賦值的寫法，先宣告變數，再用判斷決定要存什麼值。"
     }
   ]
 }

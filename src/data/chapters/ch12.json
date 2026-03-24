@@ -82,11 +82,17 @@
         {
           "code": "let a = 1;\nlet b = 2;\nconsole.log(a == 1 || b == 5);\nconsole.log(a == 9 || b == 5);",
           "output": "true\nfalse"
+        },
+        {
+          "code": "// && 和 || 的差異對照\nlet isMember = true;\nlet hasTicket = false;\n\nconsole.log(isMember && hasTicket);  // 兩個都要 true\nconsole.log(isMember || hasTicket);  // 一個 true 就夠",
+          "output": "false\ntrue"
         }
       ],
       "tips": [
         "&& 口訣：「而且」全部都要過，所有條件都 true 結果才是 true",
-        "|| 口訣：「或者」一個就夠，任一條件是 true 結果就是 true"
+        "|| 口訣：「或者」一個就夠，任一條件是 true 結果就是 true",
+        "&& 真值表：true && true = true，其餘都是 false",
+        "|| 真值表：false || false = false，其餘都是 true"
       ]
     },
     {
@@ -106,6 +112,26 @@
       "tips": [
         "條件可以用 && 或 || 串三個以上",
         "先用白話想清楚「而且」還是「或者」，再翻譯成程式碼"
+      ]
+    },
+    {
+      "id": "ch12-c07",
+      "title": "短路求值（Short-circuit Evaluation）",
+      "explanation": "&& 和 || 有個進階特性叫「短路求值」。&& 如果左邊是 false，右邊不會執行（因為結果一定是 false）。|| 如果左邊是 true，右邊不會執行（因為結果一定是 true）。而且它們不只是回傳 true/false，而是回傳其中一個運算元的值。&& 回傳第一個 falsy 值或最後一個值；|| 回傳第一個 truthy 值或最後一個值。初學者先記住基本概念就好。",
+      "codeExamples": [
+        {
+          "code": "// || 短路：左邊 true 就不看右邊\nconsole.log(\"hello\" || \"world\");\nconsole.log(0 || \"預設值\");",
+          "output": "hello\n預設值"
+        },
+        {
+          "code": "// && 短路：左邊 false 就不看右邊\nconsole.log(0 && \"hello\");\nconsole.log(\"hello\" && \"world\");",
+          "output": "0\nworld"
+        }
+      ],
+      "tips": [
+        "|| 常用來設定預設值：value || '預設值'",
+        "&& 常用來做條件執行：條件 && 動作",
+        "初學者先記住 || 找第一個 truthy，&& 找第一個 falsy"
       ]
     }
   ],
@@ -211,6 +237,56 @@
       "question": "console.log 會印出什麼？",
       "correctAnswer": "false",
       "explanation": "&&（AND）要求兩邊條件都成立。height >= 130 成立（140 >= 130 是 true），但 age >= 10 不成立（8 >= 10 是 false）。只要有一邊是 false，&& 的結果就是 false。所以這個人身高夠但年齡不夠，不能搭雲霄飛車。"
+    },
+    {
+      "id": "ch12-q11",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "console.log(0 == false);\nconsole.log(\"\" == false);\nconsole.log(null == undefined);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "true\ntrue\ntrue",
+      "explanation": "這三個都是雙等號（==）寬鬆比較的經典陷阱。0 和 false 經過自動轉型後值相等，所以是 true。空字串 \"\" 和 false 轉型後也相等，所以是 true。null 和 undefined 在寬鬆比較中被視為相等（這是 JavaScript 的特殊規則），所以也是 true。這就是為什麼建議用三等號（===）的原因。"
+    },
+    {
+      "id": "ch12-q12",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "let name = \"\" || \"匿名\";\nconsole.log(name);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "匿名",
+      "explanation": "這是 || 短路求值的應用。空字串 \"\" 是 falsy 值，所以 || 會繼續看右邊，回傳 \"匿名\"。這個寫法常用來設定預設值：如果左邊沒有值（是 falsy），就用右邊的預設值。"
+    },
+    {
+      "id": "ch12-q13",
+      "type": "multiple-choice",
+      "difficulty": 2,
+      "question": "下列哪個表達式的結果「不是」布林值？",
+      "options": [
+        "5 > 3",
+        "true && false",
+        "\"hello\" || \"world\"",
+        "10 === \"10\""
+      ],
+      "correctIndex": 2,
+      "explanation": "5 > 3 回傳 true（布林值）。true && false 回傳 false（布林值）。10 === \"10\" 回傳 false（布林值）。但 \"hello\" || \"world\" 不是回傳布林值，而是回傳 \"hello\"（字串）。因為 || 的短路求值會回傳運算元本身的值，\"hello\" 是 truthy，所以直接回傳 \"hello\"。"
+    },
+    {
+      "id": "ch12-q14",
+      "type": "true-false",
+      "difficulty": 3,
+      "statement": "null === undefined 的結果是 true。",
+      "question": "這個說法正確嗎？",
+      "correctAnswer": false,
+      "explanation": "三等號（===）是嚴格比較，值和型別都要相同。null 的型別是 object，undefined 的型別是 undefined，型別不同所以結果是 false。注意：如果用雙等號（==）寬鬆比較，null == undefined 的結果會是 true，這是 JavaScript 的特殊規則。"
+    },
+    {
+      "id": "ch12-q15",
+      "type": "code-prediction",
+      "difficulty": 3,
+      "code": "let score = 0;\nlet display = score || \"沒有成績\";\nconsole.log(display);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "沒有成績",
+      "explanation": "這是一個常見的陷阱。score 的值是 0，但 0 在 JavaScript 中是 falsy 值。所以 || 會認為左邊「不成立」，跳過去回傳右邊的 \"沒有成績\"。問題在於 0 分其實是一個有效的成績，卻被當成「沒有值」。這就是用 || 設定預設值時需要小心的地方：如果 0 或空字串是合理的值，|| 會誤判。"
     }
   ]
 }

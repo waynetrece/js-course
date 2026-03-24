@@ -63,6 +63,50 @@
         }
       ],
       "tips": ["要複製陣列請用展開運算子 [...a] 或 a.slice()"]
+    },
+    {
+      "id": "ch07-c06",
+      "title": "讀取 vs 寫入操作對比",
+      "explanation": "陣列操作分兩大類。讀取操作：用索引讀取 arr[0]、.length、.indexOf()、.includes()，這些不會改變原陣列。寫入操作：push()、pop()、unshift()、shift()、arr[0] = 'new'、splice()，這些會改變原陣列。初學者常見錯誤是搞混哪些操作會改變原陣列、哪些不會。",
+      "codeExamples": [
+        {
+          "code": "let arr = [10, 20, 30];\n\n// --- 讀取操作（不會改變原陣列）---\nconsole.log(arr[0]);         // 10\nconsole.log(arr.length);     // 3\nconsole.log(arr.indexOf(20));// 1\nconsole.log(arr.includes(30));// true\nconsole.log(arr);            // [10, 20, 30]（沒變）",
+          "output": "10\n3\n1\ntrue\n[10, 20, 30]"
+        },
+        {
+          "code": "let arr = [10, 20, 30];\n\n// --- 寫入操作（會改變原陣列）---\narr.push(40);\nconsole.log(arr); // [10, 20, 30, 40]（多了 40）\n\narr[0] = 99;\nconsole.log(arr); // [99, 20, 30, 40]（第一筆被改了）",
+          "output": "[10, 20, 30, 40]\n[99, 20, 30, 40]"
+        }
+      ],
+      "tips": [
+        "讀取操作（不改原陣列）：arr[i]、.length、.indexOf()、.includes()、.slice()",
+        "寫入操作（會改原陣列）：push()、pop()、unshift()、shift()、splice()、arr[i] = 值",
+        "判斷技巧：如果你需要「拿資料來看」就是讀取；如果你需要「增刪改資料」就是寫入"
+      ]
+    },
+    {
+      "id": "ch07-c07",
+      "title": "常用方法速覽（splice / slice / indexOf）",
+      "explanation": "splice() 可以在任意位置新增或刪除元素（會改變原陣列）。slice() 可以擷取陣列的一部分（不會改變原陣列，回傳新陣列）。indexOf() 可以找到某個值的索引位置（找不到回傳 -1）。",
+      "codeExamples": [
+        {
+          "code": "// splice(起始索引, 刪除幾個, 要新增的元素...)\nlet arr = ['a', 'b', 'c', 'd'];\narr.splice(1, 1);         // 從索引 1 刪除 1 個\nconsole.log(arr);          // ['a', 'c', 'd']\n\narr.splice(1, 0, 'x');    // 從索引 1 刪除 0 個，插入 'x'\nconsole.log(arr);          // ['a', 'x', 'c', 'd']",
+          "output": "['a', 'c', 'd']\n['a', 'x', 'c', 'd']"
+        },
+        {
+          "code": "// slice(起始索引, 結束索引)  ※ 不包含結束索引\nlet arr = [10, 20, 30, 40, 50];\nlet part = arr.slice(1, 3);\nconsole.log(part);  // [20, 30]（取索引 1、2）\nconsole.log(arr);   // [10, 20, 30, 40, 50]（原陣列沒變）",
+          "output": "[20, 30]\n[10, 20, 30, 40, 50]"
+        },
+        {
+          "code": "// indexOf(要找的值)\nlet fruits = ['apple', 'banana', 'cherry'];\nconsole.log(fruits.indexOf('banana')); // 1（在索引 1）\nconsole.log(fruits.indexOf('grape'));   // -1（找不到）",
+          "output": "1\n-1"
+        }
+      ],
+      "tips": [
+        "splice 有 p（破壞）：會改變原陣列；slice 沒有 p（保護）：不會改變原陣列",
+        "indexOf 找不到回傳 -1，不是 0 也不是 undefined",
+        "slice(1, 3) 取的是索引 1 和 2，不包含索引 3（左閉右開）"
+      ]
     }
   ],
   "quizzes": [
@@ -175,6 +219,33 @@
       "options": ["let b = a", "let b = [...a]", "let b = a.push()", "let b = a.length"],
       "correctIndex": 1,
       "explanation": "[...a] 用展開運算子建立一個新陣列，內容和 a 一樣但不共用參考。"
+    },
+    {
+      "id": "ch07-q13",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "let arr = [10, 20, 30, 40, 50];\nlet part = arr.slice(1, 3);\nconsole.log(part);\nconsole.log(arr.length);",
+      "question": "兩行 console.log 分別會印出什麼？",
+      "correctAnswer": "[20, 30] 和 5",
+      "explanation": "slice(1, 3) 擷取索引 1 到 2（不含 3）的元素，回傳新陣列 [20, 30]。slice 不會改變原陣列，所以 arr 還是 5 筆，arr.length 是 5。"
+    },
+    {
+      "id": "ch07-q14",
+      "type": "multiple-choice",
+      "difficulty": 2,
+      "question": "下列哪個方法「不會」改變原陣列？",
+      "options": ["push()", "splice()", "slice()", "shift()"],
+      "correctIndex": 2,
+      "explanation": "slice() 會回傳一個新陣列，不會改變原陣列。push()、splice()、shift() 都會直接修改原陣列。記憶技巧：slice 沒有 p，代表「保護」原陣列。"
+    },
+    {
+      "id": "ch07-q15",
+      "type": "code-prediction",
+      "difficulty": 3,
+      "code": "let fruits = ['apple', 'banana', 'cherry'];\nlet idx = fruits.indexOf('grape');\nconsole.log(idx);\nfruits.splice(1, 1, 'mango');\nconsole.log(fruits);",
+      "question": "兩行 console.log 分別會印出什麼？",
+      "correctAnswer": "-1 和 [\"apple\", \"mango\", \"cherry\"]",
+      "explanation": "indexOf('grape') 找不到 'grape'，回傳 -1。splice(1, 1, 'mango') 從索引 1 刪除 1 個元素（'banana'），並在該位置插入 'mango'，所以陣列變成 ['apple', 'mango', 'cherry']。"
     }
   ]
 }

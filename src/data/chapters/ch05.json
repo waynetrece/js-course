@@ -23,7 +23,7 @@
       "title": "數字與字串相加的規則",
       "explanation": "只要 + 號的任一邊是字串，結果就會變成字串拼接。而 *、-、/ 只有數學運算的功能，遇到非數字才會產生 NaN。",
       "codeExamples": [{"code": "console.log(\"Wayne\" + 20);   // \"Wayne20\"\nconsole.log(10 + \"10\");      // \"1010\"\nconsole.log(\"10\" * \"10\");    // 100", "output": "Wayne20\n1010\n100"}],
-      "tips": ["+ 有字串就是拼接，結果是 string", "* - / 是數學，結果是 number 或 NaN"]
+      "tips": ["+ 有字串就是拼接，結果是 string", "* - / 是數學，結果是 number 或 NaN", "常見錯誤：兩個看起來像數字的字串用 + 號相加，結果是拼接不是數學加法（例如 \"5\" + \"3\" 是 \"53\" 不是 8）"]
     },
     {
       "id": "ch05-c04",
@@ -31,6 +31,28 @@
       "explanation": "模板字串用反引號包起來，搭配 ${} 可以直接把變數插入文字中，比起用 + 號串接更簡潔好讀。",
       "codeExamples": [{"code": "let name = \"Wayne\";\nlet age = 20;\nlet msg = `${name} 今年 ${age} 歲`;\nconsole.log(msg);", "output": "Wayne 今年 20 歲"}],
       "tips": ["反引號不是單引號，在鍵盤左上角", "${} 裡面放變數名稱"]
+    },
+    {
+      "id": "ch05-c05",
+      "title": "為什麼 + 號這麼特殊",
+      "explanation": "在 JavaScript 的四則運算中，只有 + 號同時具備「字串拼接」和「數學加法」兩種功能。其他運算子（-、*、/）只有數學運算功能，遇到字串時會自動嘗試轉成數字。+ 號的判斷規則是：只要任一邊是字串，就執行拼接；兩邊都是數字時才做加法。這是初學者最常搞混的地方。\n\n對照表：\n| 運算式 | 結果 | 原因 |\n| \"10\" + 10 | \"1010\" | + 碰到字串，拼接 |\n| \"10\" - 2 | 8 | - 只有數學功能，\"10\" 轉成 10 |\n| \"10\" * 2 | 20 | * 只有數學功能，\"10\" 轉成 10 |\n| \"hello\" - 1 | NaN | - 要轉數字，但 \"hello\" 轉不了 |",
+      "codeExamples": [
+        {"code": "// + 號：有字串就拼接\nconsole.log(\"10\" + 10);    // \"1010\"（字串拼接）\nconsole.log(10 + 10);      // 20（數學加法）", "output": "1010\n20"},
+        {"code": "// 其他運算子：只有數學功能\nconsole.log(\"10\" - 2);     // 8（字串自動轉數字）\nconsole.log(\"10\" * 2);     // 20\nconsole.log(\"hello\" - 1);  // NaN（轉不了數字）", "output": "8\n20\nNaN"}
+      ],
+      "tips": ["加號雙面人：碰字串就拼接，純數字才加法", "其他運算子只有數學功能，字串會被強制轉數字"]
+    },
+    {
+      "id": "ch05-c06",
+      "title": "跳脫字元與特殊字元",
+      "explanation": "如果字串裡面需要放引號或特殊符號怎麼辦？用反斜線 \\ 來「跳脫」。常用的跳脫字元有 \\\"（在雙引號字串裡放雙引號）、\\'（在單引號字串裡放單引號）、\\n（換行）、\\\\（放反斜線本身）。另一個更簡單的解法是：外面用單引號，裡面就可以直接用雙引號，反之亦然。模板字串（反引號）裡面可以直接放單引號和雙引號，不需要跳脫。",
+      "codeExamples": [
+        {"code": "// 用跳脫字元放引號\nlet msg1 = \"他說\\\"你好\\\"\";\nconsole.log(msg1);", "output": "他說\"你好\""},
+        {"code": "// 外單內雙，不用跳脫\nlet msg2 = '他說\"你好\"';\nconsole.log(msg2);", "output": "他說\"你好\""},
+        {"code": "// \\n 換行\nlet msg3 = \"第一行\\n第二行\";\nconsole.log(msg3);", "output": "第一行\n第二行"},
+        {"code": "// 模板字串裡面可以直接放引號\nlet msg4 = `他說\"你好\"，她說'嗨'`;\nconsole.log(msg4);", "output": "他說\"你好\"，她說'嗨'"}
+      ],
+      "tips": ["反斜線是跳脫的暗號，告訴 JavaScript 後面那個字元是文字不是語法", "外單內雙或外雙內單可以避免跳脫，程式碼更好讀"]
     }
   ],
   "quizzes": [
@@ -125,6 +147,51 @@
       "options": ["10 + \"10\"", "\"10\" + 10", "\"10\" - \"2\"", "\"hello\" + 0"],
       "correctIndex": 2,
       "explanation": "\"10\" - \"2\" 的結果是 8，型別是 number。因為 - 是純數學運算符號。其他三個含 + 號且有字串，都是拼接。"
+    },
+    {
+      "id": "ch05-q11",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "let a = \"5\";\nlet b = \"3\";\nconsole.log(a + b);\nconsole.log(a - b);",
+      "question": "兩個 console.log 分別會印出什麼？",
+      "correctAnswer": "53 和 2",
+      "explanation": "a 和 b 都是字串。第一行用 + 號，兩邊都是字串所以執行拼接，結果是 \"53\"。第二行用 - 號，- 只有數學功能，字串 \"5\" 和 \"3\" 被自動轉成數字 5 和 3，結果是 2。這題完美展示了 + 號和其他運算子的差異。"
+    },
+    {
+      "id": "ch05-q12",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "let str = \"Hello World\";\nconsole.log(str.length);\nconsole.log(str.indexOf(\"World\"));",
+      "question": "兩個 console.log 分別會印出什麼？",
+      "correctAnswer": "11 和 6",
+      "explanation": "str.length 回傳字串的字元數量，\"Hello World\" 共 11 個字元（包含中間的空格）。str.indexOf(\"World\") 回傳 \"World\" 在字串中開始的位置索引，從 0 開始數：H(0) e(1) l(2) l(3) o(4) 空格(5) W(6)，所以 \"World\" 從索引 6 開始。"
+    },
+    {
+      "id": "ch05-q13",
+      "type": "multiple-choice",
+      "difficulty": 2,
+      "question": "下列哪個方法可以檢查字串中是否包含某段文字？",
+      "options": [".length", ".indexOf()", ".includes()", ".toString()"],
+      "correctIndex": 2,
+      "explanation": ".includes() 會回傳 true 或 false，專門用來檢查字串是否包含指定的文字。.length 是取得長度，.indexOf() 是找位置（找不到回傳 -1），.toString() 是轉成字串。雖然 .indexOf() 也能間接判斷，但 .includes() 語意更清楚直覺。"
+    },
+    {
+      "id": "ch05-q14",
+      "type": "true-false",
+      "difficulty": 2,
+      "statement": "let msg = \"他說\\\"你好\\\"\"; 這段程式碼會報錯，因為字串裡面不能放引號",
+      "question": "這個說法正確嗎？",
+      "correctAnswer": false,
+      "explanation": "這段程式碼不會報錯。反斜線 \\ 是跳脫字元，\\\" 代表「這是文字中的引號，不是字串結尾的引號」。所以 msg 的值會是：他說\"你好\"。字串裡面可以放引號，只要用跳脫字元處理就好。"
+    },
+    {
+      "id": "ch05-q15",
+      "type": "code-prediction",
+      "difficulty": 3,
+      "code": "let x = \"10\";\nlet y = \"3\";\nconsole.log(x + y);\nconsole.log(+x + +y);",
+      "question": "兩個 console.log 分別會印出什麼？",
+      "correctAnswer": "103 和 13",
+      "explanation": "第一行：x 和 y 都是字串，+ 號碰到字串執行拼接，結果是 \"103\"。第二行：變數前面加上 + 號（一元正號運算子）可以把字串轉成數字，+x 變成數字 10，+y 變成數字 3，兩個數字相加得到 13。這是一個快速把字串轉數字的小技巧。"
     }
   ]
 }

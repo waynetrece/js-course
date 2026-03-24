@@ -12,9 +12,13 @@
         {
           "code": "let cokePrice = 20;\ncokePrice = 40;\ncokePrice = 75;\nconsole.log(cokePrice);",
           "output": "75"
+        },
+        {
+          "code": "console.log(myName);\n// ReferenceError: myName is not defined\n// 變數還沒宣告就使用，會直接報錯",
+          "output": "ReferenceError: myName is not defined"
         }
       ],
-      "tips": ["第一次宣告要加 let，之後改值不用再加 let", "同一個變數名稱只能宣告一次，重複宣告會報錯"]
+      "tips": ["第一次宣告要加 let，之後改值不用再加 let", "同一個變數名稱只能宣告一次，重複宣告會報錯", "使用一個從未宣告過的變數，會得到 ReferenceError"]
     },
     {
       "id": "ch02-c02",
@@ -31,7 +35,7 @@
     {
       "id": "ch02-c03",
       "title": "重複宣告 vs 重新賦值",
-      "explanation": "「重複宣告」是指再寫一次 let 或 const 來宣告同名變數，不管是 let 還是 const 都會報錯。「重新賦值」是指直接寫變數名稱加等號來改值，let 允許，但 const 不行。",
+      "explanation": "「重複宣告」和「重新賦值」是初學者最容易搞混的兩件事。「重複宣告」是指對同一個名稱再用一次 let 或 const 來宣告，這樣做 let 和 const 都會報錯（SyntaxError）。「重新賦值」是指直接用等號把新的值指定給已經存在的變數，let 允許這樣做，但 const 不行（會報 TypeError）。簡單來說：宣告是「造盒子」，賦值是「換盒子裡的東西」。盒子只能造一次，而 const 的盒子連東西都不讓你換。",
       "codeExamples": [
         {
           "code": "let ming = '小明';\nming = '小民';  // 合法！重新賦值\nconsole.log(ming);",
@@ -40,9 +44,13 @@
         {
           "code": "let ming = '小明';\nlet ming = '小民'; // 報錯！重複宣告",
           "output": "SyntaxError: Identifier 'ming' has already been declared"
+        },
+        {
+          "code": "const teacher = '老師';\nteacher = '校長'; // 報錯！const 不能重新賦值",
+          "output": "TypeError: Assignment to constant variable."
         }
       ],
-      "tips": ["重複宣告（再寫一次 let/const）→ 都不行", "重新賦值（直接用 = 改值）→ let 可以，const 不行"]
+      "tips": ["重複宣告（再寫一次 let/const）→ 都不行", "重新賦值（直接用 = 改值）→ let 可以，const 不行", "報錯類型不同：重複宣告是 SyntaxError，const 重新賦值是 TypeError"]
     },
     {
       "id": "ch02-c04",
@@ -55,6 +63,38 @@
         }
       ],
       "tips": ["數字不開頭，保留字不碰，大小寫要分清", "通常用駝峰式命名（myVariableName）"]
+    },
+    {
+      "id": "ch02-c05",
+      "title": "var 的 Hoisting 行為差異",
+      "explanation": "var 有 hoisting（提升）的特性，JavaScript 引擎在執行前會先把 var 宣告「提升」到最上面，但只提升宣告，不提升賦值。所以在 var 宣告之前使用變數不會報錯，但值會是 undefined。let 和 const 其實也有 hoisting，但它們會進入 TDZ（Temporal Dead Zone，暫時死區），在宣告之前使用會直接報 ReferenceError，不讓你存取。這是 let/const 比 var 更安全的原因之一。",
+      "codeExamples": [
+        {
+          "code": "console.log(a);\nvar a = 10;\nconsole.log(a);",
+          "output": "undefined\n10"
+        },
+        {
+          "code": "// 上面的程式碼，JavaScript 引擎實際上看到的是：\nvar a;            // 宣告被提升到最上面\nconsole.log(a);   // undefined（有宣告但還沒賦值）\na = 10;           // 賦值留在原地\nconsole.log(a);   // 10",
+          "output": "undefined\n10"
+        },
+        {
+          "code": "console.log(b);\nlet b = 10;\n// ReferenceError: Cannot access 'b' before initialization\n// let 的 TDZ 不讓你在宣告前使用",
+          "output": "ReferenceError: Cannot access 'b' before initialization"
+        }
+      ],
+      "tips": ["記憶口訣：「var 會偷跑但沒帶值，let 會擋門不讓過」", "var 提升後值是 undefined，let/const 提升後進入 TDZ 直接報錯", "TDZ 是 Temporal Dead Zone（暫時死區），指的是從區塊開始到宣告語句之間的區域"]
+    },
+    {
+      "id": "ch02-c06",
+      "title": "let vs const 選用時機",
+      "explanation": "實務開發中，預設優先用 const，只在確定需要重新賦值時才用 let。這是因為 const 可以避免意外修改變數，讓程式碼更安全、更容易追蹤。很多團隊的 coding style（如 Airbnb 規範）都規定「能用 const 就不用 let」。至於 var，現代開發幾乎不再使用。",
+      "codeExamples": [
+        {
+          "code": "// 實務寫法示範：一個簡單的購物計算\nconst TAX_RATE = 0.05;      // 稅率不會變 → const\nconst PRODUCT_NAME = '鍵盤'; // 商品名稱不會變 → const\nlet quantity = 1;            // 數量會被使用者改變 → let\nlet totalPrice = 0;          // 總價會被計算更新 → let\n\nquantity = 3;\ntotalPrice = 1500 * quantity * (1 + TAX_RATE);\nconsole.log(PRODUCT_NAME, totalPrice);",
+          "output": "鍵盤 4725"
+        }
+      ],
+      "tips": ["口訣：「先 const 後 let，不用 var」", "寫程式時先全部用 const，等到需要改值時再把那個變回 let", "常數命名慣例：全大寫加底線（如 TAX_RATE），但這只是慣例不是規定"]
     }
   ],
   "quizzes": [
@@ -148,6 +188,52 @@
       "options": ["var 是 2015 年 ES6 推出的新語法", "var 可以重複宣告同名變數而不報錯", "現在寫程式應該優先使用 var", "var 和 const 的功能完全相同"],
       "correctIndex": 1,
       "explanation": "var 允許重複宣告同名變數。var 是 1995 年就有的舊語法，現在主流使用 let 和 const。"
+    },
+    {
+      "id": "ch02-q11",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "console.log(x);\nvar x = 10;",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "undefined",
+      "explanation": "var 有 hoisting（提升）特性，宣告會被提升到最上面，但賦值不會。所以程式執行時，x 已經存在（被提升了），但還沒被賦值為 10，值是 undefined。這就是 var 的陷阱之一。"
+    },
+    {
+      "id": "ch02-q12",
+      "type": "code-prediction",
+      "difficulty": 3,
+      "code": "console.log(y);\nlet y = 10;",
+      "question": "這段程式碼執行後會發生什麼？",
+      "correctAnswer": "報錯",
+      "explanation": "let 雖然也有 hoisting，但會進入 TDZ（暫時死區）。在 let 宣告之前嘗試存取變數 y，會直接拋出 ReferenceError: Cannot access 'y' before initialization。這跟 var 的行為完全不同——var 會給你 undefined，let 則是直接報錯阻止你。"
+    },
+    {
+      "id": "ch02-q13",
+      "type": "multiple-choice",
+      "difficulty": 2,
+      "question": "在一個購物車程式中，以下四個變數哪些應該用 const 宣告？\n\n___ taxRate = 0.05;\n___ totalItems = 0;\n___ storeName = \"小明商店\";\n___ cartItems = [];",
+      "options": ["全部都用 const", "taxRate 和 storeName 用 const，totalItems 和 cartItems 用 let", "只有 taxRate 用 const，其他用 let", "全部都用 let 比較安全"],
+      "correctIndex": 1,
+      "explanation": "taxRate（稅率）和 storeName（店名）在程式執行中不會改變，應該用 const。totalItems（商品數量）會隨著加入商品而改變，要用 let。cartItems 雖然是陣列，但之後可能會被重新指定為新陣列（例如清空購物車 cartItems = []），所以用 let 更有彈性。"
+    },
+    {
+      "id": "ch02-q14",
+      "type": "true-false",
+      "difficulty": 2,
+      "statement": "const arr = [1, 2, 3]; arr.push(4); 這段程式碼會報錯，因為 const 不能被修改",
+      "question": "這個說法正確嗎？",
+      "correctAnswer": false,
+      "explanation": "這段程式碼不會報錯！const 限制的是「不能重新賦值」（不能用 = 指定新的值），但不限制「修改內容」。arr.push(4) 是在原本的陣列裡面加東西，並沒有把 arr 指向新的陣列，所以完全合法。如果寫 arr = [1, 2, 3, 4] 才會報錯，因為這是重新賦值。"
+    },
+    {
+      "id": "ch02-q15",
+      "type": "fill-in-blank",
+      "difficulty": 3,
+      "code": "let score = 0;\nscore = 100;\nconsole.log(score);  // 正常印出 100\n\n___\nconsole.log(level);\nlet level = 5;\n// 這段會報錯，原因是 let 的 ___",
+      "blank": "___",
+      "question": "let 在宣告前就被使用會報錯，這個機制叫做什麼？（填入英文縮寫，三個字母）",
+      "correctAnswer": "TDZ",
+      "explanation": "TDZ 是 Temporal Dead Zone（暫時死區）的縮寫。let 和 const 雖然有 hoisting，但從區塊開始到宣告語句之間的這段區域就是 TDZ，在這個區域內存取變數會直接拋出 ReferenceError。這個機制讓 let/const 比 var 更安全，能幫你及早發現「還沒宣告就使用」的錯誤。"
     }
   ]
 }

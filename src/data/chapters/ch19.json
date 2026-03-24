@@ -142,6 +142,50 @@
         "函式裡面沒用 let，直接用變數名 → 往外找全域的",
         "要把裡面的值傳出去 → 用 return"
       ]
+    },
+    {
+      "id": "ch19-c09",
+      "title": "箭頭函式預告（Arrow Function）",
+      "explanation": "ES6 推出了箭頭函式，是函式的簡寫語法。用 => 取代 function 關鍵字，寫起來更簡潔。這個語法在之後學習陣列方法（如 forEach、map、filter）時會大量使用。目前先認識語法長什麼樣，知道它和 function 宣告的差別。傳統寫法是 function add(a, b) { return a + b; }，箭頭函式寫法是 const add = (a, b) => a + b。只有一個參數時可以省略小括號，例如 const double = n => n * 2。如果函式只有一行且就是 return，可以省略大括號和 return 關鍵字。",
+      "codeExamples": [
+        {
+          "code": "// 傳統函式宣告\nfunction add(a, b) {\n  return a + b;\n}\nconsole.log(add(2, 3));",
+          "output": "5"
+        },
+        {
+          "code": "// 箭頭函式寫法\nconst add = (a, b) => a + b;\nconsole.log(add(2, 3));",
+          "output": "5"
+        },
+        {
+          "code": "// 只有一個參數，可以省略小括號\nconst double = n => n * 2;\nconsole.log(double(4));\n\n// 多行邏輯，需要大括號和 return\nconst getGrade = score => {\n  if (score >= 60) return \"及格\";\n  return \"不及格\";\n};\nconsole.log(getGrade(75));",
+          "output": "8\n及格"
+        }
+      ],
+      "tips": [
+        "箭頭函式是 function 的簡寫，不是完全不同的東西",
+        "目前先認識語法，之後學陣列方法時會大量使用",
+        "注意：箭頭函式不能用 function 宣告的 hoisting 特性"
+      ]
+    },
+    {
+      "id": "ch19-c10",
+      "title": "純函式概念（Pure Function）",
+      "explanation": "純函式是指：(1) 同樣的輸入永遠得到同樣的輸出 (2) 不會影響外部的任何東西（沒有副作用）。純函式更好測試、更好除錯、更好理解。反例包括：函式裡面修改全域變數、函式裡面用 console.log、函式結果依賴外部變數。不是所有函式都需要是純的，但盡量讓函式「純」一點是好習慣。",
+      "codeExamples": [
+        {
+          "code": "// 純函式：同樣輸入，同樣輸出\nfunction add(a, b) {\n  return a + b;\n}\n\nconsole.log(add(1, 2));\nconsole.log(add(1, 2));",
+          "output": "3\n3"
+        },
+        {
+          "code": "// 不純的函式：修改了外部變數\nlet total = 0;\n\nfunction addToTotal(n) {\n  total += n; // 改了外部變數（副作用）\n  return total;\n}\n\nconsole.log(addToTotal(5));\nconsole.log(addToTotal(5));",
+          "output": "5\n10"
+        }
+      ],
+      "tips": [
+        "純函式口訣：進去什麼出來什麼，外面的東西不要碰",
+        "不是所有函式都要純，但核心邏輯盡量用純函式",
+        "同樣的輸入卻得到不同結果，代表函式不純"
+      ]
     }
   ],
   "quizzes": [
@@ -246,6 +290,56 @@
       "question": "console.log 會印出什麼？",
       "correctAnswer": "450\n800",
       "explanation": "第一次呼叫：isMember 是 true 但 500 < 1000，第一個 if 不成立；第二個 if 只看 isMember 是 true，成立，回傳 500 * 0.9 = 450。第二次呼叫：isMember 是 false，前兩個 if 都有 isMember 條件所以都不成立，走到最後 return price，回傳原價 800。"
+    },
+    {
+      "id": "ch19-q11",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "const add = (a, b) => a + b;\nconsole.log(add(3, 5));\nconsole.log(typeof add);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "8\nfunction",
+      "explanation": "箭頭函式 (a, b) => a + b 等同於 function(a, b) { return a + b; }。add(3, 5) 回傳 3 + 5 = 8。用 typeof 檢查箭頭函式，結果一樣是 \"function\"，因為箭頭函式本質上還是函式。"
+    },
+    {
+      "id": "ch19-q12",
+      "type": "multiple-choice",
+      "difficulty": 2,
+      "question": "以下哪個是正確的箭頭函式寫法？",
+      "options": [
+        "const add = a, b => a + b;",
+        "const add => (a, b) { return a + b; }",
+        "const add = (a, b) => a + b;",
+        "const add = (a, b) -> a + b;"
+      ],
+      "correctIndex": 2,
+      "explanation": "正確的箭頭函式語法是 const 名稱 = (參數) => 表達式。選項 A 多個參數沒有加小括號；選項 B 的 => 位置錯誤，應該在參數後面；選項 D 用了 -> 而不是 =>，JavaScript 的箭頭是 =>。"
+    },
+    {
+      "id": "ch19-q13",
+      "type": "code-prediction",
+      "difficulty": 3,
+      "code": "let count = 0;\n\nfunction addOne() {\n  count += 1;\n  return count;\n}\n\nconsole.log(addOne());\nconsole.log(addOne());\nconsole.log(count);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "1\n2\n2",
+      "explanation": "addOne 是不純的函式，每次呼叫都會修改外部的 count 變數。第一次呼叫：count 從 0 變成 1，return 1。第二次呼叫：count 從 1 變成 2，return 2。最後印 count，此時已經被改成 2。同樣的函式呼叫兩次，結果卻不同（1 和 2），這就是不純函式的特徵。"
+    },
+    {
+      "id": "ch19-q14",
+      "type": "true-false",
+      "difficulty": 2,
+      "statement": "箭頭函式 const fn = () => { } 和傳統函式 function fn() { } 在所有情況下都完全相同。",
+      "question": "這個說法正確嗎？",
+      "correctAnswer": false,
+      "explanation": "錯誤。雖然箭頭函式和傳統函式都能定義函式，但有幾個重要差異：(1) 箭頭函式沒有自己的 this（這個之後會學到）；(2) 箭頭函式不能當作建構函式（constructor）使用；(3) 傳統函式宣告有 hoisting 特性（可以在宣告前呼叫），箭頭函式用 const 宣告所以沒有。"
+    },
+    {
+      "id": "ch19-q15",
+      "type": "code-prediction",
+      "difficulty": 3,
+      "code": "const double = n => n * 2;\nconst add = (a, b) => a + b;\n\nlet result = add(double(3), double(5));\nconsole.log(result);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "16",
+      "explanation": "這題考函式組合（function composition）。先執行內層的函式：double(3) 回傳 3 * 2 = 6，double(5) 回傳 5 * 2 = 10。再把結果當作引數傳給 add：add(6, 10) 回傳 6 + 10 = 16。函式的回傳值可以直接當作另一個函式的引數使用。"
     }
   ]
 }

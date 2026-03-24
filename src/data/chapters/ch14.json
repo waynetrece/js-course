@@ -98,6 +98,22 @@
         "password.length 是 9（abc123456 有 9 個字元），>= 8 成立，印出「註冊成功」",
         "實際應用中，註冊、登入等流程都會用到多層判斷"
       ]
+    },
+    {
+      "id": "ch14-c08",
+      "title": "從文字需求轉換成流程圖的 SOP",
+      "explanation": "實際開發中，需求通常用文字描述（例如「如果使用者年滿 18 歲且有身分證，就讓他通過；否則如果年滿 18 歲但沒帶身分證，請他補件；否則告知未成年不能進」）。把文字需求轉成程式碼的 SOP 是：(1) 畫底線標記條件和動作 (2) 條件對應菱形，動作對應方形 (3) 找出判斷順序（先外後內，先嚴格後寬鬆） (4) 用箭頭連起來 (5) 走一遍所有路徑檢查 (6) 照著流程圖寫程式碼。",
+      "codeExamples": [
+        {
+          "code": "// ASCII 流程圖範例：\n// [開始]\n//   |\n// <年齡 >= 18?>\n//  /       \\\n// Yes       No\n// |          |\n// <有身分證?>  [告知未成年]\n//  /     \\       |\n// Yes     No   [結束]\n// |        |\n// [通過]  [請補件]\n// |        |\n// [結束]  [結束]\n\n// 對應程式碼：\nlet age = 20;\nlet hasID = true;\n\nif (age >= 18) {\n  if (hasID) {\n    console.log(\"通過\");\n  } else {\n    console.log(\"請補件\");\n  }\n} else {\n  console.log(\"未成年，不能進\");\n}",
+          "output": "通過"
+        }
+      ],
+      "tips": [
+        "先用中文列出所有條件和動作，再畫圖",
+        "走一遍所有路徑，確認每條路都有結果",
+        "ASCII 流程圖：< > 是判斷，[ ] 是動作"
+      ]
     }
   ],
   "quizzes": [
@@ -202,6 +218,61 @@
       "question": "console.log 會印出什麼？",
       "correctAnswer": "密碼太短，至少 8 個字元",
       "explanation": "hasAccount 是 false，第一個 if 不成立。password 是 \"abc\"，長度是 3，3 >= 8 不成立，else if 也不成立。最後走到 else，印出「密碼太短，至少 8 個字元」。"
+    },
+    {
+      "id": "ch14-q11",
+      "type": "multiple-choice",
+      "difficulty": 1,
+      "question": "在流程圖中，橢圓形符號代表什麼？",
+      "options": [
+        "條件判斷",
+        "處理步驟",
+        "開始或結束",
+        "資料輸入"
+      ],
+      "correctIndex": 2,
+      "explanation": "橢圓形在流程圖中代表「開始」或「結束」，是每個流程圖的起點和終點。條件判斷用菱形，處理步驟用方形。"
+    },
+    {
+      "id": "ch14-q12",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "let age = 20;\nlet hasID = false;\n\nif (age >= 18) {\n  if (hasID) {\n    console.log(\"通過\");\n  } else {\n    console.log(\"請補件\");\n  }\n} else {\n  console.log(\"未成年\");\n}",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "請補件",
+      "explanation": "age 是 20，20 >= 18 成立，進入外層 if 區塊。接著判斷 hasID，hasID 是 false，所以走內層的 else，印出「請補件」。這就是巢狀判斷：先判斷年齡，再判斷有沒有身分證。"
+    },
+    {
+      "id": "ch14-q13",
+      "type": "true-false",
+      "difficulty": 2,
+      "statement": "畫流程圖時，每個菱形（判斷）一定只有 Yes 和 No 兩條路。",
+      "question": "這個說法正確嗎？",
+      "correctAnswer": true,
+      "explanation": "沒錯，流程圖中每個菱形（條件判斷）一定只會分出 Yes 和 No 兩條路，因為一個條件的結果只有「成立」或「不成立」。如果需要判斷更多情況，就用多個菱形串接（對應 else if），而不是在一個菱形上拉出三條路。"
+    },
+    {
+      "id": "ch14-q14",
+      "type": "multiple-choice",
+      "difficulty": 2,
+      "question": "把文字需求轉換成程式碼的正確順序是？",
+      "options": [
+        "直接寫程式碼 → 測試 → 修改",
+        "標記條件和動作 → 畫流程圖 → 檢查 → 寫程式碼",
+        "先寫 else → 再加 if → 最後加條件",
+        "先定義變數 → 隨意寫判斷 → 用 console.log 檢查"
+      ],
+      "correctIndex": 1,
+      "explanation": "正確的 SOP 是：先從文字需求中標記出條件（菱形）和動作（方形），接著畫流程圖理清判斷順序，走一遍所有路徑檢查邏輯是否完整，最後才照著流程圖寫程式碼。這樣可以避免邊寫邊想容易遺漏的問題。"
+    },
+    {
+      "id": "ch14-q15",
+      "type": "code-prediction",
+      "difficulty": 3,
+      "code": "let temperature = 38;\nlet hasRaincoat = true;\n\nif (temperature >= 35) {\n  console.log(\"高溫警報，建議待在室內\");\n} else if (temperature >= 25) {\n  if (hasRaincoat) {\n    console.log(\"天氣好，帶雨具出門\");\n  } else {\n    console.log(\"天氣好，記得帶雨具\");\n  }\n} else {\n  console.log(\"天氣涼，穿外套\");\n}",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "高溫警報，建議待在室內",
+      "explanation": "temperature 是 38，第一個條件 38 >= 35 成立，直接印出「高溫警報，建議待在室內」。後面的 else if 和 else 完全不會執行。雖然 hasRaincoat 是 true，但程式根本不會走到判斷 hasRaincoat 的那一段，因為 if/else if/else 只要有一個條件成立，其餘全部跳過。"
     }
   ]
 }

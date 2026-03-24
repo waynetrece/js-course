@@ -31,6 +31,42 @@
       "explanation": "parseInt() 把字串轉成數字，toString() 把數字轉成字串。轉換後要存回變數才會生效。",
       "codeExamples": [{"code": "let a = \"5\";\na = parseInt(a);\nconsole.log(a + 3);\n\nlet b = 1;\nb = b.toString();\nconsole.log(b + 1);", "output": "8\n11"}],
       "tips": ["字串 + 數字 = 字串拼接，不是數學運算", "parseInt() 字串變數字，toString() 數字變字串"]
+    },
+    {
+      "id": "ch06-c05",
+      "title": "undefined vs null 實務使用時機",
+      "explanation": "實務上什麼時候會遇到 undefined vs null？undefined 常出現在：忘了給初始值、函式沒有 return、存取不存在的屬性。null 常出現在：刻意清空變數（例如登出時清空使用者資料）、API 回傳的空值。初學者記住：你通常不需要自己寫 undefined，它是 JS 自動給的；你會主動寫 null 來清空。",
+      "codeExamples": [
+        {
+          "code": "// undefined 常見情境：存取不存在的屬性\nlet user = { name: \"Wayne\" };\nconsole.log(user.age);",
+          "output": "undefined"
+        },
+        {
+          "code": "// undefined 常見情境：函式沒有 return\nfunction sayHi() {\n  let msg = \"Hi\";\n}\nconsole.log(sayHi());",
+          "output": "undefined"
+        },
+        {
+          "code": "// null 常見情境：登出時主動清空使用者資料\nlet user = { name: \"Wayne\" };\nconsole.log(user);\nuser = null; // 登出，清空資料\nconsole.log(user);",
+          "output": "{ name: \"Wayne\" }\nnull"
+        }
+      ],
+      "tips": ["undefined 是 JS 自動給的，null 是你主動設定的", "實務口訣：看到 undefined 先檢查是不是漏給值了"]
+    },
+    {
+      "id": "ch06-c06",
+      "title": "Truthy 與 Falsy 值（初步認識）",
+      "explanation": "在 JavaScript 中，不只有 true/false 是布林值。在需要布林值的地方（例如 if 條件），JS 會自動把其他型別的值轉成 true 或 false。會被轉成 false 的值叫做 falsy，只有 6 個：false、0、\"\"（空字串）、null、undefined、NaN。其他所有值都是 truthy（會被當成 true）。",
+      "codeExamples": [
+        {
+          "code": "// falsy 值：會被當成 false\nif (0) {\n  console.log(\"不會印出\");\n}\nif (\"\") {\n  console.log(\"不會印出\");\n}\nif (null) {\n  console.log(\"不會印出\");\n}\nconsole.log(\"以上三個 if 都不會執行\");",
+          "output": "以上三個 if 都不會執行"
+        },
+        {
+          "code": "// truthy 值：會被當成 true\nif (\"hello\") {\n  console.log(\"字串有內容是 truthy\");\n}\nif (1) {\n  console.log(\"非零數字是 truthy\");\n}\nif ([]) {\n  console.log(\"空陣列也是 truthy！\");\n}",
+          "output": "字串有內容是 truthy\n非零數字是 truthy\n空陣列也是 truthy！"
+        }
+      ],
+      "tips": ["Falsy 值只有 6 個，背起來：false、0、空字串、null、undefined、NaN", "空陣列 [] 和空物件 {} 是 truthy，這是常見陷阱"]
     }
   ],
   "quizzes": [
@@ -125,6 +161,51 @@
       "question": "這個說法正確嗎？",
       "correctAnswer": false,
       "explanation": "typeof null 回傳的是 \"object\"，不是 \"null\"。這是 JavaScript 歷史遺留的 bug。"
+    },
+    {
+      "id": "ch06-q11",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "let obj = { name: \"Wayne\" };\nconsole.log(obj.age);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "undefined",
+      "explanation": "存取物件中不存在的屬性會回傳 undefined，不會報錯。obj 裡面只有 name 屬性，沒有 age，所以結果是 undefined。"
+    },
+    {
+      "id": "ch06-q12",
+      "type": "true-false",
+      "difficulty": 2,
+      "statement": "typeof undefined 和 typeof null 的結果是一樣的",
+      "question": "這個說法正確嗎？",
+      "correctAnswer": false,
+      "explanation": "typeof undefined 的結果是 \"undefined\"，typeof null 的結果是 \"object\"。兩者不一樣。typeof null 回傳 \"object\" 是 JavaScript 歷史遺留的 bug。"
+    },
+    {
+      "id": "ch06-q13",
+      "type": "multiple-choice",
+      "difficulty": 2,
+      "question": "下列哪一個值在 if 條件中會被判定為 false（falsy）？",
+      "options": ["\"0\"（字串零）", "0（數字零）", "[]（空陣列）", "\"false\"（字串 false）"],
+      "correctIndex": 1,
+      "explanation": "數字 0 是 falsy 值，在 if 條件中會被判定為 false。\"0\" 是有內容的字串，是 truthy。[]（空陣列）也是 truthy，這是常見陷阱。\"false\" 是有內容的字串，也是 truthy。"
+    },
+    {
+      "id": "ch06-q14",
+      "type": "code-prediction",
+      "difficulty": 3,
+      "code": "let a = \"\";\nlet b = \"hello\";\nlet c = 0;\nconsole.log(Boolean(a));\nconsole.log(Boolean(b));\nconsole.log(Boolean(c));",
+      "question": "三個 console.log 分別會印出什麼？",
+      "correctAnswer": "false\ntrue\nfalse",
+      "explanation": "空字串 \"\" 是 falsy，Boolean(\"\") 是 false。\"hello\" 是有內容的字串，是 truthy，Boolean(\"hello\") 是 true。數字 0 是 falsy，Boolean(0) 是 false。"
+    },
+    {
+      "id": "ch06-q15",
+      "type": "code-prediction",
+      "difficulty": 3,
+      "code": "let user = null;\nconsole.log(typeof user);\nconsole.log(user === undefined);\nconsole.log(user == undefined);",
+      "question": "三個 console.log 分別會印出什麼？",
+      "correctAnswer": "object\nfalse\ntrue",
+      "explanation": "typeof null 回傳 \"object\"（歷史 bug）。null === undefined 是 false，因為嚴格比較下它們是不同型別。null == undefined 是 true，因為寬鬆比較下 JS 把這兩個視為相等（這是 JS 的特殊規則）。"
     }
   ]
 }

@@ -5,8 +5,8 @@
     "title": "let, const, var",
     "category": "基礎篇",
     "status": "completed",
-    "conceptCount": 4,
-    "quizCount": 10
+    "conceptCount": 6,
+    "quizCount": 15
   },
   {
     "id": "ch05",
@@ -14,8 +14,8 @@
     "title": "字串型別",
     "category": "基礎篇",
     "status": "completed",
-    "conceptCount": 4,
-    "quizCount": 10
+    "conceptCount": 6,
+    "quizCount": 15
   },
   {
     "id": "ch06",
@@ -23,8 +23,8 @@
     "title": "布林、undefined、null",
     "category": "基礎篇",
     "status": "completed",
-    "conceptCount": 4,
-    "quizCount": 10
+    "conceptCount": 6,
+    "quizCount": 15
   },
   {
     "id": "ch07",
@@ -32,8 +32,8 @@
     "title": "陣列教學",
     "category": "資料結構篇",
     "status": "completed",
-    "conceptCount": 5,
-    "quizCount": 12
+    "conceptCount": 7,
+    "quizCount": 15
   },
   {
     "id": "ch08",
@@ -41,8 +41,8 @@
     "title": "物件教學",
     "category": "資料結構篇",
     "status": "completed",
-    "conceptCount": 4,
-    "quizCount": 10
+    "conceptCount": 6,
+    "quizCount": 15
   },
   {
     "id": "ch12",
@@ -50,8 +50,8 @@
     "title": "比較與邏輯運算子",
     "category": "邏輯判斷篇",
     "status": "completed",
-    "conceptCount": 6,
-    "quizCount": 10
+    "conceptCount": 7,
+    "quizCount": 15
   },
   {
     "id": "ch13",
@@ -59,8 +59,8 @@
     "title": "流程判斷 if / else if / else",
     "category": "邏輯判斷篇",
     "status": "completed",
-    "conceptCount": 7,
-    "quizCount": 10
+    "conceptCount": 8,
+    "quizCount": 15
   },
   {
     "id": "ch14",
@@ -68,8 +68,8 @@
     "title": "if 流程圖規劃流程",
     "category": "邏輯判斷篇",
     "status": "completed",
-    "conceptCount": 7,
-    "quizCount": 10
+    "conceptCount": 8,
+    "quizCount": 15
   },
   {
     "id": "ch15",
@@ -77,8 +77,8 @@
     "title": "if 中階運用",
     "category": "邏輯判斷篇",
     "status": "completed",
-    "conceptCount": 5,
-    "quizCount": 10
+    "conceptCount": 7,
+    "quizCount": 15
   },
   {
     "id": "ch16",
@@ -113,8 +113,8 @@
     "title": "函式 function",
     "category": "函式篇",
     "status": "completed",
-    "conceptCount": 8,
-    "quizCount": 10
+    "conceptCount": 10,
+    "quizCount": 15
   },
   {
     "id": "ch21",
