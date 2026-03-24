@@ -55,22 +55,22 @@ export default function Dashboard() {
     )[0];
 
   return (
-    <div className="mx-auto max-w-content px-4 py-8 pb-20 md:px-6 md:pb-8">
+    <div className="mx-auto max-w-content px-4 pb-20 pt-10 md:px-6 md:pb-12">
       {/* Welcome */}
-      <div className="mb-8">
+      <div className="mb-10">
         <h1 className="text-2xl font-bold md:text-3xl">JS 觀念複習</h1>
-        <p className="mt-1 text-muted-foreground">
+        <p className="mt-2 text-muted-foreground">
           六角學院 JavaScript 課程 — 互動式複習平台
         </p>
       </div>
 
       {/* Stats Grid */}
-      <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mb-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
         {/* Overall Progress */}
-        <Card className="sm:col-span-2 lg:col-span-1">
-          <CardContent className="flex flex-col items-center py-6">
-            <ProgressRing value={overallProgress} label="整體進度" />
-            <p className="mt-2 text-sm text-muted-foreground">
+        <Card>
+          <CardContent className="flex flex-col items-center justify-center py-6">
+            <ProgressRing value={overallProgress} label="整體進度" size={100} />
+            <p className="mt-3 text-sm text-muted-foreground">
               {completedChapters.length} / {totalChapters} 章
             </p>
           </CardContent>
@@ -78,13 +78,11 @@ export default function Dashboard() {
 
         {/* Streak */}
         <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
+          <CardContent className="flex flex-col justify-center py-6">
+            <p className="text-sm font-medium text-muted-foreground">
               連續學習
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="flex items-baseline gap-1">
+            </p>
+            <div className="mt-2 flex items-baseline gap-1">
               <span className="text-3xl font-bold">{progress.streakDays}</span>
               <span className="text-sm text-muted-foreground">天</span>
             </div>
@@ -96,13 +94,11 @@ export default function Dashboard() {
 
         {/* Average Score */}
         <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
+          <CardContent className="flex flex-col justify-center py-6">
+            <p className="text-sm font-medium text-muted-foreground">
               平均分數
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="flex items-baseline gap-1">
+            </p>
+            <div className="mt-2 flex items-baseline gap-1">
               <span className="text-3xl font-bold">{avgScore}</span>
               <span className="text-sm text-muted-foreground">分</span>
             </div>
@@ -114,13 +110,11 @@ export default function Dashboard() {
 
         {/* Total Quizzes */}
         <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
+          <CardContent className="flex flex-col justify-center py-6">
+            <p className="text-sm font-medium text-muted-foreground">
               可用題目
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="flex items-baseline gap-1">
+            </p>
+            <div className="mt-2 flex items-baseline gap-1">
               <span className="text-3xl font-bold">
                 {completedChapters.reduce((s, c) => s + c.quizCount, 0)}
               </span>
@@ -134,7 +128,7 @@ export default function Dashboard() {
       </div>
 
       {/* Quick Actions */}
-      <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div className="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
         {lastStudiedChapter ? (
           <Card className="border-primary/20 bg-primary/5">
             <CardContent className="py-6">
