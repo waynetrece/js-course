@@ -1,0 +1,128 @@
+[
+  {
+    "id": "ch02",
+    "number": 2,
+    "title": "let, const, var",
+    "category": "基礎篇",
+    "status": "completed",
+    "conceptCount": 4,
+    "quizCount": 10
+  },
+  {
+    "id": "ch05",
+    "number": 5,
+    "title": "字串型別",
+    "category": "基礎篇",
+    "status": "completed",
+    "conceptCount": 3,
+    "quizCount": 8
+  },
+  {
+    "id": "ch06",
+    "number": 6,
+    "title": "布林、undefined、null",
+    "category": "基礎篇",
+    "status": "completed",
+    "conceptCount": 4,
+    "quizCount": 10
+  },
+  {
+    "id": "ch07",
+    "number": 7,
+    "title": "陣列教學",
+    "category": "資料結構篇",
+    "status": "completed",
+    "conceptCount": 5,
+    "quizCount": 12
+  },
+  {
+    "id": "ch08",
+    "number": 8,
+    "title": "物件教學",
+    "category": "資料結構篇",
+    "status": "completed",
+    "conceptCount": 5,
+    "quizCount": 12
+  },
+  {
+    "id": "ch12",
+    "number": 12,
+    "title": "比較與邏輯運算子",
+    "category": "邏輯判斷篇",
+    "status": "completed",
+    "conceptCount": 6,
+    "quizCount": 14
+  },
+  {
+    "id": "ch13",
+    "number": 13,
+    "title": "流程判斷 if/else",
+    "category": "邏輯判斷篇",
+    "status": "completed",
+    "conceptCount": 5,
+    "quizCount": 12
+  },
+  {
+    "id": "ch14",
+    "number": 14,
+    "title": "if 中階運用",
+    "category": "邏輯判斷篇",
+    "status": "completed",
+    "conceptCount": 4,
+    "quizCount": 10
+  },
+  {
+    "id": "ch15",
+    "number": 15,
+    "title": "if 進階運用",
+    "category": "邏輯判斷篇",
+    "status": "completed",
+    "conceptCount": 4,
+    "quizCount": 10
+  },
+  {
+    "id": "ch16",
+    "number": 16,
+    "title": "陣列進階教學",
+    "category": "資料結構篇",
+    "status": "in-progress",
+    "conceptCount": 0,
+    "quizCount": 0
+  },
+  {
+    "id": "ch17",
+    "number": 17,
+    "title": "物件進階教學",
+    "category": "資料結構篇",
+    "status": "in-progress",
+    "conceptCount": 0,
+    "quizCount": 0
+  },
+  {
+    "id": "ch18",
+    "number": 18,
+    "title": "陣列與物件整合運用",
+    "category": "資料結構篇",
+    "status": "in-progress",
+    "conceptCount": 0,
+    "quizCount": 0
+  },
+  {
+    "id": "ch19",
+    "number": 19,
+    "title": "函式 function",
+    "category": "函式篇",
+    "status": "completed",
+    "conceptCount": 5,
+    "quizCount": 12
+  },
+  {
+    "id": "ch21",
+    "number": 21,
+    "title": "陣列 forEach 資料處理",
+    "category": "函式篇",
+    "status": "in-progress",
+    "conceptCount": 0,
+    "quizCount": 0
+  }
+]

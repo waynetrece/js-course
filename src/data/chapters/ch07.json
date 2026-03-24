@@ -1,0 +1,180 @@
+{
+  "id": "ch07",
+  "number": 7,
+  "title": "陣列教學",
+  "category": "資料結構篇",
+  "concepts": [
+    {
+      "id": "ch07-c01",
+      "title": "為什麼要用陣列",
+      "explanation": "當資料有多筆且性質相同時，用陣列統一管理比個別變數更有效率。例如一班學生的成績，用一個陣列就能存放所有人的分數。",
+      "codeExamples": [
+        {
+          "code": "// 不用陣列：要開很多變數\nlet score1 = 80;\nlet score2 = 90;\nlet score3 = 75;\n\n// 用陣列：一個變數搞定\nlet scores = [80, 90, 75];",
+          "output": ""
+        }
+      ],
+      "tips": ["陣列適合「同類型、多筆」的資料"]
+    },
+    {
+      "id": "ch07-c02",
+      "title": "陣列的建立與索引",
+      "explanation": "陣列用中括號 [] 建立，裡面的每筆資料用逗號隔開。取值用索引（index），索引從 0 開始，不是從 1 開始。",
+      "codeExamples": [
+        {
+          "code": "let fruits = ['apple', 'banana', 'cherry'];\nconsole.log(fruits[0]);\nconsole.log(fruits[2]);",
+          "output": "apple\ncherry"
+        }
+      ],
+      "tips": ["索引從 0 開始，第一筆是 [0]、第二筆是 [1]", "超出範圍會得到 undefined，不會報錯"]
+    },
+    {
+      "id": "ch07-c03",
+      "title": "陣列長度 .length",
+      "explanation": ".length 會回傳陣列裡有幾筆資料。最後一筆的索引永遠是 .length - 1。",
+      "codeExamples": [
+        {
+          "code": "let colors = ['red', 'green', 'blue'];\nconsole.log(colors.length);\nconsole.log(colors[colors.length - 1]);",
+          "output": "3\nblue"
+        }
+      ],
+      "tips": ["length 是屬性不是方法，不需要加小括號"]
+    },
+    {
+      "id": "ch07-c04",
+      "title": "新增與刪除元素",
+      "explanation": "push() 從尾端新增、pop() 從尾端刪除、unshift() 從前端新增、shift() 從前端刪除。",
+      "codeExamples": [
+        {
+          "code": "let arr = [1, 2, 3];\narr.push(4);      // [1, 2, 3, 4]\narr.pop();        // [1, 2, 3]\narr.unshift(0);   // [0, 1, 2, 3]\narr.shift();      // [1, 2, 3]",
+          "output": ""
+        }
+      ],
+      "tips": ["push/pop 操作尾端（常用）", "unshift/shift 操作前端（較少用）", "這四個方法都會改變原陣列"]
+    },
+    {
+      "id": "ch07-c05",
+      "title": "陣列是傳參考",
+      "explanation": "陣列是物件型別，賦值給另一個變數時，兩個變數指向同一份資料。修改其中一個，另一個也會跟著變。",
+      "codeExamples": [
+        {
+          "code": "let a = [1, 2, 3];\nlet b = a;\nb.push(4);\nconsole.log(a);",
+          "output": "[1, 2, 3, 4]"
+        }
+      ],
+      "tips": ["要複製陣列請用展開運算子 [...a] 或 a.slice()"]
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "ch07-q01",
+      "type": "code-prediction",
+      "difficulty": 1,
+      "code": "let arr = ['a', 'b', 'c'];\nconsole.log(arr[1]);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "b",
+      "explanation": "索引從 0 開始，arr[0] 是 'a'，arr[1] 是 'b'。"
+    },
+    {
+      "id": "ch07-q02",
+      "type": "code-prediction",
+      "difficulty": 1,
+      "code": "let nums = [10, 20, 30];\nconsole.log(nums.length);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "3",
+      "explanation": ".length 回傳陣列中的元素數量，這裡有 3 筆資料。"
+    },
+    {
+      "id": "ch07-q03",
+      "type": "fill-in-blank",
+      "difficulty": 1,
+      "code": "let colors = ['red', 'green'];\ncolors.___(\"blue\");",
+      "blank": "___",
+      "question": "要在陣列尾端新增 'blue'，空格應該填什麼？",
+      "correctAnswer": "push",
+      "explanation": "push() 方法會將元素加到陣列的最後面。"
+    },
+    {
+      "id": "ch07-q04",
+      "type": "multiple-choice",
+      "difficulty": 1,
+      "question": "陣列的索引（index）從幾開始？",
+      "options": ["0", "1", "-1", "取決於陣列長度"],
+      "correctIndex": 0,
+      "explanation": "JavaScript 陣列的索引從 0 開始，第一筆資料的索引是 0。"
+    },
+    {
+      "id": "ch07-q05",
+      "type": "true-false",
+      "difficulty": 1,
+      "statement": "使用 .length 時需要加小括號，寫成 .length()",
+      "question": "這個說法正確嗎？",
+      "correctAnswer": false,
+      "explanation": ".length 是屬性（property），不是方法（method），所以不需要加小括號。"
+    },
+    {
+      "id": "ch07-q06",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "let arr = [1, 2, 3];\narr.push(4);\narr.shift();\nconsole.log(arr);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "[2, 3, 4]",
+      "explanation": "push(4) 在尾端加 4 → [1,2,3,4]，shift() 移除第一筆 → [2,3,4]。"
+    },
+    {
+      "id": "ch07-q07",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "let a = [1, 2, 3];\nlet b = a;\nb.push(4);\nconsole.log(a.length);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "4",
+      "explanation": "陣列是傳參考，a 和 b 指向同一個陣列。b.push(4) 後，a 也變成 [1,2,3,4]，length 是 4。"
+    },
+    {
+      "id": "ch07-q08",
+      "type": "multiple-choice",
+      "difficulty": 2,
+      "question": "下列哪個方法會從陣列「前端」移除元素？",
+      "options": ["pop()", "shift()", "push()", "unshift()"],
+      "correctIndex": 1,
+      "explanation": "shift() 從前端移除，pop() 從尾端移除。push() 和 unshift() 是新增。"
+    },
+    {
+      "id": "ch07-q09",
+      "type": "code-prediction",
+      "difficulty": 1,
+      "code": "let arr = ['x', 'y', 'z'];\nconsole.log(arr[3]);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "undefined",
+      "explanation": "arr 只有索引 0、1、2，存取不存在的索引 3 會得到 undefined。"
+    },
+    {
+      "id": "ch07-q10",
+      "type": "fill-in-blank",
+      "difficulty": 2,
+      "code": "let arr = [10, 20, 30, 40];\nlet last = arr[arr.___ - 1];",
+      "blank": "___",
+      "question": "要取得陣列最後一筆資料，空格應該填什麼？",
+      "correctAnswer": "length",
+      "explanation": "最後一筆的索引是 arr.length - 1。arr.length 是 4，4 - 1 = 3，arr[3] 是 40。"
+    },
+    {
+      "id": "ch07-q11",
+      "type": "true-false",
+      "difficulty": 2,
+      "statement": "let b = a; 之後修改 b 不會影響 a（假設 a 是陣列）",
+      "question": "這個說法正確嗎？",
+      "correctAnswer": false,
+      "explanation": "陣列是傳參考（pass by reference），b = a 讓 b 和 a 指向同一個陣列，修改 b 會影響 a。"
+    },
+    {
+      "id": "ch07-q12",
+      "type": "multiple-choice",
+      "difficulty": 2,
+      "question": "要複製一個陣列（不共用參考），下列哪個方式正確？",
+      "options": ["let b = a", "let b = [...a]", "let b = a.push()", "let b = a.length"],
+      "correctIndex": 1,
+      "explanation": "[...a] 用展開運算子建立一個新陣列，內容和 a 一樣但不共用參考。"
+    }
+  ]
+}
