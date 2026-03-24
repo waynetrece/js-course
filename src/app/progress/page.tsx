@@ -1,17 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { ProgressRing } from "@/components/progress/ProgressRing";
-import { getProgress } from "@/lib/progress-store";
+import { getProgress, resetProgress } from "@/lib/progress-store";
 import { UserProgress, DEFAULT_PROGRESS } from "@/types/progress";
 import { ChapterMeta } from "@/types/chapter";
+import { CATEGORY_ORDER, CATEGORY_COLORS } from "@/lib/constants";
 import chapterIndex from "@/data/chapter-index.json";
 
 const chapters = chapterIndex as ChapterMeta[];
 
 export default function ProgressPage() {
   const [progress, setProgress] = useState<UserProgress>(DEFAULT_PROGRESS);
+  const [confirmReset, setConfirmReset] = useState(false);
 
   useEffect(() => {
     setProgress(getProgress());
@@ -41,8 +44,20 @@ export default function ProgressPage() {
     0
   );
 
+  const handleReset = () => {
+    resetProgress();
+    setProgress(DEFAULT_PROGRESS);
+    setConfirmReset(false);
+  };
+
+  // Group chapters by category
+  const grouped = CATEGORY_ORDER.map((cat) => ({
+    category: cat,
+    chapters: completedChapters.filter((c) => c.category === cat),
+  })).filter((g) => g.chapters.length > 0);
+
   return (
-    <div className="mx-auto max-w-content px-4 py-8 pb-20 md:px-6 md:pb-8">
+    <div className="mx-auto max-w-content animate-fade-in px-4 py-8 pb-20 md:px-6 md:pb-8">
       <h1 className="mb-6 text-2xl font-bold">學習統計</h1>
 
       {/* Summary */}
@@ -54,80 +69,132 @@ export default function ProgressPage() {
         </Card>
 
         <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm text-muted-foreground">
-              平均最佳分數
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <span className="text-3xl font-bold">{avgScore}</span>
-            <span className="ml-1 text-sm text-muted-foreground">分</span>
+          <CardContent className="py-6">
+            <p className="mb-1 text-sm text-muted-foreground">平均最佳分數</p>
+            <p>
+              <span className="text-3xl font-bold">{avgScore}</span>
+              <span className="ml-1 text-sm text-muted-foreground">分</span>
+            </p>
           </CardContent>
         </Card>
 
         <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm text-muted-foreground">
-              測驗次數
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <span className="text-3xl font-bold">{totalAttempts}</span>
-            <span className="ml-1 text-sm text-muted-foreground">次</span>
+          <CardContent className="py-6">
+            <p className="mb-1 text-sm text-muted-foreground">測驗次數</p>
+            <p>
+              <span className="text-3xl font-bold">{totalAttempts}</span>
+              <span className="ml-1 text-sm text-muted-foreground">次</span>
+            </p>
           </CardContent>
         </Card>
 
         <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm text-muted-foreground">
-              連續學習
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <span className="text-3xl font-bold">{progress.streakDays}</span>
-            <span className="ml-1 text-sm text-muted-foreground">天</span>
+          <CardContent className="py-6">
+            <p className="mb-1 text-sm text-muted-foreground">連續學習</p>
+            <p>
+              <span className="text-3xl font-bold">{progress.streakDays}</span>
+              <span className="ml-1 text-sm text-muted-foreground">天</span>
+            </p>
           </CardContent>
         </Card>
       </div>
 
-      {/* Per-chapter scores */}
+      {/* Per-category scores with bar chart */}
       <h2 className="mb-4 text-lg font-semibold">各章節成績</h2>
-      <div className="space-y-3">
-        {completedChapters.map((ch) => {
-          const cp = progress.chapters[ch.id];
 
+      <div className="space-y-6">
+        {grouped.map(({ category, chapters: catChapters }) => {
+          const colors = CATEGORY_COLORS[category];
           return (
-            <Card key={ch.id}>
-              <CardContent className="flex items-center justify-between py-3">
-                <div>
-                  <p className="text-sm font-medium">
-                    第 {ch.number} 章：{ch.title}
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    {ch.quizCount} 題
-                    {cp ? ` / 做過 ${cp.attemptCount} 次` : " / 尚未測驗"}
-                  </p>
-                </div>
-                <div className="text-right">
-                  {cp ? (
-                    <>
-                      <p className="text-lg font-bold text-primary">
-                        {cp.bestScore} 分
-                      </p>
-                      {cp.wrongQuizIds.length > 0 && (
-                        <p className="text-xs text-destructive">
-                          {cp.wrongQuizIds.length} 題待複習
+            <div key={category}>
+              <div className="mb-3 flex items-center gap-2">
+                <span
+                  className={`rounded-full px-3 py-1 text-xs font-medium ${colors.bg} ${colors.text}`}
+                >
+                  {category}
+                </span>
+              </div>
+              <div className="space-y-2">
+                {catChapters.map((ch) => {
+                  const cp = progress.chapters[ch.id];
+                  const score = cp?.bestScore ?? 0;
+
+                  return (
+                    <Card key={ch.id}>
+                      <CardContent className="py-3">
+                        <div className="mb-1.5 flex items-center justify-between">
+                          <p className="text-sm font-medium">
+                            第 {ch.number} 章：{ch.title}
+                          </p>
+                          <div className="text-right">
+                            {cp ? (
+                              <div className="flex items-center gap-3">
+                                {cp.wrongQuizIds.length > 0 && (
+                                  <span className="text-xs text-destructive">
+                                    {cp.wrongQuizIds.length} 題待複習
+                                  </span>
+                                )}
+                                <span className="text-sm font-bold text-primary">
+                                  {score} 分
+                                </span>
+                              </div>
+                            ) : (
+                              <span className="text-sm text-muted-foreground">--</span>
+                            )}
+                          </div>
+                        </div>
+                        {/* Bar chart */}
+                        <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
+                          <div
+                            className={`h-full rounded-full transition-all duration-normal ease-material ${colors.bar}`}
+                            style={{ width: `${score}%` }}
+                          />
+                        </div>
+                        <p className="mt-1 text-xs text-muted-foreground">
+                          {ch.quizCount} 題
+                          {cp ? ` / 做過 ${cp.attemptCount} 次` : " / 尚未測驗"}
                         </p>
-                      )}
-                    </>
-                  ) : (
-                    <p className="text-sm text-muted-foreground">--</p>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+            </div>
           );
         })}
+      </div>
+
+      {/* Reset progress */}
+      <div className="mt-8 border-t border-border pt-6">
+        {!confirmReset ? (
+          <Button
+            variant="outline"
+            className="text-destructive hover:bg-destructive/10"
+            onClick={() => setConfirmReset(true)}
+          >
+            重設所有進度
+          </Button>
+        ) : (
+          <Card className="border-destructive/30">
+            <CardContent className="py-4">
+              <p className="mb-3 text-sm font-medium">
+                確定要重設所有學習進度嗎？此操作無法復原。
+              </p>
+              <div className="flex gap-3">
+                <Button variant="destructive" size="sm" onClick={handleReset}>
+                  確定重設
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setConfirmReset(false)}
+                >
+                  取消
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        )}
       </div>
     </div>
   );

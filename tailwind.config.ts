@@ -53,6 +53,10 @@ const config: Config = {
       transitionTimingFunction: {
         material: "cubic-bezier(0.4, 0, 0.2, 1)",
       },
+      animation: {
+        "fade-in": "fade-in 0.35s cubic-bezier(0.4, 0, 0.2, 1) both",
+        "slide-in": "slide-in 0.3s cubic-bezier(0.4, 0, 0.2, 1) both",
+      },
     },
   },
   plugins: [],

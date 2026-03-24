@@ -18,9 +18,10 @@ interface QuizShellProps {
   chapterId: string;
   chapterTitle: string;
   quizzes: Quiz[];
+  onComplete?: (result: QuizResult) => void;
 }
 
-export function QuizShell({ chapterId, chapterTitle, quizzes }: QuizShellProps) {
+export function QuizShell({ chapterId, chapterTitle, quizzes, onComplete }: QuizShellProps) {
   const [session, setSession] = useState<QuizSession>(() =>
     createSession(chapterId, quizzes)
   );
@@ -49,6 +50,7 @@ export function QuizShell({ chapterId, chapterTitle, quizzes }: QuizShellProps) 
       const quizResult = calculateResult(session);
       saveQuizResult(quizResult);
       setResult(quizResult);
+      onComplete?.(quizResult);
     } else {
       setSession({ ...session, currentIndex: nextIndex });
     }
@@ -125,7 +127,7 @@ export function QuizShell({ chapterId, chapterTitle, quizzes }: QuizShellProps) 
       </div>
 
       {/* Quiz Card */}
-      <Card>
+      <Card key={currentQuiz.id} className="animate-slide-in">
         <CardContent className="py-6">
           {currentQuiz.type === "code-prediction" && (
             <CodePrediction

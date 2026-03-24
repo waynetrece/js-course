@@ -48,7 +48,7 @@ export default function ChapterDetailPage() {
   }
 
   return (
-    <div className="mx-auto max-w-content px-4 py-8 pb-20 md:px-6 md:pb-8">
+    <div className="mx-auto max-w-content animate-fade-in px-4 py-8 pb-20 md:px-6 md:pb-8">
       {/* Header */}
       <div className="mb-6">
         <Link

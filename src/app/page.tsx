@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ProgressRing } from "@/components/progress/ProgressRing";
@@ -55,7 +55,7 @@ export default function Dashboard() {
     )[0];
 
   return (
-    <div className="mx-auto max-w-content px-4 pb-20 pt-10 md:px-6 md:pb-12">
+    <div className="mx-auto max-w-content animate-fade-in px-4 pb-20 pt-10 md:px-6 md:pb-12">
       {/* Welcome */}
       <div className="mb-10">
         <h1 className="text-2xl font-bold md:text-3xl">JS 觀念複習</h1>

@@ -60,3 +60,23 @@ export function getWeakQuizIds(progress: UserProgress): string[] {
   }
   return allWrong;
 }
+
+export function removeCorrectFromWeak(correctIds: string[]): UserProgress {
+  const progress = getProgress();
+  const updated = { ...progress, chapters: { ...progress.chapters } };
+
+  for (const [chId, cp] of Object.entries(updated.chapters)) {
+    const filtered = cp.wrongQuizIds.filter((id) => !correctIds.includes(id));
+    if (filtered.length !== cp.wrongQuizIds.length) {
+      updated.chapters[chId] = { ...cp, wrongQuizIds: filtered };
+    }
+  }
+
+  saveProgress(updated);
+  return updated;
+}
+
+export function resetProgress(): void {
+  if (typeof window === "undefined") return;
+  localStorage.removeItem(STORAGE_KEY);
+}

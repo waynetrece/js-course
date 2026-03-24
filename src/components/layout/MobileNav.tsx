@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NAV_ITEMS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "./ThemeToggle";
 
 const ICONS: Record<string, React.ReactNode> = {
   "/": (
@@ -48,6 +49,7 @@ export function MobileNav() {
             </Link>
           );
         })}
+        <ThemeToggle className="flex-col gap-0.5 px-3 py-1" />
       </div>
     </nav>
   );

@@ -25,7 +25,7 @@ export default function ChaptersPage() {
   }, {} as Record<ChapterCategory, ChapterMeta[]>);
 
   return (
-    <div className="mx-auto max-w-content px-4 py-8 pb-20 md:px-6 md:pb-8">
+    <div className="mx-auto max-w-content animate-fade-in px-4 py-8 pb-20 md:px-6 md:pb-8">
       <h1 className="mb-6 text-2xl font-bold">章節列表</h1>
 
       {CATEGORY_ORDER.map((category) => {
