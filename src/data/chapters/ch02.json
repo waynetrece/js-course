@@ -1,0 +1,153 @@
+{
+  "id": "ch02",
+  "number": 2,
+  "title": "let, const, var",
+  "category": "基礎篇",
+  "concepts": [
+    {
+      "id": "ch02-c01",
+      "title": "let 宣告變數",
+      "explanation": "let 是用來宣告變數的關鍵字。你可以把變數想像成一個貼了標籤的盒子，let 就是你第一次製作這個盒子並貼上標籤的動作。第一次使用時要寫 let，之後想改盒子裡的內容，直接寫變數名稱就好，不需要再加 let。",
+      "codeExamples": [
+        {
+          "code": "let cokePrice = 20;\ncokePrice = 40;\ncokePrice = 75;\nconsole.log(cokePrice);",
+          "output": "75"
+        }
+      ],
+      "tips": ["第一次宣告要加 let，之後改值不用再加 let", "同一個變數名稱只能宣告一次，重複宣告會報錯"]
+    },
+    {
+      "id": "ch02-c02",
+      "title": "const 常數",
+      "explanation": "const 也是用來宣告變數的關鍵字，但它宣告的是「常數」，也就是值不能被改變的資料。當你有一個值在程式執行過程中不應該被修改，就用 const。如果不小心去改它，程式會立刻報錯提醒你。",
+      "codeExamples": [
+        {
+          "code": "const discount = 0.8;\nconst bananaPrice = 30;\nlet cartQuantity = 0;\ncartQuantity = 3;\nconsole.log(discount, bananaPrice, cartQuantity);",
+          "output": "0.8 30 3"
+        }
+      ],
+      "tips": ["const 的值一旦設定，就不能再改變", "會變用 let，不變用 const"]
+    },
+    {
+      "id": "ch02-c03",
+      "title": "重複宣告 vs 重新賦值",
+      "explanation": "「重複宣告」是指再寫一次 let 或 const 來宣告同名變數，不管是 let 還是 const 都會報錯。「重新賦值」是指直接寫變數名稱加等號來改值，let 允許，但 const 不行。",
+      "codeExamples": [
+        {
+          "code": "let ming = '小明';\nming = '小民';  // 合法！重新賦值\nconsole.log(ming);",
+          "output": "小民"
+        },
+        {
+          "code": "let ming = '小明';\nlet ming = '小民'; // 報錯！重複宣告",
+          "output": "SyntaxError: Identifier 'ming' has already been declared"
+        }
+      ],
+      "tips": ["重複宣告（再寫一次 let/const）→ 都不行", "重新賦值（直接用 = 改值）→ let 可以，const 不行"]
+    },
+    {
+      "id": "ch02-c04",
+      "title": "變數命名規則",
+      "explanation": "變數名稱不能用數字開頭，不能使用保留字（let、const、if 等），大小寫有分。不需要死背保留字，用到會報錯，改掉就好。",
+      "codeExamples": [
+        {
+          "code": "let myName = 'Wayne';  // 駝峰式\nlet _count = 0;         // 底線開頭\nlet name1 = '小明';    // 數字在後面",
+          "output": ""
+        }
+      ],
+      "tips": ["數字不開頭，保留字不碰，大小寫要分清", "通常用駝峰式命名（myVariableName）"]
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "ch02-q01",
+      "type": "code-prediction",
+      "difficulty": 1,
+      "code": "let price = 100;\nprice = 50;\nprice = 75;\nconsole.log(price);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "75",
+      "explanation": "變數的值會被最後一次賦值覆蓋。price 從 100 改成 50，再改成 75，最後的值就是 75。"
+    },
+    {
+      "id": "ch02-q02",
+      "type": "true-false",
+      "difficulty": 1,
+      "statement": "使用 let 宣告的變數，修改值時需要再次加上 let 關鍵字",
+      "question": "這個說法正確嗎？",
+      "correctAnswer": false,
+      "explanation": "第一次宣告時要加 let，之後修改值只需要寫「變數名稱 = 新值」，不需要再加 let。重複寫 let 反而會報錯。"
+    },
+    {
+      "id": "ch02-q03",
+      "type": "multiple-choice",
+      "difficulty": 1,
+      "question": "以下哪一個情境應該使用 const？",
+      "options": ["遊戲中的玩家分數", "購物車裡的商品數量", "數學的圓周率 3.14159", "網站的當前訪客人數"],
+      "correctIndex": 2,
+      "explanation": "圓周率是固定不變的值，適合用 const 保護。遊戲分數、購物車數量、訪客人數都會隨時間改變，應該用 let。"
+    },
+    {
+      "id": "ch02-q04",
+      "type": "true-false",
+      "difficulty": 1,
+      "statement": "const sun = 1; sun = 2; 這段程式碼會正常執行，不會報錯",
+      "question": "這個說法正確嗎？",
+      "correctAnswer": false,
+      "explanation": "const 宣告的變數不能被重新賦值。嘗試修改 const 的值會產生 TypeError。"
+    },
+    {
+      "id": "ch02-q05",
+      "type": "multiple-choice",
+      "difficulty": 2,
+      "question": "下列哪一行程式碼會造成錯誤？（假設前面已有 let cloudCount = 3;）",
+      "options": ["cloudCount = 5;", "let cloudCount = 10;", "console.log(cloudCount);", "const discount = 0.8;"],
+      "correctIndex": 1,
+      "explanation": "對同一個變數「重複宣告」——再次用 let 宣告已存在的 cloudCount，會造成 SyntaxError。正確做法是直接寫 cloudCount = 10。"
+    },
+    {
+      "id": "ch02-q06",
+      "type": "fill-in-blank",
+      "difficulty": 1,
+      "code": "___ discount = 0.8;  // 活動折扣，不應該被修改",
+      "blank": "___",
+      "question": "活動折扣不應該被修改，應該用什麼關鍵字宣告？",
+      "correctAnswer": "const",
+      "explanation": "活動折扣是固定的值，不應該被改變，要用 const。"
+    },
+    {
+      "id": "ch02-q07",
+      "type": "multiple-choice",
+      "difficulty": 1,
+      "question": "以下哪一個變數命名是合法的？",
+      "options": ["let 2cool = '酷'", "let const = 1", "let my name = 'Wayne'", "let cool2 = '酷'"],
+      "correctIndex": 3,
+      "explanation": "數字開頭（不合法）、保留字（不合法）、有空格（不合法）。只有 cool2 是合法的——數字放在後面是允許的。"
+    },
+    {
+      "id": "ch02-q08",
+      "type": "true-false",
+      "difficulty": 2,
+      "statement": "name、Name、NAME 在 JavaScript 中是同一個變數",
+      "question": "這個說法正確嗎？",
+      "correctAnswer": false,
+      "explanation": "JavaScript 的變數名稱有大小寫之分（case-sensitive）。name、Name、NAME 是三個完全不同的變數。"
+    },
+    {
+      "id": "ch02-q09",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "let ming = '小明';\nlet ming = '小民';\nconsole.log(ming);",
+      "question": "這段程式碼執行後會發生什麼？",
+      "correctAnswer": "報錯",
+      "explanation": "這是「重複宣告」——對同一個變數名稱再次使用 let 宣告。let 不允許重複宣告，會直接報 SyntaxError。"
+    },
+    {
+      "id": "ch02-q10",
+      "type": "multiple-choice",
+      "difficulty": 2,
+      "question": "關於 var，下列哪一項描述是正確的？",
+      "options": ["var 是 2015 年 ES6 推出的新語法", "var 可以重複宣告同名變數而不報錯", "現在寫程式應該優先使用 var", "var 和 const 的功能完全相同"],
+      "correctIndex": 1,
+      "explanation": "var 允許重複宣告同名變數。var 是 1995 年就有的舊語法，現在主流使用 let 和 const。"
+    }
+  ]
+}

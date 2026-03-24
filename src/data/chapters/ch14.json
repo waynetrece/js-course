@@ -1,0 +1,207 @@
+{
+  "id": "ch14",
+  "number": 14,
+  "title": "if 流程圖規劃流程",
+  "category": "邏輯判斷篇",
+  "concepts": [
+    {
+      "id": "ch14-c01",
+      "title": "為什麼要畫流程圖",
+      "explanation": "程式邏輯複雜時，直接寫 code 容易遺漏條件或搞混順序。先用流程圖把判斷流程視覺化，理清楚再寫程式，可以大幅降低出錯機率。",
+      "codeExamples": [],
+      "tips": [
+        "寫程式之前先想清楚邏輯，流程圖是幫你思考的工具",
+        "多層判斷（if / else if / else）特別適合先畫流程圖"
+      ]
+    },
+    {
+      "id": "ch14-c02",
+      "title": "流程圖三大符號",
+      "explanation": "流程圖有三種基本符號：橢圓形代表開始與結束、方形代表處理步驟（執行某個動作）、菱形代表條件判斷（if/else），會分出 Yes 和 No 兩條路。",
+      "codeExamples": [],
+      "tips": [
+        "橢圓形 = 開始 / 結束",
+        "方形 = 處理步驟（例如：顯示訊息、設定變數）",
+        "菱形 = 判斷條件，分出 Yes / No 兩條路"
+      ]
+    },
+    {
+      "id": "ch14-c03",
+      "title": "流程圖對應 if/else 程式碼",
+      "explanation": "流程圖中的菱形判斷對應程式碼中的 if 條件，Yes 分支對應 if 區塊內的程式碼，No 分支對應 else 區塊內的程式碼。方形步驟對應實際要執行的動作，例如 console.log。",
+      "codeExamples": [
+        {
+          "code": "if (條件) {\n  // Yes 分支 → 步驟A\n} else {\n  // No 分支 → 步驟B\n}",
+          "output": "（依條件結果執行步驟A或步驟B）"
+        }
+      ],
+      "tips": [
+        "菱形的 Yes 方向 = if 區塊",
+        "菱形的 No 方向 = else 區塊",
+        "箭頭的走向就是程式執行的順序"
+      ]
+    },
+    {
+      "id": "ch14-c04",
+      "title": "拆解題目的四步流程",
+      "explanation": "拿到一個需求時，用四個步驟拆解：(1) 找出要判斷什麼 → 畫菱形；(2) 找出每種情況要做什麼 → 畫方形；(3) 用箭頭連起來，確認邏輯正確；(4) 照著流程圖寫程式碼。",
+      "codeExamples": [],
+      "tips": [
+        "先找「判斷條件」再找「執行動作」",
+        "畫完流程圖後先檢查一次邏輯，再開始寫程式",
+        "這個流程適用於所有 if/else 題目"
+      ]
+    },
+    {
+      "id": "ch14-c05",
+      "title": "單層判斷 — 變數 + if/else",
+      "explanation": "最基本的判斷結構：宣告一個變數，用 if/else 判斷變數的值，根據結果執行不同的動作。流程圖只有一個菱形判斷。",
+      "codeExamples": [
+        {
+          "code": "let wallet = 300;\n\nif (wallet >= 500) {\n  console.log(\"可以吃大餐\");\n} else {\n  console.log(\"吃滷肉飯\");\n}",
+          "output": "吃滷肉飯"
+        }
+      ],
+      "tips": [
+        "wallet 是 300，不符合 >= 500 的條件，所以走 else",
+        "單層判斷只有一個條件，流程圖最簡單"
+      ]
+    },
+    {
+      "id": "ch14-c06",
+      "title": "多層判斷 — if / else if / else",
+      "explanation": "當判斷條件超過兩種情況時，需要用 if / else if / else 做多層判斷。流程圖會有多個菱形，第一個條件不符合時進入第二個菱形繼續判斷，依此類推。",
+      "codeExamples": [
+        {
+          "code": "let score = 75;\n\nif (score >= 90) {\n  console.log(\"優等\");\n} else if (score >= 60) {\n  console.log(\"及格\");\n} else {\n  console.log(\"不及格\");\n}",
+          "output": "及格"
+        }
+      ],
+      "tips": [
+        "判斷順序很重要：先判斷 >= 90，不符合才判斷 >= 60",
+        "else 是最後的保底，前面條件都不符合才會走到這裡",
+        "流程圖中，第二個菱形接在第一個菱形的 No 方向"
+      ]
+    },
+    {
+      "id": "ch14-c07",
+      "title": "巢狀判斷 — 註冊流程範例",
+      "explanation": "有時候判斷之間有階層關係，例如先判斷是否有帳號，沒有的話再判斷密碼長度。流程圖呈現出樹狀結構，第二層判斷只在第一層的某一分支中出現。對應程式碼會用 else if 或巢狀 if 來實現。",
+      "codeExamples": [
+        {
+          "code": "let hasAccount = false;\nlet password = \"abc123456\";\n\nif (hasAccount) {\n  console.log(\"導向登入頁面\");\n} else if (password.length >= 8) {\n  console.log(\"註冊成功\");\n} else {\n  console.log(\"密碼太短，至少 8 個字元\");\n}",
+          "output": "註冊成功"
+        }
+      ],
+      "tips": [
+        "hasAccount 是 false，所以不會進 if 區塊",
+        "password.length 是 9（abc123456 有 9 個字元），>= 8 成立，印出「註冊成功」",
+        "實際應用中，註冊、登入等流程都會用到多層判斷"
+      ]
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "ch14-q01",
+      "type": "multiple-choice",
+      "difficulty": 1,
+      "question": "在流程圖中，菱形符號代表什麼？",
+      "options": [
+        "開始或結束",
+        "處理步驟（執行動作）",
+        "條件判斷（if/else）",
+        "變數宣告"
+      ],
+      "correctIndex": 2,
+      "explanation": "菱形在流程圖中代表條件判斷，對應程式碼中的 if/else，會從菱形分出 Yes 和 No 兩條路。"
+    },
+    {
+      "id": "ch14-q02",
+      "type": "true-false",
+      "difficulty": 1,
+      "statement": "流程圖中的方形符號代表判斷條件。",
+      "question": "這個說法正確嗎？",
+      "correctAnswer": false,
+      "explanation": "方形代表的是「處理步驟」，也就是執行某個動作（例如顯示訊息、設定變數）。判斷條件是用菱形表示的。"
+    },
+    {
+      "id": "ch14-q03",
+      "type": "code-prediction",
+      "difficulty": 1,
+      "code": "let wallet = 600;\n\nif (wallet >= 500) {\n  console.log(\"可以吃大餐\");\n} else {\n  console.log(\"吃滷肉飯\");\n}",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "可以吃大餐",
+      "explanation": "wallet 的值是 600，600 >= 500 成立（true），所以走 if 區塊，印出「可以吃大餐」。"
+    },
+    {
+      "id": "ch14-q04",
+      "type": "fill-in-blank",
+      "difficulty": 1,
+      "code": "let age = 20;\n\nif (age >= 18) {\n  console.log(\"可以投票\");\n} ___ {\n  console.log(\"不能投票\");\n}",
+      "blank": "___",
+      "question": "空格中應該填入什麼關鍵字，讓 age 小於 18 時印出「不能投票」？",
+      "correctAnswer": "else",
+      "explanation": "else 代表「否則」，當 if 的條件不成立時，就會執行 else 區塊裡的程式碼。"
+    },
+    {
+      "id": "ch14-q05",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "let score = 55;\n\nif (score >= 90) {\n  console.log(\"優等\");\n} else if (score >= 60) {\n  console.log(\"及格\");\n} else {\n  console.log(\"不及格\");\n}",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "不及格",
+      "explanation": "score 是 55。第一個條件 55 >= 90 不成立，第二個條件 55 >= 60 也不成立，所以走到最後的 else，印出「不及格」。"
+    },
+    {
+      "id": "ch14-q06",
+      "type": "multiple-choice",
+      "difficulty": 2,
+      "question": "拿到一個需求要寫 if/else 判斷，建議的步驟順序是？",
+      "options": [
+        "直接寫程式碼 → 測試 → 修改",
+        "找出判斷條件 → 找出執行動作 → 畫流程圖 → 寫程式碼",
+        "先寫 else → 再寫 if → 最後加條件",
+        "先宣告所有變數 → 畫流程圖 → 刪掉流程圖 → 寫程式碼"
+      ],
+      "correctIndex": 1,
+      "explanation": "正確的流程是：(1) 找出要判斷什麼（菱形）→ (2) 找出每種情況要做什麼（方形）→ (3) 用箭頭連起來確認邏輯 → (4) 照著流程圖寫程式碼。"
+    },
+    {
+      "id": "ch14-q07",
+      "type": "true-false",
+      "difficulty": 2,
+      "statement": "在多層判斷的流程圖中，第二個菱形（第二個條件判斷）接在第一個菱形的 Yes 方向。",
+      "question": "這個說法正確嗎？",
+      "correctAnswer": false,
+      "explanation": "第二個菱形應該接在第一個菱形的 No 方向。因為第一個條件成立時直接執行對應動作，不成立（No）時才需要繼續往下判斷第二個條件，這就是 else if 的邏輯。"
+    },
+    {
+      "id": "ch14-q08",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "let hasAccount = true;\nlet password = \"abc123456\";\n\nif (hasAccount) {\n  console.log(\"導向登入頁面\");\n} else if (password.length >= 8) {\n  console.log(\"註冊成功\");\n} else {\n  console.log(\"密碼太短\");\n}",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "導向登入頁面",
+      "explanation": "hasAccount 是 true，所以第一個 if 條件就成立了，直接印出「導向登入頁面」。後面的 else if 和 else 都不會執行，因為 if/else if/else 只會執行其中一個區塊。"
+    },
+    {
+      "id": "ch14-q09",
+      "type": "fill-in-blank",
+      "difficulty": 3,
+      "code": "let temperature = 35;\n\nif (temperature >= 35) {\n  console.log(\"高溫警報\");\n} else if (temperature >= 28) {\n  console.log(\"炎熱\");\n} ___ {\n  console.log(\"舒適\");\n}",
+      "blank": "___",
+      "question": "空格中應該填入什麼，讓 temperature 小於 28 時印出「舒適」？",
+      "correctAnswer": "else",
+      "explanation": "在 if / else if 之後，用 else 來處理所有剩餘的情況。當 temperature 既不 >= 35 也不 >= 28 時（也就是小於 28），就會執行 else 區塊印出「舒適」。"
+    },
+    {
+      "id": "ch14-q10",
+      "type": "code-prediction",
+      "difficulty": 3,
+      "code": "let hasAccount = false;\nlet password = \"abc\";\n\nif (hasAccount) {\n  console.log(\"導向登入頁面\");\n} else if (password.length >= 8) {\n  console.log(\"註冊成功\");\n} else {\n  console.log(\"密碼太短，至少 8 個字元\");\n}",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "密碼太短，至少 8 個字元",
+      "explanation": "hasAccount 是 false，第一個 if 不成立。password 是 \"abc\"，長度是 3，3 >= 8 不成立，else if 也不成立。最後走到 else，印出「密碼太短，至少 8 個字元」。"
+    }
+  ]
+}

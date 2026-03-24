@@ -1,0 +1,130 @@
+{
+  "id": "ch05",
+  "number": 5,
+  "title": "字串型別",
+  "category": "基礎篇",
+  "concepts": [
+    {
+      "id": "ch05-c01",
+      "title": "宣告字串必須加引號",
+      "explanation": "在 JavaScript 中，文字（字串）必須用引號包起來。可以用雙引號或單引號，兩種都正確。如果沒加引號，JavaScript 會把它當成變數名稱去找，找不到就會報錯。",
+      "codeExamples": [{"code": "let a = \"hello\";  // 正確\nlet b = 'hello';  // 也正確\nlet c = hello;    // 錯誤！會被當成變數名稱", "output": ""}],
+      "tips": ["文字就要加引號，這是字串的識別符號"]
+    },
+    {
+      "id": "ch05-c02",
+      "title": "字串用 + 號串接",
+      "explanation": "字串跟字串之間可以用 + 號把它們接在一起，這叫做字串拼接。想要加空格，需要自己多放一個空白字串。",
+      "codeExamples": [{"code": "let msg = \"哈囉\" + \" \" + \"世界\";\nconsole.log(msg);", "output": "哈囉 世界"}],
+      "tips": ["字串的 + 是拼接不是加法", "空格不會自動產生，要自己加"]
+    },
+    {
+      "id": "ch05-c03",
+      "title": "數字與字串相加的規則",
+      "explanation": "只要 + 號的任一邊是字串，結果就會變成字串拼接。而 *、-、/ 只有數學運算的功能，遇到非數字才會產生 NaN。",
+      "codeExamples": [{"code": "console.log(\"Wayne\" + 20);   // \"Wayne20\"\nconsole.log(10 + \"10\");      // \"1010\"\nconsole.log(\"10\" * \"10\");    // 100", "output": "Wayne20\n1010\n100"}],
+      "tips": ["+ 有字串就是拼接，結果是 string", "* - / 是數學，結果是 number 或 NaN"]
+    },
+    {
+      "id": "ch05-c04",
+      "title": "模板字串（Template Literals）",
+      "explanation": "模板字串用反引號包起來，搭配 ${} 可以直接把變數插入文字中，比起用 + 號串接更簡潔好讀。",
+      "codeExamples": [{"code": "let name = \"Wayne\";\nlet age = 20;\nlet msg = `${name} 今年 ${age} 歲`;\nconsole.log(msg);", "output": "Wayne 今年 20 歲"}],
+      "tips": ["反引號不是單引號，在鍵盤左上角", "${} 裡面放變數名稱"]
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "ch05-q01",
+      "type": "true-false",
+      "difficulty": 1,
+      "statement": "let a = hello; 這樣寫，hello 會被當成字串存進變數 a",
+      "question": "這個說法正確嗎？",
+      "correctAnswer": false,
+      "explanation": "沒有加引號的 hello 會被當成變數名稱去找，不是字串。會報錯 ReferenceError。"
+    },
+    {
+      "id": "ch05-q02",
+      "type": "code-prediction",
+      "difficulty": 1,
+      "code": "let a = \"哈囉\" + \"世界\";\nconsole.log(a);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "哈囉世界",
+      "explanation": "字串用 + 號是拼接，直接接在一起。中間沒有加空白字串，所以沒有空格。"
+    },
+    {
+      "id": "ch05-q03",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "let name = \"Wayne\";\nlet age = 20;\nlet result = name + age;\nconsole.log(result);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "Wayne20",
+      "explanation": "數字與字串用 + 號相加，數字會被自動轉成字串，結果是字串拼接。"
+    },
+    {
+      "id": "ch05-q04",
+      "type": "true-false",
+      "difficulty": 2,
+      "statement": "\"hello\" + 2 的結果是 NaN",
+      "question": "這個說法正確嗎？",
+      "correctAnswer": false,
+      "explanation": "+ 號碰到字串會變成字串拼接，結果是 \"hello2\"，不是 NaN。只有 * - / 碰到無法轉數字的字串才會產生 NaN。"
+    },
+    {
+      "id": "ch05-q05",
+      "type": "multiple-choice",
+      "difficulty": 2,
+      "question": "下列哪個運算結果是 NaN？",
+      "options": ["\"10\" + \"10\"", "\"hello\" + 2", "\"hello\" * 2", "10 + \"hello\""],
+      "correctIndex": 2,
+      "explanation": "只有 \"hello\" * 2 會產生 NaN，因為 * 是數學乘法，字串 \"hello\" 無法轉成數字。"
+    },
+    {
+      "id": "ch05-q06",
+      "type": "fill-in-blank",
+      "difficulty": 1,
+      "code": "let msg = \" hello \";\nconsole.log(msg.___);  // 7",
+      "blank": "___",
+      "question": "填入正確的屬性名稱，讓程式輸出字串的長度。",
+      "correctAnswer": "length",
+      "explanation": ".length 可以取得字串的字元數量。空白也會被算進去。"
+    },
+    {
+      "id": "ch05-q07",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "let input = \"  Wayne  \";\nlet cleaned = input.trim();\nconsole.log(cleaned.length);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "5",
+      "explanation": ".trim() 去掉前後空白後剩下 \"Wayne\"，只有 5 個字元。"
+    },
+    {
+      "id": "ch05-q08",
+      "type": "fill-in-blank",
+      "difficulty": 1,
+      "code": "let name = \"Wayne\";\nlet age = 20;\nlet msg = `___ 今年 ${age} 歲`;",
+      "blank": "___",
+      "question": "填入正確的模板字串語法，讓 name 變數的值出現在句子中。",
+      "correctAnswer": "${name}",
+      "explanation": "在模板字串中，用 ${變數名稱} 的語法可以把變數的值插入文字中。"
+    },
+    {
+      "id": "ch05-q09",
+      "type": "multiple-choice",
+      "difficulty": 1,
+      "question": "typeof \"hello\" 會回傳什麼？",
+      "options": ["hello", "string", "text", "word"],
+      "correctIndex": 1,
+      "explanation": "typeof 放在字串前面會回傳 \"string\"，這是 JavaScript 表示字串型別的方式。"
+    },
+    {
+      "id": "ch05-q10",
+      "type": "multiple-choice",
+      "difficulty": 3,
+      "question": "下列哪個選項的執行結果型別是 number？",
+      "options": ["10 + \"10\"", "\"10\" + 10", "\"10\" - \"2\"", "\"hello\" + 0"],
+      "correctIndex": 2,
+      "explanation": "\"10\" - \"2\" 的結果是 8，型別是 number。因為 - 是純數學運算符號。其他三個含 + 號且有字串，都是拼接。"
+    }
+  ]
+}

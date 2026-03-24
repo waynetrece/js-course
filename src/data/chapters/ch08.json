@@ -1,0 +1,130 @@
+{
+  "id": "ch08",
+  "number": 8,
+  "title": "物件教學",
+  "category": "資料結構篇",
+  "concepts": [
+    {
+      "id": "ch08-c01",
+      "title": "物件宣告語法",
+      "explanation": "物件用大括號 {} 包起來，裡面放「屬性名稱 : 值」的組合。屬性名稱和值之間用冒號 : 連接，多組屬性之間用逗號隔開。",
+      "codeExamples": [{"code": "let home = {\n  motherName: \"mary\",\n  fatherName: \"tom\",\n  dogs: 3,\n  isWakeUp: false\n};", "output": ""}],
+      "tips": ["物件用大括號 {}，陣列用中括號 []", "屬性名稱和值之間用冒號 :，不是等號 ="]
+    },
+    {
+      "id": "ch08-c02",
+      "title": "用點記法讀取物件的值",
+      "explanation": "用「物件名稱.屬性名稱」就能取出該屬性的值。",
+      "codeExamples": [{"code": "let home = { motherName: \"mary\", dogs: 3 };\nconsole.log(home.motherName);\nconsole.log(home.dogs);", "output": "mary\n3"}],
+      "tips": ["格式是「物件名稱.屬性名稱」，中間是一個點"]
+    },
+    {
+      "id": "ch08-c03",
+      "title": "用點記法新增物件屬性",
+      "explanation": "用「物件.屬性名稱 = 值」可以新增屬性。有 = 是寫入（新增），沒有 = 是讀取。",
+      "codeExamples": [{"code": "let home = {};\nhome.motherName = \"mary\";\nhome.dogs = 3;\nconsole.log(home);", "output": "{ motherName: \"mary\", dogs: 3 }"}],
+      "tips": ["有 = 是寫入，沒有 = 是讀取", "可以先建空物件 {}，再逐步新增屬性"]
+    },
+    {
+      "id": "ch08-c04",
+      "title": "陣列 vs 物件的差異",
+      "explanation": "陣列靠「索引」找資料，物件靠「屬性名稱」找資料。",
+      "codeExamples": [{"code": "let colors = [\"red\", \"blue\"];\nconsole.log(colors[0]);\n\nlet person = { name: \"tom\", age: 25 };\nconsole.log(person.name);", "output": "red\ntom"}],
+      "tips": ["陣列：arr[0]，物件：obj.name"]
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "ch08-q01",
+      "type": "code-prediction",
+      "difficulty": 1,
+      "code": "let home = {\n  motherName: \"mary\",\n  fatherName: \"tom\",\n  dogs: 3\n};\nconsole.log(home.fatherName);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "tom",
+      "explanation": "用點記法 home.fatherName 讀取 fatherName 屬性的值，結果是 \"tom\"。"
+    },
+    {
+      "id": "ch08-q02",
+      "type": "code-prediction",
+      "difficulty": 1,
+      "code": "let person = { name: \"alice\", age: 20 };\nlet myAge = person.age;\nconsole.log(myAge);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "20",
+      "explanation": "person.age 讀取到數字 20，再存到 myAge 變數，所以印出 20。"
+    },
+    {
+      "id": "ch08-q03",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "let home = {};\nhome.motherName = \"mary\";\nhome.dogs = 3;\nconsole.log(home.dogs);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "3",
+      "explanation": "先宣告空物件，再用點記法新增屬性。home.dogs = 3 後，home.dogs 讀取到 3。"
+    },
+    {
+      "id": "ch08-q04",
+      "type": "fill-in-blank",
+      "difficulty": 1,
+      "code": "let cat = { name: \"mimi\", age: 5 };\nconsole.log(cat___name);  // mimi",
+      "blank": "___",
+      "question": "要用點記法讀取 name 屬性，空格應該填什麼？",
+      "correctAnswer": ".",
+      "explanation": "點記法格式是「物件名稱.屬性名稱」，中間用一個點連接。"
+    },
+    {
+      "id": "ch08-q05",
+      "type": "fill-in-blank",
+      "difficulty": 2,
+      "code": "let school = ___;\nschool.city = \"台北\";\nschool.students = 500;",
+      "blank": "___",
+      "question": "要宣告一個空物件，空格應該填什麼？",
+      "correctAnswer": "{}",
+      "explanation": "空物件的宣告語法是 {}（大括號裡什麼都不放）。"
+    },
+    {
+      "id": "ch08-q06",
+      "type": "multiple-choice",
+      "difficulty": 1,
+      "question": "下列哪一個是正確的物件宣告語法？",
+      "options": ["let obj = [name: \"tom\", age: 25];", "let obj = {name: \"tom\", age: 25};", "let obj = (name: \"tom\", age: 25);", "let obj = name: \"tom\", age: 25;"],
+      "correctIndex": 1,
+      "explanation": "物件用大括號 {} 包起來，屬性用冒號 : 連接。"
+    },
+    {
+      "id": "ch08-q07",
+      "type": "multiple-choice",
+      "difficulty": 2,
+      "question": "點記法有沒有 = 的差異是什麼？",
+      "options": ["有 = 是讀取，沒有 = 是新增", "有 = 是新增/修改屬性，沒有 = 是讀取屬性", "有沒有 = 都一樣，都是讀取", "有沒有 = 都一樣，都是新增"],
+      "correctIndex": 1,
+      "explanation": "obj.name 是讀取；obj.name = \"tom\" 是寫入。有 = 就是賦值，沒有 = 就是讀取。"
+    },
+    {
+      "id": "ch08-q08",
+      "type": "true-false",
+      "difficulty": 1,
+      "statement": "物件裡的值只能是字串型別，不能放數字或布林",
+      "question": "這個說法正確嗎？",
+      "correctAnswer": false,
+      "explanation": "物件的屬性值可以放任何型別，包括字串、數字、布林等。"
+    },
+    {
+      "id": "ch08-q09",
+      "type": "true-false",
+      "difficulty": 1,
+      "statement": "宣告物件時，屬性名稱和值之間用等號 = 連接",
+      "question": "這個說法正確嗎？",
+      "correctAnswer": false,
+      "explanation": "物件宣告時用冒號 : 連接，不是等號 =。等號是用在新增屬性時，如 obj.name = \"tom\"。"
+    },
+    {
+      "id": "ch08-q10",
+      "type": "multiple-choice",
+      "difficulty": 2,
+      "question": "陣列和物件讀取資料的方式有什麼不同？",
+      "options": ["陣列用屬性名稱，物件用索引編號", "兩者都用索引編號", "陣列用索引編號，物件用屬性名稱", "兩者都用屬性名稱"],
+      "correctIndex": 2,
+      "explanation": "陣列靠索引找資料如 arr[0]；物件靠屬性名稱找資料如 obj.name。"
+    }
+  ]
+}

@@ -1,0 +1,216 @@
+{
+  "id": "ch12",
+  "number": 12,
+  "title": "比較與邏輯運算子",
+  "category": "邏輯判斷篇",
+  "concepts": [
+    {
+      "id": "ch12-c01",
+      "title": "比較運算子基礎",
+      "explanation": "比較運算子用來比較兩個值的大小關係，共有四個基礎符號：>（大於）、<（小於）、>=（大於等於）、<=（小於等於）。比較的結果一定是布林值，也就是 true 或 false。可以把比較運算子想成在問一個「是非題」。",
+      "codeExamples": [
+        {
+          "code": "console.log(5 > 4);\nconsole.log(3 > 10);\nconsole.log(5 >= 5);\nconsole.log(5 <= 3);",
+          "output": "true\nfalse\ntrue\nfalse"
+        }
+      ],
+      "tips": [
+        "比較的結果一定是布林值（true 或 false），不會是數字或字串",
+        "注意 = 是賦值運算子，不是比較運算子，不要搞混"
+      ]
+    },
+    {
+      "id": "ch12-c02",
+      "title": "比較運算子搭配變數與運算式",
+      "explanation": "除了直接比較數字，也可以把值存在變數裡再比較，甚至可以在小括號裡先做加減運算，再拿運算結果去比較。另外還有 !=（不等於）運算子，當兩邊的值不同時回傳 true。",
+      "codeExamples": [
+        {
+          "code": "let a = 2;\nlet b = 3;\nconsole.log(a > b);\nconsole.log((a + b) > 1);",
+          "output": "false\ntrue"
+        },
+        {
+          "code": "let e = 8;\nlet f = 5;\nconsole.log(e >= f);\nconsole.log(e != f);",
+          "output": "true\ntrue"
+        }
+      ],
+      "tips": [
+        "變數可以直接用比較運算子比較：a > b",
+        "小括號裡可以先運算再比較：(a + b) > 1",
+        "!= 是「不等於」，兩邊值不同就回傳 true"
+      ]
+    },
+    {
+      "id": "ch12-c03",
+      "title": "單等號 vs 雙等號（賦值 vs 比較）",
+      "explanation": "單等號（=）是賦值運算子，用來把右邊的值指定給左邊的變數。雙等號（==）是比較運算子，用來判斷兩邊的值是否相等，結果是布林值。簡單記法：一個等號是「給值」，兩個等號是「比較」。",
+      "codeExamples": [
+        {
+          "code": "let a = 1;       // 單等號：把 1 賦值給 a\nlet b = 2;\nconsole.log(a == b);  // 雙等號：比較 a 和 b 是否相等",
+          "output": "false"
+        }
+      ],
+      "tips": [
+        "單等號是「把值給你」，雙等號是「你們一樣嗎？」",
+        "初學者最容易搞混的就是賦值和比較，要特別注意"
+      ]
+    },
+    {
+      "id": "ch12-c04",
+      "title": "雙等號 vs 三等號（寬鬆比較 vs 嚴格比較）",
+      "explanation": "雙等號（==）是寬鬆比較，只比較值，會自動轉型（例如把字串 \"1\" 轉成數字 1 再比）。三等號（===）是嚴格比較，值和型別都必須相同才回傳 true。實務上建議用三等號，避免自動轉型造成意外結果。",
+      "codeExamples": [
+        {
+          "code": "let a = 1;\nlet b = \"1\";\nconsole.log(a == b);\nconsole.log(a === b);",
+          "output": "true\nfalse"
+        }
+      ],
+      "tips": [
+        "雙等號像問「內容一樣嗎？」，不管包裝（型別）",
+        "三等號像問「內容和包裝都一樣嗎？」，更嚴格",
+        "實務上建議一律用三等號（===），避免自動轉型的意外"
+      ]
+    },
+    {
+      "id": "ch12-c05",
+      "title": "邏輯運算子 AND（&&）與 OR（||）",
+      "explanation": "邏輯運算子用來組合多個條件。&&（AND）代表「而且」，兩邊條件都要是 true，結果才是 true。||（OR）代表「或者」，只要其中一邊是 true，結果就是 true。結果一樣是布林值。",
+      "codeExamples": [
+        {
+          "code": "let a = 1;\nlet b = 2;\nconsole.log(a == 1 && b == 2);\nconsole.log(a == 1 && b == 5);",
+          "output": "true\nfalse"
+        },
+        {
+          "code": "let a = 1;\nlet b = 2;\nconsole.log(a == 1 || b == 5);\nconsole.log(a == 9 || b == 5);",
+          "output": "true\nfalse"
+        }
+      ],
+      "tips": [
+        "&& 口訣：「而且」全部都要過，所有條件都 true 結果才是 true",
+        "|| 口訣：「或者」一個就夠，任一條件是 true 結果就是 true"
+      ]
+    },
+    {
+      "id": "ch12-c06",
+      "title": "邏輯運算子串接多條件",
+      "explanation": "&&  和 || 不限於兩個條件，可以串三個以上的條件。先想清楚情境是「全部都要滿足」還是「滿足一個就好」，再決定用 && 或 ||。",
+      "codeExamples": [
+        {
+          "code": "// AND 串三個條件：年滿 18 而且有工作而且信用正常\nlet age = 25;\nlet hasJob = true;\nlet goodCredit = true;\nconsole.log(age >= 18 && hasJob == true && goodCredit == true);",
+          "output": "true"
+        },
+        {
+          "code": "// OR 串三個條件：未滿 6 歲或 65 歲以上或持有殘障證明\nlet age = 70;\nlet hasDisabilityCard = false;\nconsole.log(age < 6 || age >= 65 || hasDisabilityCard == true);",
+          "output": "true"
+        }
+      ],
+      "tips": [
+        "條件可以用 && 或 || 串三個以上",
+        "先用白話想清楚「而且」還是「或者」，再翻譯成程式碼"
+      ]
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "ch12-q01",
+      "type": "code-prediction",
+      "difficulty": 1,
+      "code": "let x = 10;\nlet y = 5;\nconsole.log(x > y);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "true",
+      "explanation": "x 的值是 10，y 的值是 5。10 大於 5 是成立的，所以比較結果是 true。"
+    },
+    {
+      "id": "ch12-q02",
+      "type": "true-false",
+      "difficulty": 1,
+      "statement": "比較運算子的結果可能是數字、字串或布林值。",
+      "question": "這個說法正確嗎？",
+      "correctAnswer": false,
+      "explanation": "比較運算子的結果一定是布林值（true 或 false），不會是數字或字串。"
+    },
+    {
+      "id": "ch12-q03",
+      "type": "multiple-choice",
+      "difficulty": 1,
+      "question": "在 JavaScript 中，單等號（=）的用途是什麼？",
+      "options": [
+        "比較兩邊的值是否相等",
+        "把右邊的值賦予給左邊的變數",
+        "嚴格比較值和型別",
+        "判斷兩邊的值是否不相等"
+      ],
+      "correctIndex": 1,
+      "explanation": "單等號（=）是賦值運算子，用來把右邊的值指定給左邊的變數，例如 let a = 1。比較用的是雙等號（==）或三等號（===）。"
+    },
+    {
+      "id": "ch12-q04",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "let a = 1;\nlet b = \"1\";\nconsole.log(a == b);\nconsole.log(a === b);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "true\nfalse",
+      "explanation": "雙等號（==）只比值，會自動轉型，字串 \"1\" 轉成數字 1 後跟 a 相等，所以第一行是 true。三等號（===）比值也比型別，number 和 string 型別不同，所以第二行是 false。"
+    },
+    {
+      "id": "ch12-q05",
+      "type": "fill-in-blank",
+      "difficulty": 2,
+      "code": "let age = 20;\nlet isVip = true;\nconsole.log(age >= 18 ___ isVip == true);",
+      "blank": "___",
+      "question": "如果要表示「年滿 18 歲而且是 VIP」兩個條件都要成立，空格應該填入什麼運算子？",
+      "correctAnswer": "&&",
+      "explanation": "&&（AND）代表「而且」，兩邊條件都要成立結果才是 true。這裡要求年滿 18 歲「而且」是 VIP，所以用 &&。"
+    },
+    {
+      "id": "ch12-q06",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "let a = 3;\nlet b = 7;\nconsole.log((a + b) > 9);\nconsole.log(a != b);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "true\ntrue",
+      "explanation": "第一行：a + b = 3 + 7 = 10，10 > 9 是成立的，所以印出 true。第二行：a 是 3，b 是 7，3 不等於 7 是成立的，所以 != 回傳 true。"
+    },
+    {
+      "id": "ch12-q07",
+      "type": "multiple-choice",
+      "difficulty": 2,
+      "question": "下列哪個選項在實務開發中最建議使用？",
+      "options": [
+        "用 = 來比較兩個值是否相等",
+        "用 == 來比較，讓 JavaScript 自動轉型",
+        "用 === 來做嚴格比較，避免自動轉型的意外",
+        "以上三種都一樣，沒有差別"
+      ],
+      "correctIndex": 2,
+      "explanation": "實務上建議用三等號（===）做嚴格比較，因為雙等號的自動轉型可能造成意想不到的結果。而單等號是賦值，根本不是用來比較的。"
+    },
+    {
+      "id": "ch12-q08",
+      "type": "true-false",
+      "difficulty": 2,
+      "statement": "使用 ||（OR）運算子時，只要其中一邊的條件是 true，整個結果就是 true。",
+      "question": "這個說法正確嗎？",
+      "correctAnswer": true,
+      "explanation": "||（OR）代表「或者」，只要任一邊的條件是 true，結果就是 true。只有兩邊都是 false 時，結果才是 false。"
+    },
+    {
+      "id": "ch12-q09",
+      "type": "fill-in-blank",
+      "difficulty": 3,
+      "code": "let today = \"週三\";\nconsole.log(today == \"週六\" ___ today == \"週日\");",
+      "blank": "___",
+      "question": "如果要判斷「今天是週六或週日就放假」，空格應該填入什麼運算子？結果會是什麼？",
+      "correctAnswer": "||",
+      "explanation": "放假的條件是週六「或」週日，所以用 ||（OR）。today 是 \"週三\"，不是週六也不是週日，兩邊都是 false，所以 || 的結果是 false（要上班）。"
+    },
+    {
+      "id": "ch12-q10",
+      "type": "code-prediction",
+      "difficulty": 3,
+      "code": "let height = 140;\nlet age = 8;\nconsole.log(height >= 130 && age >= 10);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "false",
+      "explanation": "&&（AND）要求兩邊條件都成立。height >= 130 成立（140 >= 130 是 true），但 age >= 10 不成立（8 >= 10 是 false）。只要有一邊是 false，&& 的結果就是 false。所以這個人身高夠但年齡不夠，不能搭雲霄飛車。"
+    }
+  ]
+}

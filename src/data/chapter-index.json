@@ -14,8 +14,8 @@
     "title": "字串型別",
     "category": "基礎篇",
     "status": "completed",
-    "conceptCount": 3,
-    "quizCount": 8
+    "conceptCount": 4,
+    "quizCount": 10
   },
   {
     "id": "ch06",
@@ -41,8 +41,8 @@
     "title": "物件教學",
     "category": "資料結構篇",
     "status": "completed",
-    "conceptCount": 5,
-    "quizCount": 12
+    "conceptCount": 4,
+    "quizCount": 10
   },
   {
     "id": "ch12",
@@ -51,33 +51,33 @@
     "category": "邏輯判斷篇",
     "status": "completed",
     "conceptCount": 6,
-    "quizCount": 14
+    "quizCount": 10
   },
   {
     "id": "ch13",
     "number": 13,
-    "title": "流程判斷 if/else",
+    "title": "流程判斷 if / else if / else",
     "category": "邏輯判斷篇",
     "status": "completed",
-    "conceptCount": 5,
-    "quizCount": 12
+    "conceptCount": 7,
+    "quizCount": 10
   },
   {
     "id": "ch14",
     "number": 14,
-    "title": "if 中階運用",
+    "title": "if 流程圖規劃流程",
     "category": "邏輯判斷篇",
     "status": "completed",
-    "conceptCount": 4,
+    "conceptCount": 7,
     "quizCount": 10
   },
   {
     "id": "ch15",
     "number": 15,
-    "title": "if 進階運用",
+    "title": "if 中階運用",
     "category": "邏輯判斷篇",
     "status": "completed",
-    "conceptCount": 4,
+    "conceptCount": 5,
     "quizCount": 10
   },
   {
@@ -113,8 +113,8 @@
     "title": "函式 function",
     "category": "函式篇",
     "status": "completed",
-    "conceptCount": 5,
-    "quizCount": 12
+    "conceptCount": 8,
+    "quizCount": 10
   },
   {
     "id": "ch21",

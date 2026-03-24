@@ -1,0 +1,236 @@
+{
+  "id": "ch13",
+  "number": 13,
+  "title": "流程判斷 if / else if / else",
+  "category": "邏輯判斷篇",
+  "concepts": [
+    {
+      "id": "ch13-c01",
+      "title": "if 基本語法",
+      "explanation": "if 是「如果...就...」的意思，讓程式根據條件決定要不要執行某段程式碼。小括號放判斷條件（結果是 true 或 false），大括號放條件成立時要執行的程式碼。條件是 true 就執行，false 就跳過。",
+      "codeExamples": [
+        {
+          "code": "let todayDegree = 14;\n\nif (15 >= todayDegree) {\n  console.log(\"小美會穿著外套出門\");\n}\n// 15 >= 14 是 true",
+          "output": "小美會穿著外套出門"
+        },
+        {
+          "code": "let todayDegree = 20;\n\nif (15 >= todayDegree) {\n  console.log(\"小美會穿著外套出門\");\n}\n// 15 >= 20 是 false，跳過",
+          "output": "（沒有輸出）"
+        }
+      ],
+      "tips": [
+        "if 的條件結果一定是布林值（true 或 false）",
+        "比較運算子（>、<、>=、<=）是寫條件的工具",
+        "條件不成立時，大括號裡的程式碼會被跳過，什麼都不做"
+      ]
+    },
+    {
+      "id": "ch13-c02",
+      "title": "if + else 二選一",
+      "explanation": "else 是「否則」的意思，處理條件不成立時的情況。if + else 適用於只有兩種情況的判斷，條件成立走 if，不成立走 else，一定會執行其中一個。",
+      "codeExamples": [
+        {
+          "code": "let temperature = 14;\n\nif (temperature <= 15) {\n  console.log(\"穿外套出門\");\n} else {\n  console.log(\"穿短袖出門\");\n}\n// 14 <= 15 是 true",
+          "output": "穿外套出門"
+        }
+      ],
+      "tips": [
+        "if + else 適合「二選一」的情境",
+        "else 不需要寫條件，它處理 if 條件不成立的所有情況",
+        "if 和 else 一定只會執行其中一個，不可能兩個都執行"
+      ]
+    },
+    {
+      "id": "ch13-c03",
+      "title": "if + else if + else 多條件判斷",
+      "explanation": "else if 可以加多個條件，依序往下判斷。適用於三種以上情況的判斷。第一個情況用 if，中間的用 else if，最後保底用 else。",
+      "codeExamples": [
+        {
+          "code": "let score = 75;\n\nif (score >= 90) {\n  console.log(\"優秀\");\n} else if (score >= 70) {\n  console.log(\"良好\");\n} else if (score >= 60) {\n  console.log(\"及格\");\n} else {\n  console.log(\"不及格\");\n}\n// 75 >= 90？false → 75 >= 70？true",
+          "output": "良好"
+        }
+      ],
+      "tips": [
+        "else if 可以寫很多個，沒有數量限制",
+        "最後的 else 是保底，以上都不成立才執行",
+        "else 不是必要的，但建議加上以處理意外情況"
+      ]
+    },
+    {
+      "id": "ch13-c04",
+      "title": "判斷順序的重要性（嚴格放前面）",
+      "explanation": "else if 從上往下依序判斷，第一個成立就停下來，不會繼續往下檢查。所以數字條件必須把範圍小的（嚴格的）放前面，否則寬鬆的條件會先攔截，導致結果錯誤。",
+      "codeExamples": [
+        {
+          "code": "let score = 95;\n\n// 錯誤寫法：寬鬆的放前面\nif (score >= 60) {\n  console.log(\"及格\");     // 95 >= 60 是 true，到這就停了\n} else if (score >= 90) {\n  console.log(\"優秀\");     // 永遠不會執行\n}",
+          "output": "及格"
+        },
+        {
+          "code": "let score = 95;\n\n// 正確寫法：嚴格的放前面\nif (score >= 90) {\n  console.log(\"優秀\");     // 95 >= 90 是 true\n} else if (score >= 60) {\n  console.log(\"及格\");\n}",
+          "output": "優秀"
+        }
+      ],
+      "tips": [
+        "數字條件一定要「嚴格的放前面，寬鬆的放後面」",
+        "第一個成立就停，後面的全部跳過",
+        "順序寫反是最常見的錯誤，結果會完全不同"
+      ]
+    },
+    {
+      "id": "ch13-c05",
+      "title": "字串條件判斷",
+      "explanation": "字串條件使用三等號（===）做精確比對，判斷是否完全相同。和數字條件不同的是，字串比對沒有範圍重疊的問題，所以順序比較不會出錯。但 if / else if / else 的邏輯和結構完全一樣。",
+      "codeExamples": [
+        {
+          "code": "let todayWeather = \"毛毛雨\";\n\nif (todayWeather == \"沒有下雨\") {\n  console.log(\"小華不帶雨具\");\n} else if (todayWeather == \"毛毛雨\") {\n  console.log(\"帶了輕便雨衣\");\n} else if (todayWeather == \"普通的雨\") {\n  console.log(\"帶了折傘\");\n}",
+          "output": "帶了輕便雨衣"
+        },
+        {
+          "code": "let meal = \"牛肉麵\";\n\nif (meal === \"滷肉飯\") {\n  console.log(\"50 元\");\n} else if (meal === \"牛肉麵\") {\n  console.log(\"120 元\");\n} else if (meal === \"水餃\") {\n  console.log(\"80 元\");\n} else {\n  console.log(\"沒有這個餐點\");\n}",
+          "output": "120 元"
+        }
+      ],
+      "tips": [
+        "字串條件建議用三等號（===）做精確比對",
+        "字串比對不用擔心順序問題，因為每個都是精確比對",
+        "不管是數字還是字串，拆解方式都一樣：列出情況 → 寫判斷"
+      ]
+    },
+    {
+      "id": "ch13-c06",
+      "title": "搭配邏輯運算子（&& 和 ||）",
+      "explanation": "if 的條件可以搭配邏輯運算子組合多個判斷。||（或）表示其中一個成立就成立，&&（且）表示兩個都要成立才成立。這讓條件判斷更靈活。",
+      "codeExamples": [
+        {
+          "code": "let age = 8;\n\nif (age < 6 || age >= 65) {\n  console.log(\"免費入場\");\n} else if (age <= 12) {\n  console.log(\"半票：150 元\");\n} else {\n  console.log(\"全票：300 元\");\n}\n// 8 < 6？false，8 >= 65？false → 8 <= 12？true",
+          "output": "半票：150 元"
+        }
+      ],
+      "tips": [
+        "|| 是「或」，其中一個條件成立就成立",
+        "&& 是「且」，兩個條件都要成立才成立",
+        "搭配邏輯運算子可以在一個 if 裡同時檢查多個條件"
+      ]
+    },
+    {
+      "id": "ch13-c07",
+      "title": "拆解題目三步驟",
+      "explanation": "遇到多條件判斷的題目，照三步走：第一步列出所有情況（先用文字寫出所有可能），第二步排出判斷順序（數字條件要從嚴格到寬鬆），第三步寫成 if / else if / else（第一個用 if，中間用 else if，最後用 else 保底）。",
+      "codeExamples": [
+        {
+          "code": "// 題目：BMI 健康判斷\n// 第一步：列出情況\n// BMI < 18.5 → 過輕\n// BMI 18.5~23.9 → 正常\n// BMI 24~26.9 → 過重\n// BMI >= 27 → 肥胖\n\n// 第二步：從小到大排序\n// 第三步：寫程式碼\nlet bmi = 22;\n\nif (bmi < 18.5) {\n  console.log(\"過輕\");\n} else if (bmi < 24) {\n  console.log(\"正常\");\n} else if (bmi < 27) {\n  console.log(\"過重\");\n} else {\n  console.log(\"肥胖\");\n}",
+          "output": "正常"
+        }
+      ],
+      "tips": [
+        "先用中文把情況寫出來，再翻譯成程式碼",
+        "數字條件排序：嚴格（範圍小）放前面，寬鬆（範圍大）放後面",
+        "字串條件不用特別排序，但建議照邏輯順序寫，方便閱讀"
+      ]
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "ch13-q01",
+      "type": "code-prediction",
+      "difficulty": 1,
+      "code": "let temperature = 20;\n\nif (temperature <= 15) {\n  console.log(\"穿外套\");\n} else {\n  console.log(\"穿短袖\");\n}",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "穿短袖",
+      "explanation": "temperature 是 20，20 <= 15 是 false，所以條件不成立，執行 else 裡的程式碼，印出「穿短袖」。"
+    },
+    {
+      "id": "ch13-q02",
+      "type": "multiple-choice",
+      "difficulty": 1,
+      "question": "if 語法的小括號 () 裡面放什麼？",
+      "options": [
+        "要執行的程式碼",
+        "判斷條件（結果是 true 或 false）",
+        "變數宣告",
+        "console.log"
+      ],
+      "correctIndex": 1,
+      "explanation": "if 的小括號裡放的是判斷條件，條件的結果會是 true 或 false。true 就執行大括號裡的程式碼，false 就跳過。"
+    },
+    {
+      "id": "ch13-q03",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "let score = 95;\n\nif (score >= 60) {\n  console.log(\"及格\");\n} else if (score >= 90) {\n  console.log(\"優秀\");\n} else {\n  console.log(\"不及格\");\n}",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "及格",
+      "explanation": "雖然 score 是 95，但 if 是從上往下判斷的，第一個條件 95 >= 60 就是 true，到這裡就停了，印出「及格」。這是「順序寫反」的經典錯誤，應該把嚴格的條件（>= 90）放前面。"
+    },
+    {
+      "id": "ch13-q04",
+      "type": "true-false",
+      "difficulty": 1,
+      "statement": "else if 判斷時，如果第一個條件就成立，程式還會繼續往下檢查後面的 else if。",
+      "question": "這個說法正確嗎？",
+      "correctAnswer": false,
+      "explanation": "錯誤。if / else if 是從上往下依序判斷，第一個條件成立就停下來，後面的 else if 和 else 全部跳過，不會繼續檢查。"
+    },
+    {
+      "id": "ch13-q05",
+      "type": "fill-in-blank",
+      "difficulty": 1,
+      "code": "let age = 20;\n\nif (age < 18) {\n  console.log(\"未成年\");\n} ___ {\n  console.log(\"已成年\");\n}",
+      "blank": "___",
+      "question": "空格處應該填入什麼關鍵字，讓 age 為 20 時印出「已成年」？",
+      "correctAnswer": "else",
+      "explanation": "else 是「否則」的意思，當 if 的條件不成立時執行。age 是 20，20 < 18 是 false，所以走 else，印出「已成年」。"
+    },
+    {
+      "id": "ch13-q06",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "let drink = \"綠茶\";\n\nif (drink === \"珍珠奶茶\") {\n  console.log(\"60 元\");\n} else if (drink === \"綠茶\") {\n  console.log(\"30 元\");\n} else if (drink === \"紅茶\") {\n  console.log(\"25 元\");\n} else {\n  console.log(\"沒有這個品項\");\n}",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "30 元",
+      "explanation": "drink 是「綠茶」，第一個條件「珍珠奶茶」不符合，第二個條件「綠茶」符合（\"綠茶\" === \"綠茶\" 是 true），所以印出「30 元」，後面的判斷全部跳過。"
+    },
+    {
+      "id": "ch13-q07",
+      "type": "true-false",
+      "difficulty": 2,
+      "statement": "使用字串條件判斷（例如 drink === \"紅茶\"）時，else if 的順序很重要，寫反會導致結果錯誤。",
+      "question": "這個說法正確嗎？",
+      "correctAnswer": false,
+      "explanation": "錯誤。字串條件是精確比對，每個條件都是獨立判斷「是不是這個值」，不像數字條件有範圍重疊的問題，所以順序不影響結果的正確性。但數字條件就必須注意順序。"
+    },
+    {
+      "id": "ch13-q08",
+      "type": "fill-in-blank",
+      "difficulty": 2,
+      "code": "let bmi = 30;\n\nif (bmi < 18.5) {\n  console.log(\"過輕\");\n} else if (bmi < 24) {\n  console.log(\"正常\");\n} else if (___) {\n  console.log(\"過重\");\n} else {\n  console.log(\"肥胖\");\n}",
+      "blank": "___",
+      "question": "空格處應該填入什麼條件，讓 BMI 24~26.9 的人判斷為「過重」？（提示：因為前面已經排除了 < 24 的情況）",
+      "correctAnswer": "bmi < 27",
+      "explanation": "因為前面的 else if 已經排除了 bmi < 24 的情況，所以走到這裡的 bmi 一定 >= 24。只需要再判斷 bmi < 27，就能抓出 24~26.9 的範圍。bmi 是 30，30 < 27 是 false，所以走 else 印出「肥胖」。"
+    },
+    {
+      "id": "ch13-q09",
+      "type": "multiple-choice",
+      "difficulty": 2,
+      "question": "遇到多條件判斷的題目，正確的拆解步驟是什麼？",
+      "options": [
+        "直接寫程式碼 → 看結果對不對 → 調整",
+        "列出所有情況 → 排出判斷順序 → 寫成 if / else if / else",
+        "先寫 else → 再加 else if → 最後加 if",
+        "把所有條件用 && 串在一個 if 裡"
+      ],
+      "correctIndex": 1,
+      "explanation": "正確的三步驟是：(1) 列出所有情況，先用文字寫出所有可能；(2) 排出判斷順序，數字條件要從嚴格到寬鬆；(3) 寫成 if / else if / else，第一個用 if，中間用 else if，最後用 else 保底。"
+    },
+    {
+      "id": "ch13-q10",
+      "type": "code-prediction",
+      "difficulty": 3,
+      "code": "let age = 5;\n\nif (age < 6 || age >= 65) {\n  console.log(\"免費入場\");\n} else if (age <= 12) {\n  console.log(\"半票\");\n} else {\n  console.log(\"全票\");\n}",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "免費入場",
+      "explanation": "age 是 5，第一個條件是 age < 6 || age >= 65。5 < 6 是 true，|| 只要其中一個是 true 整個就是 true，所以第一個條件成立，印出「免費入場」，後面全部跳過。"
+    }
+  ]
+}

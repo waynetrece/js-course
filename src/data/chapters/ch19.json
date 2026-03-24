@@ -1,0 +1,251 @@
+{
+  "id": "ch19",
+  "number": 19,
+  "title": "函式 function",
+  "category": "函式篇",
+  "concepts": [
+    {
+      "id": "ch19-c01",
+      "title": "為什麼需要學函式",
+      "explanation": "函式就是把一段程式碼包起來，取個名字，需要的時候呼叫它就會執行。好處是同樣的事情不用重複寫，呼叫一次就好，而且程式碼更有組織，一個函式做一件事。",
+      "codeExamples": [
+        {
+          "code": "function morningAction() {\n  console.log(\"起床\");\n  console.log(\"刷牙\");\n  console.log(\"出門\");\n}\n\nmorningAction();",
+          "output": "起床\n刷牙\n出門"
+        }
+      ],
+      "tips": [
+        "function 名稱() { ... } 是宣告，把動作包起來",
+        "名稱() 是呼叫，加小括號才會執行",
+        "沒有呼叫的話，裡面的程式碼不會執行"
+      ]
+    },
+    {
+      "id": "ch19-c02",
+      "title": "註冊多組函式與模組化",
+      "explanation": "可以宣告多個函式，各自獨立，有呼叫才會執行。也可以在一個函式裡面呼叫另一個函式，把重複的動作抽成獨立函式，需要的地方呼叫就好。這樣改一處就全部生效，程式碼更好讀、好管理。",
+      "codeExamples": [
+        {
+          "code": "function cleanHead() {\n  console.log(\"刷牙\");\n  console.log(\"洗臉\");\n}\n\nfunction morningAction() {\n  console.log(\"起床\");\n  cleanHead();\n  console.log(\"出門\");\n}\n\nmorningAction();",
+          "output": "起床\n刷牙\n洗臉\n出門"
+        }
+      ],
+      "tips": [
+        "函式裡面可以呼叫其他函式，達到模組化的效果",
+        "把重複的邏輯抽出來，改一處就全部生效"
+      ]
+    },
+    {
+      "id": "ch19-c03",
+      "title": "函式參數與引數",
+      "explanation": "參數讓函式變得有彈性，同一個函式可以處理不同的資料。宣告時寫在小括號裡的名稱叫做參數（parameter），是預留的空位；呼叫時傳入的實際值叫做引數（argument），依順序填入空位。",
+      "codeExamples": [
+        {
+          "code": "function add(num1, num2) {\n  console.log(`你加總的數字為${num1 + num2}`);\n}\n\nadd(2, 3);\nadd(100, 50);",
+          "output": "你加總的數字為5\n你加總的數字為150"
+        }
+      ],
+      "tips": [
+        "參數（parameter）是宣告時的名稱，像預留的空位",
+        "引數（argument）是呼叫時傳入的實際值",
+        "參數名稱自己取，有語意好讀就好"
+      ]
+    },
+    {
+      "id": "ch19-c04",
+      "title": "作用域（Scope）",
+      "explanation": "參數和用 let 宣告的區域變數只活在函式的 {} 裡面，外面存取不到。函式的 {} 就像一個房間，參數只存在房間裡面，門外的人看不到。規則是由內往外找，找到就用；外面找不到裡面的。",
+      "codeExamples": [
+        {
+          "code": "function a(num) {\n  console.log(num);\n}\n\na(3);\nconsole.log(num);",
+          "output": "3\nReferenceError: num is not defined"
+        },
+        {
+          "code": "let name = \"Wayne\";\n\nfunction sayHi() {\n  let name = \"Amy\";\n  console.log(name);\n}\n\nsayHi();\nconsole.log(name);",
+          "output": "Amy\nWayne"
+        }
+      ],
+      "tips": [
+        "函式裡面有同名變數就用自己的，沒有才會往外找全域的",
+        "由內往外找，找到就用；外面找不到裡面的",
+        "函式裡面用 let 宣告的變數，外面拿不到"
+      ]
+    },
+    {
+      "id": "ch19-c05",
+      "title": "return 寫法",
+      "explanation": "console.log 是印在畫面上給人看的，return 是把值丟出去給程式用的。用 console.log 的話，外面接不到值（會是 undefined）；用 return 的話，外面可以用變數接住值繼續使用。碰到 return 函式就結束，後面的程式碼不會執行。",
+      "codeExamples": [
+        {
+          "code": "// console.log 版：外面接不到\nfunction add(num1, num2) {\n  console.log(num1 + num2);\n}\nlet result = add(2, 3);\nconsole.log(result);",
+          "output": "5\nundefined"
+        },
+        {
+          "code": "// return 版：外面可以接住\nfunction add(num1, num2) {\n  return num1 + num2;\n}\nlet result = add(2, 3);\nconsole.log(result);",
+          "output": "5"
+        }
+      ],
+      "tips": [
+        "console.log 是給人看的，return 是給程式用的",
+        "沒有 return 的函式回傳 undefined",
+        "碰到 return 就結束，後面的程式碼不執行"
+      ]
+    },
+    {
+      "id": "ch19-c06",
+      "title": "多個 return 搭配 if 判斷",
+      "explanation": "一個函式可以有多個 return，搭配 if 判斷，不同條件回傳不同值，但每次呼叫只會執行其中一個。碰到 return 就結束，跟 if / else if / else 的「第一個 true 就停」是同樣的邏輯。",
+      "codeExamples": [
+        {
+          "code": "function getGrade(score) {\n  if (score >= 90) return \"A\";\n  if (score >= 80) return \"B\";\n  if (score >= 70) return \"C\";\n  return \"D\";\n}\n\nconsole.log(getGrade(95));\nconsole.log(getGrade(72));",
+          "output": "A\nC"
+        }
+      ],
+      "tips": [
+        "多個 return 搭配 if，不同條件回傳不同值",
+        "碰到 return 就結束，跟 if/else if/else 的邏輯一樣",
+        "最後一個 return 不加 if 條件，當作「以上都不符合」的預設值"
+      ]
+    },
+    {
+      "id": "ch19-c07",
+      "title": "從 if/else 進化到 function",
+      "explanation": "直接寫 if/else 在外面只能用一次；包進 function 加 console.log 可以重複用但結果只能看；用 function 加 return 可以重複用而且結果還能帶走繼續使用。不用一開始就寫出完美的 function，先用 console.log 確認邏輯對了，再改成 return。",
+      "codeExamples": [
+        {
+          "code": "// 第一步：直接寫（只能用一次）\nlet num = 4;\nif (num % 2 === 0) {\n  console.log(\"偶數\");\n} else {\n  console.log(\"奇數\");\n}",
+          "output": "偶數"
+        },
+        {
+          "code": "// 第三步：function + return（可重複用，結果可帶走）\nfunction checkEven(num) {\n  if (num % 2 === 0) {\n    return \"偶數\";\n  }\n  return \"奇數\";\n}\nlet result = checkEven(4);\nconsole.log(result);",
+          "output": "偶數"
+        }
+      ],
+      "tips": [
+        "先用 console.log 確認邏輯對了，再改成 return",
+        "function + return 讓結果可以存進變數繼續使用",
+        "從直接寫 → 包函式 → 加 return，逐步進化"
+      ]
+    },
+    {
+      "id": "ch19-c08",
+      "title": "全域變數 vs 區域變數",
+      "explanation": "全域變數宣告在函式外面，到處都能用，程式結束才消失。區域變數宣告在函式裡面，只有函式裡面能用，函式執行完就消失。函式裡面沒有用 let 宣告而直接使用變數名，會往外找全域的。要把裡面的值傳出去要用 return。",
+      "codeExamples": [
+        {
+          "code": "let count = 0;\n\nfunction addOne() {\n  let localVar = \"我是區域\";\n  count += 1;\n}\n\naddOne();\naddOne();\nconsole.log(count);",
+          "output": "2"
+        }
+      ],
+      "tips": [
+        "函式裡面用 let 宣告 → 區域變數，外面拿不到",
+        "函式裡面沒用 let，直接用變數名 → 往外找全域的",
+        "要把裡面的值傳出去 → 用 return"
+      ]
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "ch19-q01",
+      "type": "code-prediction",
+      "difficulty": 1,
+      "code": "function sayHi() {\n  console.log(\"你好\");\n}\n\nlet result = sayHi();\nconsole.log(result);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "你好\nundefined",
+      "explanation": "sayHi() 執行時會印出「你好」，但函式沒有 return，所以回傳值是 undefined。result 接到的就是 undefined。"
+    },
+    {
+      "id": "ch19-q02",
+      "type": "true-false",
+      "difficulty": 1,
+      "statement": "宣告函式後，如果沒有呼叫它，裡面的程式碼還是會自動執行。",
+      "question": "這個說法正確嗎？",
+      "correctAnswer": false,
+      "explanation": "錯誤。函式宣告只是把程式碼包起來並取名，必須用「名稱()」呼叫才會執行。沒有呼叫的話，裡面的程式碼不會執行。"
+    },
+    {
+      "id": "ch19-q03",
+      "type": "multiple-choice",
+      "difficulty": 1,
+      "question": "以下哪個是正確的「呼叫函式」寫法？",
+      "options": [
+        "function greet()",
+        "greet()",
+        "call greet",
+        "greet"
+      ],
+      "correctIndex": 1,
+      "explanation": "呼叫函式的寫法是「函式名稱()」，加上小括號才會執行。function greet() 是宣告語法，不是呼叫；greet 不加小括號只是取得函式本身，不會執行。"
+    },
+    {
+      "id": "ch19-q04",
+      "type": "fill-in-blank",
+      "difficulty": 1,
+      "code": "function add(a, b) {\n  ___ a + b;\n}\n\nlet result = add(3, 5);\nconsole.log(result); // 8",
+      "blank": "___",
+      "question": "空格中應該填入什麼關鍵字，才能讓外面用變數接到計算結果？",
+      "correctAnswer": "return",
+      "explanation": "要讓函式把值丟出去給外面的程式使用，必須用 return。如果用 console.log 只是印出來看，外面接到的會是 undefined。"
+    },
+    {
+      "id": "ch19-q05",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "let color = \"紅色\";\n\nfunction paint() {\n  let color = \"藍色\";\n  return color;\n}\n\nlet result = paint();\nconsole.log(result);\nconsole.log(color);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "藍色\n紅色",
+      "explanation": "paint() 裡面用 let 宣告了區域變數 color = \"藍色\"，函式內部優先使用區域變數，所以 return 出來的是「藍色」。外面的全域變數 color 仍然是「紅色」，沒有被改動。"
+    },
+    {
+      "id": "ch19-q06",
+      "type": "multiple-choice",
+      "difficulty": 2,
+      "question": "關於「參數（parameter）」和「引數（argument）」，以下哪個說法正確？",
+      "options": [
+        "參數是呼叫時傳入的值，引數是宣告時的名稱",
+        "參數是宣告時寫在小括號裡的名稱，引數是呼叫時傳入的實際值",
+        "參數和引數是同一個東西，只是叫法不同",
+        "參數只能是數字，引數可以是任何型別"
+      ],
+      "correctIndex": 1,
+      "explanation": "參數（parameter）是宣告函式時寫在小括號裡的名稱，像是預留的空位；引數（argument）是呼叫函式時傳入的實際值，依順序填入空位。兩者角色不同。"
+    },
+    {
+      "id": "ch19-q07",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "function getGrade(score) {\n  if (score >= 90) return \"A\";\n  if (score >= 80) return \"B\";\n  if (score >= 70) return \"C\";\n  return \"D\";\n}\n\nconsole.log(getGrade(85));\nconsole.log(getGrade(60));",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "B\nD",
+      "explanation": "85 >= 90 不成立，85 >= 80 成立，碰到 return \"B\" 函式結束，回傳 \"B\"。60 >= 90、>= 80、>= 70 都不成立，走到最後的 return \"D\"。"
+    },
+    {
+      "id": "ch19-q08",
+      "type": "true-false",
+      "difficulty": 2,
+      "statement": "在函式裡面用 let 宣告的變數，可以在函式外面用 console.log 印出來。",
+      "question": "這個說法正確嗎？",
+      "correctAnswer": false,
+      "explanation": "錯誤。用 let 在函式裡面宣告的是區域變數，只活在函式的 {} 裡面，外面存取不到，會出現 ReferenceError。要把值傳出去必須用 return。"
+    },
+    {
+      "id": "ch19-q09",
+      "type": "fill-in-blank",
+      "difficulty": 3,
+      "code": "function checkAge(age) {\n  if (age >= 18) {\n    return \"可以投票\";\n  }\n  return \"未滿 18 歲\";\n}\n\nlet message = checkAge(20);\nconsole.log(___);",
+      "blank": "___",
+      "question": "console.log 的小括號裡要填什麼變數名稱，才能印出 \"可以投票\"？",
+      "correctAnswer": "message",
+      "explanation": "checkAge(20) 的回傳值被存進 message 變數裡。20 >= 18 成立，return \"可以投票\"，所以 message 的值是 \"可以投票\"。要印出來就是 console.log(message)。"
+    },
+    {
+      "id": "ch19-q10",
+      "type": "code-prediction",
+      "difficulty": 3,
+      "code": "function calculateDiscount(price, isMember) {\n  if (isMember && price >= 1000) return price * 0.8;\n  if (isMember) return price * 0.9;\n  return price;\n}\n\nconsole.log(calculateDiscount(500, true));\nconsole.log(calculateDiscount(800, false));",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "450\n800",
+      "explanation": "第一次呼叫：isMember 是 true 但 500 < 1000，第一個 if 不成立；第二個 if 只看 isMember 是 true，成立，回傳 500 * 0.9 = 450。第二次呼叫：isMember 是 false，前兩個 if 都有 isMember 條件所以都不成立，走到最後 return price，回傳原價 800。"
+    }
+  ]
+}

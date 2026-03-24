@@ -1,0 +1,188 @@
+{
+  "id": "ch15",
+  "number": 15,
+  "title": "if 中階運用",
+  "category": "邏輯判斷篇",
+  "concepts": [
+    {
+      "id": "ch15-c01",
+      "title": "為什麼需要巢狀 if（if 包 if）",
+      "explanation": "有些判斷不是單純的「是或否」就能解決，而是第一關過了之後，還要再判斷第二關。例如不是只看「有沒有帶錢」，而是「有帶錢 → 再看夠不夠」。這時候就需要在 if 裡面再放一個 if，形成巢狀結構。",
+      "codeExamples": [
+        {
+          "code": "if (外層條件) {\n  // 外層條件成立\n  if (內層條件) {\n    // 外層 + 內層都成立\n  } else {\n    // 外層成立，但內層不成立\n  }\n} else {\n  // 外層條件不成立\n}",
+          "output": "（語法結構示範，無實際輸出）"
+        }
+      ],
+      "tips": [
+        "巢狀 if 就是在 if 裡面再放 if，處理「先判斷 A，再判斷 B」的情境",
+        "每一層 if 都會多出兩條分支路徑，所以層數越多、路徑越多，越容易出錯"
+      ]
+    },
+    {
+      "id": "ch15-c02",
+      "title": "先畫流程圖再寫程式碼",
+      "explanation": "巢狀 if 的判斷路徑會變多，光用腦袋想容易漏掉某條路。流程圖能幫助你看到所有分支、確認每條路都有結果、從外到內逐層拆解。畫圖時，每個菱形代表一個 if 判斷，每個方形代表大括號裡的動作。",
+      "codeExamples": [],
+      "tips": [
+        "流程圖口訣：先畫外層 → 再展開內層 → 每條路都要有終點 → 從上往下讀一遍確認",
+        "每個菱形（判斷）對應一個 if，每個方形（動作）對應大括號裡的 console.log 或其他程式碼",
+        "流程圖畫完後，從頭到尾走一遍所有路徑，確認邏輯沒有遺漏"
+      ]
+    },
+    {
+      "id": "ch15-c03",
+      "title": "巢狀 if 實戰：腰圍健康判斷",
+      "explanation": "先用外層 if 判斷性別，再用內層 if 根據不同性別判斷腰圍是否超標。男性腰圍 >= 90 cm 超標，女性腰圍 >= 80 cm 超標。這個範例展示了外層和內層的 else 分支各自獨立處理不同情境。",
+      "codeExamples": [
+        {
+          "code": "let gender = \"男\";\nlet waist = 85;\n\nif (gender === \"男\") {\n  if (waist >= 90) {\n    console.log(\"腰圍超標\");\n  } else {\n    console.log(\"腰圍正常\");\n  }\n} else {\n  if (waist >= 80) {\n    console.log(\"腰圍超標\");\n  } else {\n    console.log(\"腰圍正常\");\n  }\n}",
+          "output": "腰圍正常"
+        }
+      ],
+      "tips": [
+        "外層 if 判斷性別，內層 if 根據性別用不同標準判斷腰圍",
+        "兩個分支（男/女）裡面都各自有自己的 if-else，互不影響"
+      ]
+    },
+    {
+      "id": "ch15-c04",
+      "title": "巢狀 if 實戰：遊樂園入場判斷",
+      "explanation": "先判斷有沒有買票，有票再判斷身高是否 >= 120 cm 才能玩雲霄飛車。沒票就直接說請先購票，不需要再判斷身高。這個範例展示了外層的 else 不一定需要再包 if 的情境。",
+      "codeExamples": [
+        {
+          "code": "let hasTicket = true;\nlet height = 135;\n\nif (hasTicket) {\n  if (height >= 120) {\n    console.log(\"可以玩雲霄飛車\");\n  } else {\n    console.log(\"只能玩旋轉木馬\");\n  }\n} else {\n  console.log(\"請先購票\");\n}",
+          "output": "可以玩雲霄飛車"
+        }
+      ],
+      "tips": [
+        "外層 else 裡只有一個動作（請先購票），不需要再包 if",
+        "hasTicket 是布林值，直接寫 if (hasTicket) 就好，不用寫 if (hasTicket === true)"
+      ]
+    },
+    {
+      "id": "ch15-c05",
+      "title": "巢狀 if 實戰：購物折扣判斷",
+      "explanation": "先判斷是不是會員，是會員再判斷消費金額決定折扣。非會員不打折、會員消費 >= 1000 打 8 折、會員消費 < 1000 打 9 折。這個範例展示了在巢狀 if 中搭配數學運算的用法。",
+      "codeExamples": [
+        {
+          "code": "let isMember = true;\nlet total = 1200;\n\nif (isMember) {\n  if (total >= 1000) {\n    console.log(\"會員打 8 折：\" + total * 0.8);\n  } else {\n    console.log(\"會員打 9 折：\" + total * 0.9);\n  }\n} else {\n  console.log(\"非會員，原價：\" + total);\n}",
+          "output": "會員打 8 折：960"
+        }
+      ],
+      "tips": [
+        "字串 + 數學運算的結果會自動轉為字串拼接",
+        "total * 0.8 就是打 8 折的計算方式"
+      ]
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "ch15-q01",
+      "type": "code-prediction",
+      "difficulty": 1,
+      "code": "let hasTicket = false;\nlet height = 150;\n\nif (hasTicket) {\n  if (height >= 120) {\n    console.log(\"可以玩雲霄飛車\");\n  } else {\n    console.log(\"只能玩旋轉木馬\");\n  }\n} else {\n  console.log(\"請先購票\");\n}",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "請先購票",
+      "explanation": "hasTicket 是 false，所以外層 if 條件不成立，直接進入 else 區塊，印出「請先購票」。即使 height 是 150（>= 120），但因為外層條件就不成立了，內層的身高判斷根本不會執行。"
+    },
+    {
+      "id": "ch15-q02",
+      "type": "multiple-choice",
+      "difficulty": 1,
+      "question": "什麼情況下需要使用巢狀 if（if 包 if）？",
+      "options": [
+        "判斷只有一個條件時",
+        "第一關過了之後，還要再判斷第二關時",
+        "只需要 if-else 就能解決時",
+        "不需要任何判斷時"
+      ],
+      "correctIndex": 1,
+      "explanation": "當判斷不是單純的「是或否」就能解決，而是第一關過了之後還要再判斷第二關時，就需要用巢狀 if。例如：先判斷有沒有買票，有票再判斷身高夠不夠。"
+    },
+    {
+      "id": "ch15-q03",
+      "type": "true-false",
+      "difficulty": 1,
+      "statement": "巢狀 if 中，外層 if 條件不成立時，內層 if 仍然會被執行。",
+      "question": "這個說法正確嗎？",
+      "correctAnswer": false,
+      "explanation": "外層 if 條件不成立時，程式會跳過整個外層 if 的大括號區塊，直接進入 else（如果有的話）。內層 if 在外層的大括號裡面，所以不會被執行。"
+    },
+    {
+      "id": "ch15-q04",
+      "type": "fill-in-blank",
+      "difficulty": 2,
+      "code": "let gender = \"女\";\nlet waist = 75;\n\nif (gender === \"男\") {\n  if (waist >= 90) {\n    console.log(\"腰圍超標\");\n  } else {\n    console.log(\"腰圍正常\");\n  }\n} else {\n  if (waist >= ___) {\n    console.log(\"腰圍超標\");\n  } else {\n    console.log(\"腰圍正常\");\n  }\n}",
+      "blank": "___",
+      "question": "根據範例，女性腰圍超標的標準是多少 cm？請填入數字。",
+      "correctAnswer": "80",
+      "explanation": "根據範例，女性腰圍 >= 80 cm 為超標。所以空格應該填入 80。gender 是「女」，所以會進入 else 區塊，用 80 作為判斷標準。"
+    },
+    {
+      "id": "ch15-q05",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "let isMember = true;\nlet total = 800;\n\nif (isMember) {\n  if (total >= 1000) {\n    console.log(\"會員打 8 折：\" + total * 0.8);\n  } else {\n    console.log(\"會員打 9 折：\" + total * 0.9);\n  }\n} else {\n  console.log(\"非會員，原價：\" + total);\n}",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "會員打 9 折：720",
+      "explanation": "isMember 是 true，所以進入外層 if 區塊。total 是 800，800 < 1000，所以內層 if 條件不成立，進入內層 else，印出「會員打 9 折：720」（800 * 0.9 = 720）。"
+    },
+    {
+      "id": "ch15-q06",
+      "type": "multiple-choice",
+      "difficulty": 2,
+      "question": "在畫巢狀 if 的流程圖時，如果有 2 個菱形（判斷），最多會有幾個方形（結果）？",
+      "options": [
+        "2 個",
+        "3 個",
+        "4 個",
+        "5 個"
+      ],
+      "correctIndex": 1,
+      "explanation": "如果外層 if 的其中一個分支不需要再判斷（像遊樂園範例的「沒票 → 請先購票」），那 2 個菱形最多會有 3 個方形結果（內層的 Yes/No 各一個 + 外層另一邊一個）。但如果兩邊都包 if（像腰圍範例），2 個菱形的結構其實是 3 個菱形。所以 2 個菱形的情境下，最多 3 個方形結果。"
+    },
+    {
+      "id": "ch15-q07",
+      "type": "true-false",
+      "difficulty": 2,
+      "statement": "寫巢狀 if 之前，建議先畫流程圖，因為可以避免遺漏分支。",
+      "question": "這個說法正確嗎？",
+      "correctAnswer": true,
+      "explanation": "巢狀 if 的判斷路徑會變多，光用腦袋想容易漏掉某條路。先畫流程圖可以看到所有分支、確認每條路都有結果、從外到內逐層拆解，能有效避免遺漏。"
+    },
+    {
+      "id": "ch15-q08",
+      "type": "code-prediction",
+      "difficulty": 3,
+      "code": "let gender = \"女\";\nlet waist = 82;\n\nif (gender === \"男\") {\n  if (waist >= 90) {\n    console.log(\"男性腰圍超標\");\n  } else {\n    console.log(\"男性腰圍正常\");\n  }\n} else {\n  if (waist >= 80) {\n    console.log(\"女性腰圍超標\");\n  } else {\n    console.log(\"女性腰圍正常\");\n  }\n}",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "女性腰圍超標",
+      "explanation": "gender 是「女」，不等於「男」，所以外層 if 條件不成立，進入 else 區塊。在 else 裡面，waist 是 82，82 >= 80 成立，所以印出「女性腰圍超標」。"
+    },
+    {
+      "id": "ch15-q09",
+      "type": "fill-in-blank",
+      "difficulty": 3,
+      "code": "let age = 20;\nlet hasID = true;\n\nif (age >= 18) {\n  if (___) {\n    console.log(\"可以進入\");\n  } else {\n    console.log(\"請出示證件\");\n  }\n} else {\n  console.log(\"未滿 18 歲，禁止進入\");\n}",
+      "blank": "___",
+      "question": "要讓程式印出「可以進入」，空格裡應該填入什麼？",
+      "correctAnswer": "hasID",
+      "explanation": "age 是 20，20 >= 18 成立，進入外層 if。要印出「可以進入」，內層 if 的條件也要成立。hasID 是 true（布林值），直接寫 hasID 作為條件就會是 true，所以會進入內層 if 區塊印出「可以進入」。"
+    },
+    {
+      "id": "ch15-q10",
+      "type": "multiple-choice",
+      "difficulty": 3,
+      "question": "以下程式碼有什麼問題？\n\nif (hasTicket) {\n  if (height >= 120) {\n    console.log(\"可以玩雲霄飛車\");\n  }\n}",
+      "options": [
+        "語法錯誤，程式無法執行",
+        "缺少 else 分支，沒有處理「有票但身高不夠」和「沒票」的情況",
+        "不能用巢狀 if，應該用 && 合併條件",
+        "沒有問題，程式完全正確"
+      ],
+      "correctIndex": 1,
+      "explanation": "這段程式碼語法上沒有錯誤，可以正常執行。但它缺少 else 分支：沒有處理「有票但身高不夠」的情況，也沒有處理「沒票」的情況。在流程圖中，這些路徑都沒有對應的終點處理，代表邏輯不完整。"
+    }
+  ]
+}

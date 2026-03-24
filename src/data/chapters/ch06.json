@@ -1,0 +1,130 @@
+{
+  "id": "ch06",
+  "number": 6,
+  "title": "布林、undefined、null",
+  "category": "基礎篇",
+  "concepts": [
+    {
+      "id": "ch06-c01",
+      "title": "布林（Boolean）",
+      "explanation": "布林只有兩個值：true（真）和 false（假）。比較運算的結果就是布林值。布林值在之後的流程判斷（if/else）會大量使用。",
+      "codeExamples": [{"code": "console.log(2 > 3);\nconsole.log(5 > 1);\ntypeof true;", "output": "false\ntrue\n\"boolean\""}],
+      "tips": ["布林只有 true 和 false 兩個值，注意全部小寫"]
+    },
+    {
+      "id": "ch06-c02",
+      "title": "undefined — 還沒給值",
+      "explanation": "當你宣告了一個變數但還沒有給它值，JS 就會自動把它設為 undefined。就像準備了空盒子，但還沒放東西進去。",
+      "codeExamples": [{"code": "let a;\nconsole.log(a);", "output": "undefined"}],
+      "tips": ["只宣告變數但不給值，JS 就自動給 undefined", "undefined 是 JS 自動設定的"]
+    },
+    {
+      "id": "ch06-c03",
+      "title": "null — 主動清空",
+      "explanation": "null 代表開發者刻意把變數設為空值。null 和 undefined 最大的差別是：undefined 是 JS 自動給的，null 是你自己設定的。",
+      "codeExamples": [{"code": "let c = 1234;\nc = null;\nconsole.log(c);\nconsole.log(typeof null);", "output": "null\nobject"}],
+      "tips": ["typeof null 回傳 \"object\"，這是 JavaScript 的歷史 bug"]
+    },
+    {
+      "id": "ch06-c04",
+      "title": "parseInt 與 toString 型別轉換",
+      "explanation": "parseInt() 把字串轉成數字，toString() 把數字轉成字串。轉換後要存回變數才會生效。",
+      "codeExamples": [{"code": "let a = \"5\";\na = parseInt(a);\nconsole.log(a + 3);\n\nlet b = 1;\nb = b.toString();\nconsole.log(b + 1);", "output": "8\n11"}],
+      "tips": ["字串 + 數字 = 字串拼接，不是數學運算", "parseInt() 字串變數字，toString() 數字變字串"]
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "ch06-q01",
+      "type": "code-prediction",
+      "difficulty": 1,
+      "code": "let a;\nconsole.log(a);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "undefined",
+      "explanation": "變數 a 宣告了但沒有賦值，JavaScript 會自動把它設為 undefined。"
+    },
+    {
+      "id": "ch06-q02",
+      "type": "code-prediction",
+      "difficulty": 1,
+      "code": "console.log(2 > 3);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "false",
+      "explanation": "2 並沒有大於 3，這個比較運算的結果是 false。"
+    },
+    {
+      "id": "ch06-q03",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "let a = \"5\";\nconsole.log(a + 3);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "53",
+      "explanation": "a 是字串 \"5\"，字串和數字相加會執行字串拼接，所以 \"5\" + 3 得到 \"53\"。"
+    },
+    {
+      "id": "ch06-q04",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "let a = \"5\";\na = parseInt(a);\nconsole.log(a + 3);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "8",
+      "explanation": "parseInt(a) 把字串 \"5\" 轉換成數字 5。數字 5 + 3 是數學運算，得到 8。"
+    },
+    {
+      "id": "ch06-q05",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "let b = 1;\nb = b.toString();\nconsole.log(b + 1);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "11",
+      "explanation": "toString() 把數字 1 轉成字串 \"1\"。字串 \"1\" + 數字 1 是字串拼接，得到 \"11\"。"
+    },
+    {
+      "id": "ch06-q06",
+      "type": "fill-in-blank",
+      "difficulty": 1,
+      "code": "let a = \"3\";\na = ___(a);\nconsole.log(a + 2);  // 5",
+      "blank": "___",
+      "question": "填入什麼方法，才能讓結果變成數字 5？",
+      "correctAnswer": "parseInt",
+      "explanation": "parseInt() 把字串轉換成數字。填入 parseInt 後，a 從字串 \"3\" 變成數字 3，再加 2 得到 5。"
+    },
+    {
+      "id": "ch06-q07",
+      "type": "fill-in-blank",
+      "difficulty": 2,
+      "code": "let b = 5;\nb = b.___();\nconsole.log(typeof b);  // \"string\"",
+      "blank": "___",
+      "question": "填入什麼方法，才能讓 typeof b 變成 \"string\"？",
+      "correctAnswer": "toString",
+      "explanation": "toString() 把數字轉換成字串。"
+    },
+    {
+      "id": "ch06-q08",
+      "type": "multiple-choice",
+      "difficulty": 1,
+      "question": "下列哪一個是布林（Boolean）型別的值？",
+      "options": ["\"true\"", "1", "true", "null"],
+      "correctIndex": 2,
+      "explanation": "布林型別只有 true 和 false 兩個值，注意沒有引號。\"true\" 是字串，1 是數字。"
+    },
+    {
+      "id": "ch06-q09",
+      "type": "multiple-choice",
+      "difficulty": 2,
+      "question": "undefined 和 null 的主要差別是什麼？",
+      "options": ["undefined 是數字，null 是字串", "undefined 是 JS 自動給的，null 是開發者主動設定的", "兩者完全相同，可以互換使用", "undefined 是主動清空，null 是 JS 自動給的"],
+      "correctIndex": 1,
+      "explanation": "undefined 是當變數沒有賦值時 JS 自動設定的；null 是開發者自己寫 c = null 主動清空的。"
+    },
+    {
+      "id": "ch06-q10",
+      "type": "true-false",
+      "difficulty": 2,
+      "statement": "typeof null 的結果是 \"null\"",
+      "question": "這個說法正確嗎？",
+      "correctAnswer": false,
+      "explanation": "typeof null 回傳的是 \"object\"，不是 \"null\"。這是 JavaScript 歷史遺留的 bug。"
+    }
+  ]
+}
