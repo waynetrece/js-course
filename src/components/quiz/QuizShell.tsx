@@ -28,7 +28,7 @@ export function QuizShell({ chapterId, chapterTitle, quizzes, onComplete }: Quiz
   const [phase, setPhase] = useState<Phase>("checking");
   const [session, setSession] = useState<QuizSession | null>(null);
   const [savedSession, setSavedSession] = useState<QuizSession | null>(null);
-  const [feedback, setFeedback] = useState<{ correct: boolean; explanation: string } | null>(null);
+  const [feedback, setFeedback] = useState<{ correct: boolean; explanation: string; formatHint?: boolean } | null>(null);
   const [result, setResult] = useState<QuizResult | null>(null);
 
   // mount 時檢查 localStorage 是否有未完成的 session
@@ -77,14 +77,17 @@ export function QuizShell({ chapterId, chapterTitle, quizzes, onComplete }: Quiz
   const handleAnswer = (answer: string | number | boolean, correct: boolean) => {
     if (!session) return;
     const currentQuiz = session.quizzes[session.currentIndex];
+    const answerStr = String(answer);
+    const isFormatHint = answerStr.startsWith("__FORMAT_HINT__|");
+    const actualAnswer = isFormatHint ? answerStr.replace("__FORMAT_HINT__|", "") : answerStr;
     const updatedAnswers = {
       ...session.answers,
-      [currentQuiz.id]: { answer: String(answer), correct },
+      [currentQuiz.id]: { answer: actualAnswer, correct },
     };
     const updated = { ...session, answers: updatedAnswers };
     setSession(updated);
     saveQuizSession(updated);
-    setFeedback({ correct, explanation: currentQuiz.explanation });
+    setFeedback({ correct, explanation: currentQuiz.explanation, formatHint: isFormatHint });
   };
 
   const handleNext = () => {
@@ -263,6 +266,7 @@ export function QuizShell({ chapterId, chapterTitle, quizzes, onComplete }: Quiz
               correct={feedback.correct}
               explanation={feedback.explanation}
               onNext={handleNext}
+              formatHint={feedback.formatHint}
             />
           )}
         </CardContent>
