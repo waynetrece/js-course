@@ -15,7 +15,10 @@ export function CodePrediction({ quiz, onAnswer }: Props) {
 
   const handleSubmit = () => {
     if (!input.trim()) return;
-    const correct = input.trim() === quiz.correctAnswer.trim();
+    // 將使用者輸入和正確答案都標準化：去除前後空白，統一分隔符號
+    const normalize = (s: string) =>
+      s.trim().split(/[\s,、]+/).filter(Boolean).join("\n");
+    const correct = normalize(input) === normalize(quiz.correctAnswer);
     setSubmitted(true);
     onAnswer(input.trim(), correct);
   };
