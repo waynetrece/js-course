@@ -132,7 +132,8 @@
         "|| 常用來設定預設值：value || '預設值'",
         "&& 常用來做條件執行：條件 && 動作",
         "初學者先記住 || 找第一個 truthy，&& 找第一個 falsy"
-      ]
+      ],
+      "isNew": true
     }
   ],
   "quizzes": [
@@ -245,7 +246,8 @@
       "code": "console.log(0 == false);\nconsole.log(\"\" == false);\nconsole.log(null == undefined);",
       "question": "console.log 會印出什麼？",
       "correctAnswer": "true\ntrue\ntrue",
-      "explanation": "這三個都是雙等號（==）寬鬆比較的經典陷阱。0 和 false 經過自動轉型後值相等，所以是 true。空字串 \"\" 和 false 轉型後也相等，所以是 true。null 和 undefined 在寬鬆比較中被視為相等（這是 JavaScript 的特殊規則），所以也是 true。這就是為什麼建議用三等號（===）的原因。"
+      "explanation": "這三個都是雙等號（==）寬鬆比較的經典陷阱。0 和 false 經過自動轉型後值相等，所以是 true。空字串 \"\" 和 false 轉型後也相等，所以是 true。null 和 undefined 在寬鬆比較中被視為相等（這是 JavaScript 的特殊規則），所以也是 true。這就是為什麼建議用三等號（===）的原因。",
+      "isNew": true
     },
     {
       "id": "ch12-q12",
@@ -254,7 +256,8 @@
       "code": "let name = \"\" || \"匿名\";\nconsole.log(name);",
       "question": "console.log 會印出什麼？",
       "correctAnswer": "匿名",
-      "explanation": "這是 || 短路求值的應用。空字串 \"\" 是 falsy 值，所以 || 會繼續看右邊，回傳 \"匿名\"。這個寫法常用來設定預設值：如果左邊沒有值（是 falsy），就用右邊的預設值。"
+      "explanation": "這是 || 短路求值的應用。空字串 \"\" 是 falsy 值，所以 || 會繼續看右邊，回傳 \"匿名\"。這個寫法常用來設定預設值：如果左邊沒有值（是 falsy），就用右邊的預設值。",
+      "isNew": true
     },
     {
       "id": "ch12-q13",
@@ -268,7 +271,8 @@
         "10 === \"10\""
       ],
       "correctIndex": 2,
-      "explanation": "5 > 3 回傳 true（布林值）。true && false 回傳 false（布林值）。10 === \"10\" 回傳 false（布林值）。但 \"hello\" || \"world\" 不是回傳布林值，而是回傳 \"hello\"（字串）。因為 || 的短路求值會回傳運算元本身的值，\"hello\" 是 truthy，所以直接回傳 \"hello\"。"
+      "explanation": "5 > 3 回傳 true（布林值）。true && false 回傳 false（布林值）。10 === \"10\" 回傳 false（布林值）。但 \"hello\" || \"world\" 不是回傳布林值，而是回傳 \"hello\"（字串）。因為 || 的短路求值會回傳運算元本身的值，\"hello\" 是 truthy，所以直接回傳 \"hello\"。",
+      "isNew": true
     },
     {
       "id": "ch12-q14",
@@ -277,7 +281,8 @@
       "statement": "null === undefined 的結果是 true。",
       "question": "這個說法正確嗎？",
       "correctAnswer": false,
-      "explanation": "三等號（===）是嚴格比較，值和型別都要相同。null 的型別是 object，undefined 的型別是 undefined，型別不同所以結果是 false。注意：如果用雙等號（==）寬鬆比較，null == undefined 的結果會是 true，這是 JavaScript 的特殊規則。"
+      "explanation": "三等號（===）是嚴格比較，值和型別都要相同。null 的型別是 object，undefined 的型別是 undefined，型別不同所以結果是 false。注意：如果用雙等號（==）寬鬆比較，null == undefined 的結果會是 true，這是 JavaScript 的特殊規則。",
+      "isNew": true
     },
     {
       "id": "ch12-q15",
@@ -286,7 +291,79 @@
       "code": "let score = 0;\nlet display = score || \"沒有成績\";\nconsole.log(display);",
       "question": "console.log 會印出什麼？",
       "correctAnswer": "沒有成績",
-      "explanation": "這是一個常見的陷阱。score 的值是 0，但 0 在 JavaScript 中是 falsy 值。所以 || 會認為左邊「不成立」，跳過去回傳右邊的 \"沒有成績\"。問題在於 0 分其實是一個有效的成績，卻被當成「沒有值」。這就是用 || 設定預設值時需要小心的地方：如果 0 或空字串是合理的值，|| 會誤判。"
+      "explanation": "這是一個常見的陷阱。score 的值是 0，但 0 在 JavaScript 中是 falsy 值。所以 || 會認為左邊「不成立」，跳過去回傳右邊的 \"沒有成績\"。問題在於 0 分其實是一個有效的成績，卻被當成「沒有值」。這就是用 || 設定預設值時需要小心的地方：如果 0 或空字串是合理的值，|| 會誤判。",
+      "isNew": true
+    },
+    {
+      "id": "ch12-q16",
+      "type": "coding-challenge",
+      "difficulty": 1,
+      "question": "寫函式判斷是否可以購買（年齡和餘額條件）",
+      "explanation": "&&（邏輯且）表示兩個條件都要成立。只要有一個條件不成立，結果就是 false。",
+      "starterCode": "// 寫一個函式 canPurchase\n// 接收兩個參數：age（年齡）、balance（餘額）\n// 條件：年齡 >= 18 且餘額 >= 100 才能購買\n// 回傳 true 或 false\n\nfunction canPurchase(age, balance) {\n  // 在這裡寫你的程式碼\n}\n",
+      "testCases": [
+        {
+          "mode": "return",
+          "functionName": "canPurchase",
+          "input": [20, 200],
+          "expected": "true",
+          "description": "20歲、200元可以購買"
+        },
+        {
+          "mode": "return",
+          "functionName": "canPurchase",
+          "input": [16, 200],
+          "expected": "false",
+          "description": "16歲不滿18，不能購買"
+        },
+        {
+          "mode": "return",
+          "functionName": "canPurchase",
+          "input": [20, 50],
+          "expected": "false",
+          "description": "餘額不足100，不能購買"
+        }
+      ],
+      "hints": ["用 && 表示「且」", "age >= 18 && balance >= 100"]
+    },
+    {
+      "id": "ch12-q17",
+      "type": "coding-challenge",
+      "difficulty": 2,
+      "question": "寫函式判斷成績等第（A/B/C/F）",
+      "explanation": "用 if/else if/else 從高到低判斷分數區間。因為 if 是由上往下執行，所以先判斷 >= 90，再判斷 >= 80，以此類推。",
+      "starterCode": "// 寫一個函式 getGrade\n// 接收一個參數 score（分數 0-100）\n// 回傳成績等第：\n// 90 以上（含）: 'A'\n// 80 以上（含）: 'B'\n// 70 以上（含）: 'C'\n// 70 以下: 'F'\n\nfunction getGrade(score) {\n  // 在這裡寫你的程式碼\n}\n",
+      "testCases": [
+        {
+          "mode": "return",
+          "functionName": "getGrade",
+          "input": [95],
+          "expected": "A",
+          "description": "95 分是 A"
+        },
+        {
+          "mode": "return",
+          "functionName": "getGrade",
+          "input": [85],
+          "expected": "B",
+          "description": "85 分是 B"
+        },
+        {
+          "mode": "return",
+          "functionName": "getGrade",
+          "input": [72],
+          "expected": "C",
+          "description": "72 分是 C"
+        },
+        {
+          "mode": "return",
+          "functionName": "getGrade",
+          "input": [50],
+          "expected": "F",
+          "description": "50 分是 F"
+        }
+      ],
+      "hints": ["用 if / else if / else 來判斷", "從最高分開始判斷"]
     }
   ]
 }

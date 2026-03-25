@@ -1,4 +1,4 @@
-export type QuizType = "code-prediction" | "fill-in-blank" | "multiple-choice" | "true-false";
+export type QuizType = "code-prediction" | "fill-in-blank" | "multiple-choice" | "true-false" | "coding-challenge";
 
 export interface BaseQuiz {
   id: string;
@@ -7,6 +7,7 @@ export interface BaseQuiz {
   question: string;
   explanation: string;
   conceptId?: string;
+  isNew?: boolean;
 }
 
 export interface CodePredictionQuiz extends BaseQuiz {
@@ -34,7 +35,22 @@ export interface TrueFalseQuiz extends BaseQuiz {
   correctAnswer: boolean;
 }
 
-export type Quiz = CodePredictionQuiz | FillInBlankQuiz | MultipleChoiceQuiz | TrueFalseQuiz;
+export interface TestCase {
+  mode: "output" | "return";
+  functionName?: string;
+  input?: unknown[];
+  expected: string;
+  description: string;
+}
+
+export interface CodingChallengeQuiz extends BaseQuiz {
+  type: "coding-challenge";
+  starterCode: string;
+  testCases: TestCase[];
+  hints?: string[];
+}
+
+export type Quiz = CodePredictionQuiz | FillInBlankQuiz | MultipleChoiceQuiz | TrueFalseQuiz | CodingChallengeQuiz;
 
 export interface QuizSession {
   chapterId: string;

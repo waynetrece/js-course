@@ -8,43 +8,92 @@
       "id": "ch08-c01",
       "title": "物件宣告語法",
       "explanation": "物件用大括號 {} 包起來，裡面放「屬性名稱 : 值」的組合。屬性名稱和值之間用冒號 : 連接，多組屬性之間用逗號隔開。",
-      "codeExamples": [{"code": "let home = {\n  motherName: \"mary\",\n  fatherName: \"tom\",\n  dogs: 3,\n  isWakeUp: false\n};", "output": ""}],
-      "tips": ["物件用大括號 {}，陣列用中括號 []", "屬性名稱和值之間用冒號 :，不是等號 ="]
+      "codeExamples": [
+        {
+          "code": "let home = {\n  motherName: \"mary\",\n  fatherName: \"tom\",\n  dogs: 3,\n  isWakeUp: false\n};",
+          "output": ""
+        }
+      ],
+      "tips": [
+        "物件用大括號 {}，陣列用中括號 []",
+        "屬性名稱和值之間用冒號 :，不是等號 ="
+      ]
     },
     {
       "id": "ch08-c02",
       "title": "用點記法讀取物件的值",
       "explanation": "用「物件名稱.屬性名稱」就能取出該屬性的值。",
-      "codeExamples": [{"code": "let home = { motherName: \"mary\", dogs: 3 };\nconsole.log(home.motherName);\nconsole.log(home.dogs);", "output": "mary\n3"}],
-      "tips": ["格式是「物件名稱.屬性名稱」，中間是一個點"]
+      "codeExamples": [
+        {
+          "code": "let home = { motherName: \"mary\", dogs: 3 };\nconsole.log(home.motherName);\nconsole.log(home.dogs);",
+          "output": "mary\n3"
+        }
+      ],
+      "tips": [
+        "格式是「物件名稱.屬性名稱」，中間是一個點"
+      ]
     },
     {
       "id": "ch08-c03",
       "title": "用點記法新增物件屬性",
       "explanation": "用「物件.屬性名稱 = 值」可以新增屬性。有 = 是寫入（新增），沒有 = 是讀取。",
-      "codeExamples": [{"code": "let home = {};\nhome.motherName = \"mary\";\nhome.dogs = 3;\nconsole.log(home);", "output": "{ motherName: \"mary\", dogs: 3 }"}],
-      "tips": ["有 = 是寫入，沒有 = 是讀取", "可以先建空物件 {}，再逐步新增屬性"]
+      "codeExamples": [
+        {
+          "code": "let home = {};\nhome.motherName = \"mary\";\nhome.dogs = 3;\nconsole.log(home);",
+          "output": "{ motherName: \"mary\", dogs: 3 }"
+        }
+      ],
+      "tips": [
+        "有 = 是寫入，沒有 = 是讀取",
+        "可以先建空物件 {}，再逐步新增屬性"
+      ]
     },
     {
       "id": "ch08-c04",
       "title": "陣列 vs 物件的差異",
       "explanation": "陣列靠「索引」找資料，物件靠「屬性名稱」找資料。陣列是有序的，用數字索引（0, 1, 2...）存取，適合存放同類型的多筆資料，例如一組成績、一組顏色。物件是無序的，用屬性名稱存取，適合描述一個事物的多個特徵，例如一個人的名字、年齡、身高。簡單來說：多筆同類資料用陣列，描述一個東西的細節用物件。",
-      "codeExamples": [{"code": "let colors = [\"red\", \"blue\"];\nconsole.log(colors[0]);\n\nlet person = { name: \"tom\", age: 25 };\nconsole.log(person.name);", "output": "red\ntom"}],
-      "tips": ["陣列：arr[0]，物件：obj.name", "陣列 = 有序、數字索引、同類多筆資料 | 物件 = 無序、屬性名稱、描述一個事物的多個特徵"]
+      "codeExamples": [
+        {
+          "code": "let colors = [\"red\", \"blue\"];\nconsole.log(colors[0]);\n\nlet person = { name: \"tom\", age: 25 };\nconsole.log(person.name);",
+          "output": "red\ntom"
+        }
+      ],
+      "tips": [
+        "陣列：arr[0]，物件：obj.name",
+        "陣列 = 有序、數字索引、同類多筆資料 | 物件 = 無序、屬性名稱、描述一個事物的多個特徵"
+      ]
     },
     {
       "id": "ch08-c05",
       "title": "中括號記法（Bracket Notation）",
       "explanation": "除了點記法（obj.name），還可以用中括號記法（obj[\"name\"]）來存取物件屬性。中括號裡放的是字串。最大的好處是可以用變數來動態存取屬性。點記法無法用變數，中括號記法可以。當屬性名稱有空格或特殊字元時，也只能用中括號記法。",
-      "codeExamples": [{"code": "let person = { name: \"Wayne\", age: 20 };\nconsole.log(person[\"name\"]);\n\nlet key = \"age\";\nconsole.log(person[key]);\nconsole.log(person.key);", "output": "Wayne\n20\nundefined"}],
-      "tips": ["中括號裡放字串或變數，點記法只能放固定名稱", "需要動態存取時用中括號，固定存取用點記法"]
+      "codeExamples": [
+        {
+          "code": "let person = { name: \"Wayne\", age: 20 };\nconsole.log(person[\"name\"]);\n\nlet key = \"age\";\nconsole.log(person[key]);\nconsole.log(person.key);",
+          "output": "Wayne\n20\nundefined"
+        }
+      ],
+      "tips": [
+        "中括號裡放字串或變數，點記法只能放固定名稱",
+        "需要動態存取時用中括號，固定存取用點記法"
+      ],
+      "isNew": true
     },
     {
       "id": "ch08-c06",
       "title": "物件方法（函式作為屬性值）",
       "explanation": "物件的屬性值可以是任何型別，包括函式（function）。當函式被放在物件裡面當屬性值時，我們稱它為「方法（method）」。呼叫方式是 obj.methodName()。其實我們一直在用方法，例如 console.log() 就是 console 物件的 log 方法，arr.push() 就是陣列物件的 push 方法。",
-      "codeExamples": [{"code": "let dog = {\n  name: \"Lucky\",\n  bark: function() {\n    console.log(\"汪汪！\");\n  }\n};\ndog.bark();", "output": "汪汪！"}],
-      "tips": ["方法就是住在物件裡的函式", "console.log()、arr.push() 都是方法的實際應用"]
+      "codeExamples": [
+        {
+          "code": "let dog = {\n  name: \"Lucky\",\n  bark: function() {\n    console.log(\"汪汪！\");\n  }\n};\ndog.bark();",
+          "output": "汪汪！"
+        }
+      ],
+      "tips": [
+        "方法就是住在物件裡的函式",
+        "console.log()、arr.push() 都是方法的實際應用"
+      ],
+      "isNew": true
     }
   ],
   "quizzes": [
@@ -100,7 +149,12 @@
       "type": "multiple-choice",
       "difficulty": 1,
       "question": "下列哪一個是正確的物件宣告語法？",
-      "options": ["let obj = [name: \"tom\", age: 25];", "let obj = {name: \"tom\", age: 25};", "let obj = (name: \"tom\", age: 25);", "let obj = name: \"tom\", age: 25;"],
+      "options": [
+        "let obj = [name: \"tom\", age: 25];",
+        "let obj = {name: \"tom\", age: 25};",
+        "let obj = (name: \"tom\", age: 25);",
+        "let obj = name: \"tom\", age: 25;"
+      ],
       "correctIndex": 1,
       "explanation": "物件用大括號 {} 包起來，屬性用冒號 : 連接。"
     },
@@ -109,7 +163,12 @@
       "type": "multiple-choice",
       "difficulty": 2,
       "question": "點記法有沒有 = 的差異是什麼？",
-      "options": ["有 = 是讀取，沒有 = 是新增", "有 = 是新增/修改屬性，沒有 = 是讀取屬性", "有沒有 = 都一樣，都是讀取", "有沒有 = 都一樣，都是新增"],
+      "options": [
+        "有 = 是讀取，沒有 = 是新增",
+        "有 = 是新增/修改屬性，沒有 = 是讀取屬性",
+        "有沒有 = 都一樣，都是讀取",
+        "有沒有 = 都一樣，都是新增"
+      ],
       "correctIndex": 1,
       "explanation": "obj.name 是讀取；obj.name = \"tom\" 是寫入。有 = 就是賦值，沒有 = 就是讀取。"
     },
@@ -136,7 +195,12 @@
       "type": "multiple-choice",
       "difficulty": 2,
       "question": "陣列和物件讀取資料的方式有什麼不同？",
-      "options": ["陣列用屬性名稱，物件用索引編號", "兩者都用索引編號", "陣列用索引編號，物件用屬性名稱", "兩者都用屬性名稱"],
+      "options": [
+        "陣列用屬性名稱，物件用索引編號",
+        "兩者都用索引編號",
+        "陣列用索引編號，物件用屬性名稱",
+        "兩者都用屬性名稱"
+      ],
       "correctIndex": 2,
       "explanation": "陣列靠索引找資料如 arr[0]；物件靠屬性名稱找資料如 obj.name。"
     },
@@ -147,7 +211,8 @@
       "code": "let person = { name: \"Wayne\", age: 20 };\nlet key = \"name\";\nconsole.log(person[key]);\nconsole.log(person.key);",
       "question": "兩個 console.log 分別會印出什麼？",
       "correctAnswer": "Wayne\nundefined",
-      "explanation": "person[key] 中的 key 是變數，值為 \"name\"，所以等同於 person[\"name\"]，印出 \"Wayne\"。而 person.key 是點記法，會直接去找叫做 \"key\" 的屬性，物件裡沒有這個屬性，所以回傳 undefined。這就是中括號記法和點記法的關鍵差異：中括號可以用變數，點記法只能用固定名稱。"
+      "explanation": "person[key] 中的 key 是變數，值為 \"name\"，所以等同於 person[\"name\"]，印出 \"Wayne\"。而 person.key 是點記法，會直接去找叫做 \"key\" 的屬性，物件裡沒有這個屬性，所以回傳 undefined。這就是中括號記法和點記法的關鍵差異：中括號可以用變數，點記法只能用固定名稱。",
+      "isNew": true
     },
     {
       "id": "ch08-q12",
@@ -156,16 +221,23 @@
       "code": "let cat = {\n  name: \"mimi\",\n  meow: function() {\n    console.log(\"喵喵！\");\n  }\n};\ncat.meow();",
       "question": "console.log 會印出什麼？",
       "correctAnswer": "喵喵！",
-      "explanation": "cat.meow 是一個函式（方法），用 cat.meow() 呼叫它，函式內部執行 console.log(\"喵喵！\")，所以印出「喵喵！」。"
+      "explanation": "cat.meow 是一個函式（方法），用 cat.meow() 呼叫它，函式內部執行 console.log(\"喵喵！\")，所以印出「喵喵！」。",
+      "isNew": true
     },
     {
       "id": "ch08-q13",
       "type": "multiple-choice",
       "difficulty": 2,
       "question": "以下哪個情境「必須」使用中括號記法而非點記法？",
-      "options": ["存取 obj.name 屬性", "用變數 key 動態存取屬性", "新增 obj.age 屬性", "讀取 obj.color 屬性"],
+      "options": [
+        "存取 obj.name 屬性",
+        "用變數 key 動態存取屬性",
+        "新增 obj.age 屬性",
+        "讀取 obj.color 屬性"
+      ],
       "correctIndex": 1,
-      "explanation": "當需要用變數來動態決定要存取哪個屬性時，只能用中括號記法（obj[key]）。點記法無法使用變數，person.key 會被當成去找叫做 \"key\" 的屬性，而不是讀取 key 變數的值。"
+      "explanation": "當需要用變數來動態決定要存取哪個屬性時，只能用中括號記法（obj[key]）。點記法無法使用變數，person.key 會被當成去找叫做 \"key\" 的屬性，而不是讀取 key 變數的值。",
+      "isNew": true
     },
     {
       "id": "ch08-q14",
@@ -174,7 +246,8 @@
       "statement": "console.log() 中的 log 其實就是 console 物件的一個方法",
       "question": "這個說法正確嗎？",
       "correctAnswer": true,
-      "explanation": "console 是 JavaScript 內建的物件，log 是它的一個方法（函式屬性）。我們每次寫 console.log() 其實就是在呼叫 console 物件的 log 方法。同理，arr.push() 也是陣列物件的 push 方法。"
+      "explanation": "console 是 JavaScript 內建的物件，log 是它的一個方法（函式屬性）。我們每次寫 console.log() 其實就是在呼叫 console 物件的 log 方法。同理，arr.push() 也是陣列物件的 push 方法。",
+      "isNew": true
     },
     {
       "id": "ch08-q15",
@@ -183,7 +256,49 @@
       "code": "let scores = {\n  math: 90,\n  english: 85,\n  science: 78\n};\nlet subjects = [\"math\", \"english\", \"science\"];\nconsole.log(scores[subjects[0]]);\nconsole.log(scores[subjects[2]]);",
       "question": "兩個 console.log 分別會印出什麼？",
       "correctAnswer": "90\n78",
-      "explanation": "subjects[0] 是 \"math\"，所以 scores[subjects[0]] 等同於 scores[\"math\"]，印出 90。subjects[2] 是 \"science\"，所以 scores[subjects[2]] 等同於 scores[\"science\"]，印出 78。這題結合了陣列索引和中括號記法：先從陣列取出字串，再用這個字串當作物件的屬性名稱去取值。"
+      "explanation": "subjects[0] 是 \"math\"，所以 scores[subjects[0]] 等同於 scores[\"math\"]，印出 90。subjects[2] 是 \"science\"，所以 scores[subjects[2]] 等同於 scores[\"science\"]，印出 78。這題結合了陣列索引和中括號記法：先從陣列取出字串，再用這個字串當作物件的屬性名稱去取值。",
+      "isNew": true
+    },
+    {
+      "id": "ch08-q16",
+      "type": "coding-challenge",
+      "difficulty": 1,
+      "question": "建立物件並用中括號讀取屬性",
+      "explanation": "中括號語法 student['name'] 和點語法 student.name 都可以讀取屬性，但中括號可以使用變數作為屬性名稱。",
+      "starterCode": "// 請建立一個物件 student，包含以下屬性：\n// name: '小明'\n// age: 20\n// grade: 'A'\n//\n// 然後用中括號語法搭配變數 key 來讀取屬性\n// 依序印出 name、age、grade 的值\n\n// 在下面寫你的程式碼\n",
+      "testCases": [
+        {
+          "mode": "output",
+          "expected": "小明\n20\nA",
+          "description": "依序印出 name、age、grade"
+        }
+      ],
+      "hints": ["物件用 {} 建立", "中括號語法：student['name'] 或 student[key]", "可以用迴圈或手動一個一個印"]
+    },
+    {
+      "id": "ch08-q17",
+      "type": "coding-challenge",
+      "difficulty": 2,
+      "question": "寫函式取得物件所有屬性值",
+      "explanation": "Object.values(obj) 可以直接取得物件所有值組成的陣列。也可以用 for...in 迴圈遍歷物件的每個 key，再用 obj[key] 取得值。",
+      "starterCode": "// 寫一個函式 getValues\n// 接收一個物件參數 obj\n// 回傳該物件所有屬性值組成的陣列\n// 例如 getValues({a: 1, b: 2}) 回傳 [1, 2]\n\nfunction getValues(obj) {\n  // 在這裡寫你的程式碼\n}\n",
+      "testCases": [
+        {
+          "mode": "return",
+          "functionName": "getValues",
+          "input": [{"a": 1, "b": 2}],
+          "expected": "[1,2]",
+          "description": "{a:1, b:2} 的值是 [1,2]"
+        },
+        {
+          "mode": "return",
+          "functionName": "getValues",
+          "input": [{"name": "Wayne"}],
+          "expected": "[\"Wayne\"]",
+          "description": "{name:'Wayne'} 的值是 ['Wayne']"
+        }
+      ],
+      "hints": ["可以用 Object.values()", "或用 for...in 迴圈搭配 push"]
     }
   ]
 }

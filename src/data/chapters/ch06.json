@@ -8,29 +8,59 @@
       "id": "ch06-c01",
       "title": "布林（Boolean）",
       "explanation": "布林只有兩個值：true（真）和 false（假）。比較運算的結果就是布林值。布林值在之後的流程判斷（if/else）會大量使用。",
-      "codeExamples": [{"code": "console.log(2 > 3);\nconsole.log(5 > 1);\ntypeof true;", "output": "false\ntrue\n\"boolean\""}],
-      "tips": ["布林只有 true 和 false 兩個值，注意全部小寫"]
+      "codeExamples": [
+        {
+          "code": "console.log(2 > 3);\nconsole.log(5 > 1);\ntypeof true;",
+          "output": "false\ntrue\n\"boolean\""
+        }
+      ],
+      "tips": [
+        "布林只有 true 和 false 兩個值，注意全部小寫"
+      ]
     },
     {
       "id": "ch06-c02",
       "title": "undefined — 還沒給值",
       "explanation": "當你宣告了一個變數但還沒有給它值，JS 就會自動把它設為 undefined。就像準備了空盒子，但還沒放東西進去。",
-      "codeExamples": [{"code": "let a;\nconsole.log(a);", "output": "undefined"}],
-      "tips": ["只宣告變數但不給值，JS 就自動給 undefined", "undefined 是 JS 自動設定的"]
+      "codeExamples": [
+        {
+          "code": "let a;\nconsole.log(a);",
+          "output": "undefined"
+        }
+      ],
+      "tips": [
+        "只宣告變數但不給值，JS 就自動給 undefined",
+        "undefined 是 JS 自動設定的"
+      ]
     },
     {
       "id": "ch06-c03",
       "title": "null — 主動清空",
       "explanation": "null 代表開發者刻意把變數設為空值。null 和 undefined 最大的差別是：undefined 是 JS 自動給的，null 是你自己設定的。",
-      "codeExamples": [{"code": "let c = 1234;\nc = null;\nconsole.log(c);\nconsole.log(typeof null);", "output": "null\nobject"}],
-      "tips": ["typeof null 回傳 \"object\"，這是 JavaScript 的歷史 bug"]
+      "codeExamples": [
+        {
+          "code": "let c = 1234;\nc = null;\nconsole.log(c);\nconsole.log(typeof null);",
+          "output": "null\nobject"
+        }
+      ],
+      "tips": [
+        "typeof null 回傳 \"object\"，這是 JavaScript 的歷史 bug"
+      ]
     },
     {
       "id": "ch06-c04",
       "title": "parseInt 與 toString 型別轉換",
       "explanation": "parseInt() 把字串轉成數字，toString() 把數字轉成字串。轉換後要存回變數才會生效。",
-      "codeExamples": [{"code": "let a = \"5\";\na = parseInt(a);\nconsole.log(a + 3);\n\nlet b = 1;\nb = b.toString();\nconsole.log(b + 1);", "output": "8\n11"}],
-      "tips": ["字串 + 數字 = 字串拼接，不是數學運算", "parseInt() 字串變數字，toString() 數字變字串"]
+      "codeExamples": [
+        {
+          "code": "let a = \"5\";\na = parseInt(a);\nconsole.log(a + 3);\n\nlet b = 1;\nb = b.toString();\nconsole.log(b + 1);",
+          "output": "8\n11"
+        }
+      ],
+      "tips": [
+        "字串 + 數字 = 字串拼接，不是數學運算",
+        "parseInt() 字串變數字，toString() 數字變字串"
+      ]
     },
     {
       "id": "ch06-c05",
@@ -50,7 +80,11 @@
           "output": "{ name: \"Wayne\" }\nnull"
         }
       ],
-      "tips": ["undefined 是 JS 自動給的，null 是你主動設定的", "實務口訣：看到 undefined 先檢查是不是漏給值了"]
+      "tips": [
+        "undefined 是 JS 自動給的，null 是你主動設定的",
+        "實務口訣：看到 undefined 先檢查是不是漏給值了"
+      ],
+      "isNew": true
     },
     {
       "id": "ch06-c06",
@@ -66,7 +100,11 @@
           "output": "字串有內容是 truthy\n非零數字是 truthy\n空陣列也是 truthy！"
         }
       ],
-      "tips": ["Falsy 值只有 6 個，背起來：false、0、空字串、null、undefined、NaN", "空陣列 [] 和空物件 {} 是 truthy，這是常見陷阱"]
+      "tips": [
+        "Falsy 值只有 6 個，背起來：false、0、空字串、null、undefined、NaN",
+        "空陣列 [] 和空物件 {} 是 truthy，這是常見陷阱"
+      ],
+      "isNew": true
     }
   ],
   "quizzes": [
@@ -140,7 +178,12 @@
       "type": "multiple-choice",
       "difficulty": 1,
       "question": "下列哪一個是布林（Boolean）型別的值？",
-      "options": ["\"true\"", "1", "true", "null"],
+      "options": [
+        "\"true\"",
+        "1",
+        "true",
+        "null"
+      ],
       "correctIndex": 2,
       "explanation": "布林型別只有 true 和 false 兩個值，注意沒有引號。\"true\" 是字串，1 是數字。"
     },
@@ -149,7 +192,12 @@
       "type": "multiple-choice",
       "difficulty": 2,
       "question": "undefined 和 null 的主要差別是什麼？",
-      "options": ["undefined 是數字，null 是字串", "undefined 是 JS 自動給的，null 是開發者主動設定的", "兩者完全相同，可以互換使用", "undefined 是主動清空，null 是 JS 自動給的"],
+      "options": [
+        "undefined 是數字，null 是字串",
+        "undefined 是 JS 自動給的，null 是開發者主動設定的",
+        "兩者完全相同，可以互換使用",
+        "undefined 是主動清空，null 是 JS 自動給的"
+      ],
       "correctIndex": 1,
       "explanation": "undefined 是當變數沒有賦值時 JS 自動設定的；null 是開發者自己寫 c = null 主動清空的。"
     },
@@ -169,7 +217,8 @@
       "code": "let obj = { name: \"Wayne\" };\nconsole.log(obj.age);",
       "question": "console.log 會印出什麼？",
       "correctAnswer": "undefined",
-      "explanation": "存取物件中不存在的屬性會回傳 undefined，不會報錯。obj 裡面只有 name 屬性，沒有 age，所以結果是 undefined。"
+      "explanation": "存取物件中不存在的屬性會回傳 undefined，不會報錯。obj 裡面只有 name 屬性，沒有 age，所以結果是 undefined。",
+      "isNew": true
     },
     {
       "id": "ch06-q12",
@@ -178,16 +227,23 @@
       "statement": "typeof undefined 和 typeof null 的結果是一樣的",
       "question": "這個說法正確嗎？",
       "correctAnswer": false,
-      "explanation": "typeof undefined 的結果是 \"undefined\"，typeof null 的結果是 \"object\"。兩者不一樣。typeof null 回傳 \"object\" 是 JavaScript 歷史遺留的 bug。"
+      "explanation": "typeof undefined 的結果是 \"undefined\"，typeof null 的結果是 \"object\"。兩者不一樣。typeof null 回傳 \"object\" 是 JavaScript 歷史遺留的 bug。",
+      "isNew": true
     },
     {
       "id": "ch06-q13",
       "type": "multiple-choice",
       "difficulty": 2,
       "question": "下列哪一個值在 if 條件中會被判定為 false（falsy）？",
-      "options": ["\"0\"（字串零）", "0（數字零）", "[]（空陣列）", "\"false\"（字串 false）"],
+      "options": [
+        "\"0\"（字串零）",
+        "0（數字零）",
+        "[]（空陣列）",
+        "\"false\"（字串 false）"
+      ],
       "correctIndex": 1,
-      "explanation": "數字 0 是 falsy 值，在 if 條件中會被判定為 false。\"0\" 是有內容的字串，是 truthy。[]（空陣列）也是 truthy，這是常見陷阱。\"false\" 是有內容的字串，也是 truthy。"
+      "explanation": "數字 0 是 falsy 值，在 if 條件中會被判定為 false。\"0\" 是有內容的字串，是 truthy。[]（空陣列）也是 truthy，這是常見陷阱。\"false\" 是有內容的字串，也是 truthy。",
+      "isNew": true
     },
     {
       "id": "ch06-q14",
@@ -196,7 +252,8 @@
       "code": "let a = \"\";\nlet b = \"hello\";\nlet c = 0;\nconsole.log(Boolean(a));\nconsole.log(Boolean(b));\nconsole.log(Boolean(c));",
       "question": "三個 console.log 分別會印出什麼？",
       "correctAnswer": "false\ntrue\nfalse",
-      "explanation": "空字串 \"\" 是 falsy，Boolean(\"\") 是 false。\"hello\" 是有內容的字串，是 truthy，Boolean(\"hello\") 是 true。數字 0 是 falsy，Boolean(0) 是 false。"
+      "explanation": "空字串 \"\" 是 falsy，Boolean(\"\") 是 false。\"hello\" 是有內容的字串，是 truthy，Boolean(\"hello\") 是 true。數字 0 是 falsy，Boolean(0) 是 false。",
+      "isNew": true
     },
     {
       "id": "ch06-q15",
@@ -205,7 +262,56 @@
       "code": "let user = null;\nconsole.log(typeof user);\nconsole.log(user === undefined);\nconsole.log(user == undefined);",
       "question": "三個 console.log 分別會印出什麼？",
       "correctAnswer": "object\nfalse\ntrue",
-      "explanation": "typeof null 回傳 \"object\"（歷史 bug）。null === undefined 是 false，因為嚴格比較下它們是不同型別。null == undefined 是 true，因為寬鬆比較下 JS 把這兩個視為相等（這是 JS 的特殊規則）。"
+      "explanation": "typeof null 回傳 \"object\"（歷史 bug）。null === undefined 是 false，因為嚴格比較下它們是不同型別。null == undefined 是 true，因為寬鬆比較下 JS 把這兩個視為相等（這是 JS 的特殊規則）。",
+      "isNew": true
+    },
+    {
+      "id": "ch06-q16",
+      "type": "coding-challenge",
+      "difficulty": 2,
+      "question": "寫一個函式 checkValue，判斷值是 null、undefined 還是有值",
+      "explanation": "用嚴格等於 === 分別判斷 null 和 undefined。注意 0 和空字串雖然是 falsy，但它們不是 null 也不是 undefined，所以屬於 has value。",
+      "starterCode": "// 寫一個函式 checkValue\n// 接收一個參數 val\n// 如果 val 是 null，回傳 'null'\n// 如果 val 是 undefined，回傳 'undefined'\n// 其他情況回傳 'has value'\n\nfunction checkValue(val) {\n  // 在這裡寫你的程式碼\n}\n",
+      "testCases": [
+        {
+          "mode": "return",
+          "functionName": "checkValue",
+          "input": [null],
+          "expected": "null",
+          "description": "null 應回傳 'null'"
+        },
+        {
+          "mode": "return",
+          "functionName": "checkValue",
+          "input": [42],
+          "expected": "has value",
+          "description": "42 是有值的"
+        },
+        {
+          "mode": "return",
+          "functionName": "checkValue",
+          "input": [0],
+          "expected": "has value",
+          "description": "0 也算有值"
+        }
+      ],
+      "hints": ["null 要用 === null 來判斷", "undefined 要用 === undefined 來判斷", "注意判斷順序：先判斷 null 和 undefined，最後才是 has value"]
+    },
+    {
+      "id": "ch06-q17",
+      "type": "coding-challenge",
+      "difficulty": 1,
+      "question": "用 console.log 依序印出五個值的 typeof 結果",
+      "explanation": "typeof null 回傳 'object' 是 JavaScript 的歷史 bug，但已經是標準行為。其他型別都如預期。",
+      "starterCode": "// 請依序用 console.log 印出以下值的 typeof 結果：\n// 1. typeof true\n// 2. typeof undefined\n// 3. typeof null\n// 4. typeof 42\n// 5. typeof 'hello'\n\n",
+      "testCases": [
+        {
+          "mode": "output",
+          "expected": "boolean\nundefined\nobject\nnumber\nstring",
+          "description": "五個 typeof 結果都正確"
+        }
+      ],
+      "hints": ["typeof null 的結果比較特殊", "每個 typeof 都用一個 console.log 印出"]
     }
   ]
 }

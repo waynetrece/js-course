@@ -9,6 +9,7 @@ import { CodePrediction } from "./CodePrediction";
 import { FillInBlank } from "./FillInBlank";
 import { MultipleChoice } from "./MultipleChoice";
 import { TrueFalse } from "./TrueFalse";
+import { CodingChallenge } from "./CodingChallenge";
 import { QuizFeedback } from "./QuizFeedback";
 import { Quiz, QuizSession, QuizResult } from "@/types/quiz";
 import { createSession, calculateResult } from "@/lib/quiz-engine";
@@ -129,6 +130,11 @@ export function QuizShell({ chapterId, chapterTitle, quizzes, onComplete }: Quiz
       {/* Quiz Card */}
       <Card key={currentQuiz.id} className="animate-slide-in">
         <CardContent className="py-6">
+          {currentQuiz.isNew && (
+            <span className="mb-3 inline-block rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-semibold text-emerald-700">
+              平台獨家
+            </span>
+          )}
           {currentQuiz.type === "code-prediction" && (
             <CodePrediction
               key={currentQuiz.id}
@@ -152,6 +158,13 @@ export function QuizShell({ chapterId, chapterTitle, quizzes, onComplete }: Quiz
           )}
           {currentQuiz.type === "true-false" && (
             <TrueFalse
+              key={currentQuiz.id}
+              quiz={currentQuiz}
+              onAnswer={handleAnswer}
+            />
+          )}
+          {currentQuiz.type === "coding-challenge" && (
+            <CodingChallenge
               key={currentQuiz.id}
               quiz={currentQuiz}
               onAnswer={handleAnswer}

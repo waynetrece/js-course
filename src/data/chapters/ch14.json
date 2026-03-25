@@ -113,7 +113,8 @@
         "先用中文列出所有條件和動作，再畫圖",
         "走一遍所有路徑，確認每條路都有結果",
         "ASCII 流程圖：< > 是判斷，[ ] 是動作"
-      ]
+      ],
+      "isNew": true
     }
   ],
   "quizzes": [
@@ -231,7 +232,8 @@
         "資料輸入"
       ],
       "correctIndex": 2,
-      "explanation": "橢圓形在流程圖中代表「開始」或「結束」，是每個流程圖的起點和終點。條件判斷用菱形，處理步驟用方形。"
+      "explanation": "橢圓形在流程圖中代表「開始」或「結束」，是每個流程圖的起點和終點。條件判斷用菱形，處理步驟用方形。",
+      "isNew": true
     },
     {
       "id": "ch14-q12",
@@ -240,7 +242,8 @@
       "code": "let age = 20;\nlet hasID = false;\n\nif (age >= 18) {\n  if (hasID) {\n    console.log(\"通過\");\n  } else {\n    console.log(\"請補件\");\n  }\n} else {\n  console.log(\"未成年\");\n}",
       "question": "console.log 會印出什麼？",
       "correctAnswer": "請補件",
-      "explanation": "age 是 20，20 >= 18 成立，進入外層 if 區塊。接著判斷 hasID，hasID 是 false，所以走內層的 else，印出「請補件」。這就是巢狀判斷：先判斷年齡，再判斷有沒有身分證。"
+      "explanation": "age 是 20，20 >= 18 成立，進入外層 if 區塊。接著判斷 hasID，hasID 是 false，所以走內層的 else，印出「請補件」。這就是巢狀判斷：先判斷年齡，再判斷有沒有身分證。",
+      "isNew": true
     },
     {
       "id": "ch14-q13",
@@ -249,7 +252,8 @@
       "statement": "畫流程圖時，每個菱形（判斷）一定只有 Yes 和 No 兩條路。",
       "question": "這個說法正確嗎？",
       "correctAnswer": true,
-      "explanation": "沒錯，流程圖中每個菱形（條件判斷）一定只會分出 Yes 和 No 兩條路，因為一個條件的結果只有「成立」或「不成立」。如果需要判斷更多情況，就用多個菱形串接（對應 else if），而不是在一個菱形上拉出三條路。"
+      "explanation": "沒錯，流程圖中每個菱形（條件判斷）一定只會分出 Yes 和 No 兩條路，因為一個條件的結果只有「成立」或「不成立」。如果需要判斷更多情況，就用多個菱形串接（對應 else if），而不是在一個菱形上拉出三條路。",
+      "isNew": true
     },
     {
       "id": "ch14-q14",
@@ -263,7 +267,8 @@
         "先定義變數 → 隨意寫判斷 → 用 console.log 檢查"
       ],
       "correctIndex": 1,
-      "explanation": "正確的 SOP 是：先從文字需求中標記出條件（菱形）和動作（方形），接著畫流程圖理清判斷順序，走一遍所有路徑檢查邏輯是否完整，最後才照著流程圖寫程式碼。這樣可以避免邊寫邊想容易遺漏的問題。"
+      "explanation": "正確的 SOP 是：先從文字需求中標記出條件（菱形）和動作（方形），接著畫流程圖理清判斷順序，走一遍所有路徑檢查邏輯是否完整，最後才照著流程圖寫程式碼。這樣可以避免邊寫邊想容易遺漏的問題。",
+      "isNew": true
     },
     {
       "id": "ch14-q15",
@@ -272,7 +277,86 @@
       "code": "let temperature = 38;\nlet hasRaincoat = true;\n\nif (temperature >= 35) {\n  console.log(\"高溫警報，建議待在室內\");\n} else if (temperature >= 25) {\n  if (hasRaincoat) {\n    console.log(\"天氣好，帶雨具出門\");\n  } else {\n    console.log(\"天氣好，記得帶雨具\");\n  }\n} else {\n  console.log(\"天氣涼，穿外套\");\n}",
       "question": "console.log 會印出什麼？",
       "correctAnswer": "高溫警報，建議待在室內",
-      "explanation": "temperature 是 38，第一個條件 38 >= 35 成立，直接印出「高溫警報，建議待在室內」。後面的 else if 和 else 完全不會執行。雖然 hasRaincoat 是 true，但程式根本不會走到判斷 hasRaincoat 的那一段，因為 if/else if/else 只要有一個條件成立，其餘全部跳過。"
+      "explanation": "temperature 是 38，第一個條件 38 >= 35 成立，直接印出「高溫警報，建議待在室內」。後面的 else if 和 else 完全不會執行。雖然 hasRaincoat 是 true，但程式根本不會走到判斷 hasRaincoat 的那一段，因為 if/else if/else 只要有一個條件成立，其餘全部跳過。",
+      "isNew": true
+    },
+    {
+      "id": "ch14-q16",
+      "type": "coding-challenge",
+      "difficulty": 1,
+      "question": "依流程圖判斷飲料推薦",
+      "explanation": "這是典型的二層巢狀 if。外層判斷溫度，內層判斷甜度。也可以用 if/else if 搭配 && 一層搞定。",
+      "starterCode": "// 寫一個函式 recommendDrink\n// 接收兩個參數：hot（是否要熱的 true/false）、sweet（是否要甜的 true/false）\n// 流程：\n// 如果要熱的：\n//   要甜的 → '熱可可'\n//   不甜的 → '熱茶'\n// 如果不要熱的：\n//   要甜的 → '奶茶'\n//   不甜的 → '冰水'\n\nfunction recommendDrink(hot, sweet) {\n  // 在這裡寫你的程式碼\n}\n",
+      "testCases": [
+        {
+          "mode": "return",
+          "functionName": "recommendDrink",
+          "input": [true, true],
+          "expected": "熱可可",
+          "description": "熱+甜=熱可可"
+        },
+        {
+          "mode": "return",
+          "functionName": "recommendDrink",
+          "input": [true, false],
+          "expected": "熱茶",
+          "description": "熱+不甜=熱茶"
+        },
+        {
+          "mode": "return",
+          "functionName": "recommendDrink",
+          "input": [false, true],
+          "expected": "奶茶",
+          "description": "冰+甜=奶茶"
+        },
+        {
+          "mode": "return",
+          "functionName": "recommendDrink",
+          "input": [false, false],
+          "expected": "冰水",
+          "description": "冰+不甜=冰水"
+        }
+      ],
+      "hints": ["先判斷 hot，再在裡面判斷 sweet", "也可以用 && 組合兩個條件"]
+    },
+    {
+      "id": "ch14-q17",
+      "type": "coding-challenge",
+      "difficulty": 2,
+      "question": "依流程圖判斷票價",
+      "explanation": "按照流程圖從上往下判斷：先看是否免費、再看是否半票、再看學生票、最後全票。",
+      "starterCode": "// 寫一個函式 getTicketPrice\n// 接收兩個參數：age（年齡）、isStudent（是否為學生 true/false）\n// 票價規則：\n// 6 歲以下（不含）：免費，回傳 0\n// 6-12 歲（含兩端）：半票，回傳 150\n// 12 歲以上且是學生：學生票，回傳 200\n// 其他：全票，回傳 300\n\nfunction getTicketPrice(age, isStudent) {\n  // 在這裡寫你的程式碼\n}\n",
+      "testCases": [
+        {
+          "mode": "return",
+          "functionName": "getTicketPrice",
+          "input": [4, false],
+          "expected": "0",
+          "description": "4歲免費"
+        },
+        {
+          "mode": "return",
+          "functionName": "getTicketPrice",
+          "input": [10, false],
+          "expected": "150",
+          "description": "10歲半票 150"
+        },
+        {
+          "mode": "return",
+          "functionName": "getTicketPrice",
+          "input": [20, true],
+          "expected": "200",
+          "description": "20歲學生票 200"
+        },
+        {
+          "mode": "return",
+          "functionName": "getTicketPrice",
+          "input": [20, false],
+          "expected": "300",
+          "description": "20歲全票 300"
+        }
+      ],
+      "hints": ["先判斷年齡 < 6", "再判斷 <= 12", "再看是否是學生"]
     }
   ]
 }

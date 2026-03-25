@@ -10,9 +10,13 @@ export function shuffleQuizzes(quizzes: Quiz[]): Quiz[] {
 }
 
 export function createSession(chapterId: string, quizzes: Quiz[]): QuizSession {
+  const shuffled = shuffleQuizzes(quizzes);
+  // coding-challenge 排到最後面
+  const normal = shuffled.filter((q) => q.type !== "coding-challenge");
+  const coding = shuffled.filter((q) => q.type === "coding-challenge");
   return {
     chapterId,
-    quizzes: shuffleQuizzes(quizzes),
+    quizzes: [...normal, ...coding],
     currentIndex: 0,
     answers: {},
     startTime: Date.now(),
@@ -29,6 +33,9 @@ export function checkAnswer(quiz: Quiz, userAnswer: string | number | boolean): 
       return Number(userAnswer) === quiz.correctIndex;
     case "true-false":
       return Boolean(userAnswer) === quiz.correctAnswer;
+    case "coding-challenge":
+      // coding-challenge 的正確判斷在 CodingChallenge 元件內處理
+      return Boolean(userAnswer);
   }
 }
 

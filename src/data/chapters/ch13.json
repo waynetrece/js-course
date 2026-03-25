@@ -154,7 +154,8 @@
         "養成好習慣：永遠加大括號、永遠用三等號、嚴格放前面、記得 else 保底",
         "if (x = 5) 是賦值，if (x === 5) 才是比較，一個等號差很多",
         "寫完判斷後自我檢查：有沒有漏掉什麼情況沒處理到？"
-      ]
+      ],
+      "isNew": true
     }
   ],
   "quizzes": [
@@ -267,7 +268,8 @@
       "code": "let x = 5;\n\nif (x = 10) {\n  console.log(\"成立\");\n} else {\n  console.log(\"不成立\");\n}\nconsole.log(x);",
       "question": "console.log 會依序印出什麼？（提示：注意 if 小括號裡是一個等號還是三個等號）",
       "correctAnswer": "成立\n10",
-      "explanation": "這是一個經典陷阱！if (x = 10) 裡面用的是一個等號 =，這是「賦值」不是「比較」。所以 x 會被改成 10，而賦值運算的結果就是 10。因為 10 是 truthy（非零數字都是 truthy），條件成立，印出「成立」。接著第二個 console.log(x) 印出被改過的 x，也就是 10。正確的比較應該寫 if (x === 10)。"
+      "explanation": "這是一個經典陷阱！if (x = 10) 裡面用的是一個等號 =，這是「賦值」不是「比較」。所以 x 會被改成 10，而賦值運算的結果就是 10。因為 10 是 truthy（非零數字都是 truthy），條件成立，印出「成立」。接著第二個 console.log(x) 印出被改過的 x，也就是 10。正確的比較應該寫 if (x === 10)。",
+      "isNew": true
     },
     {
       "id": "ch13-q12",
@@ -281,7 +283,8 @@
         "只有兩種情況的簡單判斷"
       ],
       "correctIndex": 1,
-      "explanation": "switch 最適合用在「一個變數要跟多個固定值做比對」的情境，例如判斷星期幾、月份、選單選項等。如果是判斷數字大小範圍（例如成績 >= 90），用 if / else if 會更方便；如果只有兩種情況，用 if / else 就夠了；如果要判斷多個不同變數，switch 也不適合。"
+      "explanation": "switch 最適合用在「一個變數要跟多個固定值做比對」的情境，例如判斷星期幾、月份、選單選項等。如果是判斷數字大小範圍（例如成績 >= 90），用 if / else if 會更方便；如果只有兩種情況，用 if / else 就夠了；如果要判斷多個不同變數，switch 也不適合。",
+      "isNew": true
     },
     {
       "id": "ch13-q13",
@@ -290,7 +293,8 @@
       "code": "let age = 25;\nlet hasLicense = false;\n\nif (age >= 18 && hasLicense) {\n  console.log(\"可以開車\");\n} else if (age >= 18) {\n  console.log(\"可以考駕照\");\n} else {\n  console.log(\"未成年\");\n}",
       "question": "console.log 會印出什麼？",
       "correctAnswer": "可以考駕照",
-      "explanation": "age 是 25，hasLicense 是 false。第一個條件 age >= 18 && hasLicense，25 >= 18 是 true，但 hasLicense 是 false，&& 要兩個都是 true 才成立，所以第一個條件是 false。接著看第二個條件 age >= 18，25 >= 18 是 true，條件成立，印出「可以考駕照」。這題的重點是 && 的運作方式：只要其中一個是 false，整個就是 false。"
+      "explanation": "age 是 25，hasLicense 是 false。第一個條件 age >= 18 && hasLicense，25 >= 18 是 true，但 hasLicense 是 false，&& 要兩個都是 true 才成立，所以第一個條件是 false。接著看第二個條件 age >= 18，25 >= 18 是 true，條件成立，印出「可以考駕照」。這題的重點是 && 的運作方式：只要其中一個是 false，整個就是 false。",
+      "isNew": true
     },
     {
       "id": "ch13-q14",
@@ -299,7 +303,8 @@
       "statement": "在 if 判斷中，if (score >= 60) 和 if (60 <= score) 的判斷結果完全相同。",
       "question": "這個說法正確嗎？",
       "correctAnswer": true,
-      "explanation": "正確。score >= 60 和 60 <= score 只是寫法順序不同，邏輯意思完全一樣，都是「score 大於等於 60」。不管 score 是什麼值，兩種寫法的判斷結果都會相同。一般習慣寫 score >= 60（變數在前面），比較直覺好讀。"
+      "explanation": "正確。score >= 60 和 60 <= score 只是寫法順序不同，邏輯意思完全一樣，都是「score 大於等於 60」。不管 score 是什麼值，兩種寫法的判斷結果都會相同。一般習慣寫 score >= 60（變數在前面），比較直覺好讀。",
+      "isNew": true
     },
     {
       "id": "ch13-q15",
@@ -308,7 +313,86 @@
       "code": "let hour = 14;\nlet greeting;\n\nif (hour < 12) {\n  greeting = \"早安\";\n} else if (hour < 18) {\n  greeting = \"午安\";\n} else {\n  greeting = \"晚安\";\n}\n\nconsole.log(greeting);",
       "question": "console.log 會印出什麼？",
       "correctAnswer": "午安",
-      "explanation": "hour 是 14。第一個條件 hour < 12，14 < 12 是 false，跳過。第二個條件 hour < 18，14 < 18 是 true，條件成立，greeting 被設定為「午安」，後面的 else 跳過。最後 console.log(greeting) 印出「午安」。這題也展示了用 if/else if/else 搭配變數賦值的寫法，先宣告變數，再用判斷決定要存什麼值。"
+      "explanation": "hour 是 14。第一個條件 hour < 12，14 < 12 是 false，跳過。第二個條件 hour < 18，14 < 18 是 true，條件成立，greeting 被設定為「午安」，後面的 else 跳過。最後 console.log(greeting) 印出「午安」。這題也展示了用 if/else if/else 搭配變數賦值的寫法，先宣告變數，再用判斷決定要存什麼值。",
+      "isNew": true
+    },
+    {
+      "id": "ch13-q16",
+      "type": "coding-challenge",
+      "difficulty": 1,
+      "question": "寫 if/else 判斷體溫狀態",
+      "explanation": "由上往下判斷，先處理發燒（>= 37.5），再處理正常（>= 36），最後是偏低。",
+      "starterCode": "// 寫一個函式 checkTemperature\n// 接收一個參數 temp（體溫）\n// 回傳：\n// 37.5 以上（含）: '發燒'\n// 36 到 37.5（不含 37.5）: '正常'\n// 36 以下（不含）: '偏低'\n\nfunction checkTemperature(temp) {\n  // 在這裡寫你的程式碼\n}\n",
+      "testCases": [
+        {
+          "mode": "return",
+          "functionName": "checkTemperature",
+          "input": [38.2],
+          "expected": "發燒",
+          "description": "38.2 度是發燒"
+        },
+        {
+          "mode": "return",
+          "functionName": "checkTemperature",
+          "input": [36.8],
+          "expected": "正常",
+          "description": "36.8 度是正常"
+        },
+        {
+          "mode": "return",
+          "functionName": "checkTemperature",
+          "input": [35.5],
+          "expected": "偏低",
+          "description": "35.5 度是偏低"
+        },
+        {
+          "mode": "return",
+          "functionName": "checkTemperature",
+          "input": [37.5],
+          "expected": "發燒",
+          "description": "37.5 度算發燒"
+        }
+      ],
+      "hints": ["先判斷 >= 37.5", "再判斷 >= 36", "剩下的就是偏低"]
+    },
+    {
+      "id": "ch13-q17",
+      "type": "coding-challenge",
+      "difficulty": 2,
+      "question": "寫函式判斷 BMI 分類",
+      "explanation": "BMI 分類是連續的數值區間，用 if/else if/else 逐一判斷。從小到大：< 18.5 過輕、< 24 正常、< 27 過重、其餘肥胖。",
+      "starterCode": "// 寫一個函式 getBMICategory\n// 接收一個參數 bmi（BMI 值）\n// 回傳分類：\n// 18.5 以下（不含）: '過輕'\n// 18.5 到 24（不含 24）: '正常'\n// 24 到 27（不含 27）: '過重'\n// 27 以上（含）: '肥胖'\n\nfunction getBMICategory(bmi) {\n  // 在這裡寫你的程式碼\n}\n",
+      "testCases": [
+        {
+          "mode": "return",
+          "functionName": "getBMICategory",
+          "input": [17],
+          "expected": "過輕",
+          "description": "BMI 17 是過輕"
+        },
+        {
+          "mode": "return",
+          "functionName": "getBMICategory",
+          "input": [22],
+          "expected": "正常",
+          "description": "BMI 22 是正常"
+        },
+        {
+          "mode": "return",
+          "functionName": "getBMICategory",
+          "input": [25],
+          "expected": "過重",
+          "description": "BMI 25 是過重"
+        },
+        {
+          "mode": "return",
+          "functionName": "getBMICategory",
+          "input": [30],
+          "expected": "肥胖",
+          "description": "BMI 30 是肥胖"
+        }
+      ],
+      "hints": ["用 if / else if / else", "可以從小到大判斷，也可以從大到小"]
     }
   ]
 }

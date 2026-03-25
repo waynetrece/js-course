@@ -18,7 +18,11 @@
           "output": "ReferenceError: myName is not defined"
         }
       ],
-      "tips": ["第一次宣告要加 let，之後改值不用再加 let", "同一個變數名稱只能宣告一次，重複宣告會報錯", "使用一個從未宣告過的變數，會得到 ReferenceError"]
+      "tips": [
+        "第一次宣告要加 let，之後改值不用再加 let",
+        "同一個變數名稱只能宣告一次，重複宣告會報錯",
+        "使用一個從未宣告過的變數，會得到 ReferenceError"
+      ]
     },
     {
       "id": "ch02-c02",
@@ -30,7 +34,10 @@
           "output": "0.8 30 3"
         }
       ],
-      "tips": ["const 的值一旦設定，就不能再改變", "會變用 let，不變用 const"]
+      "tips": [
+        "const 的值一旦設定，就不能再改變",
+        "會變用 let，不變用 const"
+      ]
     },
     {
       "id": "ch02-c03",
@@ -50,7 +57,11 @@
           "output": "TypeError: Assignment to constant variable."
         }
       ],
-      "tips": ["重複宣告（再寫一次 let/const）→ 都不行", "重新賦值（直接用 = 改值）→ let 可以，const 不行", "報錯類型不同：重複宣告是 SyntaxError，const 重新賦值是 TypeError"]
+      "tips": [
+        "重複宣告（再寫一次 let/const）→ 都不行",
+        "重新賦值（直接用 = 改值）→ let 可以，const 不行",
+        "報錯類型不同：重複宣告是 SyntaxError，const 重新賦值是 TypeError"
+      ]
     },
     {
       "id": "ch02-c04",
@@ -62,7 +73,10 @@
           "output": ""
         }
       ],
-      "tips": ["數字不開頭，保留字不碰，大小寫要分清", "通常用駝峰式命名（myVariableName）"]
+      "tips": [
+        "數字不開頭，保留字不碰，大小寫要分清",
+        "通常用駝峰式命名（myVariableName）"
+      ]
     },
     {
       "id": "ch02-c05",
@@ -82,7 +96,12 @@
           "output": "ReferenceError: Cannot access 'b' before initialization"
         }
       ],
-      "tips": ["記憶口訣：「var 會偷跑但沒帶值，let 會擋門不讓過」", "var 提升後值是 undefined，let/const 提升後進入 TDZ 直接報錯", "TDZ 是 Temporal Dead Zone（暫時死區），指的是從區塊開始到宣告語句之間的區域"]
+      "tips": [
+        "記憶口訣：「var 會偷跑但沒帶值，let 會擋門不讓過」",
+        "var 提升後值是 undefined，let/const 提升後進入 TDZ 直接報錯",
+        "TDZ 是 Temporal Dead Zone（暫時死區），指的是從區塊開始到宣告語句之間的區域"
+      ],
+      "isNew": true
     },
     {
       "id": "ch02-c06",
@@ -94,7 +113,12 @@
           "output": "鍵盤 4725"
         }
       ],
-      "tips": ["口訣：「先 const 後 let，不用 var」", "寫程式時先全部用 const，等到需要改值時再把那個變回 let", "常數命名慣例：全大寫加底線（如 TAX_RATE），但這只是慣例不是規定"]
+      "tips": [
+        "口訣：「先 const 後 let，不用 var」",
+        "寫程式時先全部用 const，等到需要改值時再把那個變回 let",
+        "常數命名慣例：全大寫加底線（如 TAX_RATE），但這只是慣例不是規定"
+      ],
+      "isNew": true
     }
   ],
   "quizzes": [
@@ -121,7 +145,12 @@
       "type": "multiple-choice",
       "difficulty": 1,
       "question": "以下哪一個情境應該使用 const？",
-      "options": ["遊戲中的玩家分數", "購物車裡的商品數量", "數學的圓周率 3.14159", "網站的當前訪客人數"],
+      "options": [
+        "遊戲中的玩家分數",
+        "購物車裡的商品數量",
+        "數學的圓周率 3.14159",
+        "網站的當前訪客人數"
+      ],
       "correctIndex": 2,
       "explanation": "圓周率是固定不變的值，適合用 const 保護。遊戲分數、購物車數量、訪客人數都會隨時間改變，應該用 let。"
     },
@@ -139,7 +168,12 @@
       "type": "multiple-choice",
       "difficulty": 2,
       "question": "下列哪一行程式碼會造成錯誤？（假設前面已有 let cloudCount = 3;）",
-      "options": ["cloudCount = 5;", "let cloudCount = 10;", "console.log(cloudCount);", "const discount = 0.8;"],
+      "options": [
+        "cloudCount = 5;",
+        "let cloudCount = 10;",
+        "console.log(cloudCount);",
+        "const discount = 0.8;"
+      ],
       "correctIndex": 1,
       "explanation": "對同一個變數「重複宣告」——再次用 let 宣告已存在的 cloudCount，會造成 SyntaxError。正確做法是直接寫 cloudCount = 10。"
     },
@@ -158,7 +192,12 @@
       "type": "multiple-choice",
       "difficulty": 1,
       "question": "以下哪一個變數命名是合法的？",
-      "options": ["let 2cool = '酷'", "let const = 1", "let my name = 'Wayne'", "let cool2 = '酷'"],
+      "options": [
+        "let 2cool = '酷'",
+        "let const = 1",
+        "let my name = 'Wayne'",
+        "let cool2 = '酷'"
+      ],
       "correctIndex": 3,
       "explanation": "數字開頭（不合法）、保留字（不合法）、有空格（不合法）。只有 cool2 是合法的——數字放在後面是允許的。"
     },
@@ -185,7 +224,12 @@
       "type": "multiple-choice",
       "difficulty": 2,
       "question": "關於 var，下列哪一項描述是正確的？",
-      "options": ["var 是 2015 年 ES6 推出的新語法", "var 可以重複宣告同名變數而不報錯", "現在寫程式應該優先使用 var", "var 和 const 的功能完全相同"],
+      "options": [
+        "var 是 2015 年 ES6 推出的新語法",
+        "var 可以重複宣告同名變數而不報錯",
+        "現在寫程式應該優先使用 var",
+        "var 和 const 的功能完全相同"
+      ],
       "correctIndex": 1,
       "explanation": "var 允許重複宣告同名變數。var 是 1995 年就有的舊語法，現在主流使用 let 和 const。"
     },
@@ -196,7 +240,8 @@
       "code": "console.log(x);\nvar x = 10;",
       "question": "console.log 會印出什麼？",
       "correctAnswer": "undefined",
-      "explanation": "var 有 hoisting（提升）特性，宣告會被提升到最上面，但賦值不會。所以程式執行時，x 已經存在（被提升了），但還沒被賦值為 10，值是 undefined。這就是 var 的陷阱之一。"
+      "explanation": "var 有 hoisting（提升）特性，宣告會被提升到最上面，但賦值不會。所以程式執行時，x 已經存在（被提升了），但還沒被賦值為 10，值是 undefined。這就是 var 的陷阱之一。",
+      "isNew": true
     },
     {
       "id": "ch02-q12",
@@ -205,16 +250,23 @@
       "code": "console.log(y);\nlet y = 10;",
       "question": "這段程式碼執行後會發生什麼？",
       "correctAnswer": "報錯",
-      "explanation": "let 雖然也有 hoisting，但會進入 TDZ（暫時死區）。在 let 宣告之前嘗試存取變數 y，會直接拋出 ReferenceError: Cannot access 'y' before initialization。這跟 var 的行為完全不同——var 會給你 undefined，let 則是直接報錯阻止你。"
+      "explanation": "let 雖然也有 hoisting，但會進入 TDZ（暫時死區）。在 let 宣告之前嘗試存取變數 y，會直接拋出 ReferenceError: Cannot access 'y' before initialization。這跟 var 的行為完全不同——var 會給你 undefined，let 則是直接報錯阻止你。",
+      "isNew": true
     },
     {
       "id": "ch02-q13",
       "type": "multiple-choice",
       "difficulty": 2,
       "question": "在一個購物車程式中，以下四個變數哪些應該用 const 宣告？\n\n___ taxRate = 0.05;\n___ totalItems = 0;\n___ storeName = \"小明商店\";\n___ cartItems = [];",
-      "options": ["全部都用 const", "taxRate 和 storeName 用 const，totalItems 和 cartItems 用 let", "只有 taxRate 用 const，其他用 let", "全部都用 let 比較安全"],
+      "options": [
+        "全部都用 const",
+        "taxRate 和 storeName 用 const，totalItems 和 cartItems 用 let",
+        "只有 taxRate 用 const，其他用 let",
+        "全部都用 let 比較安全"
+      ],
       "correctIndex": 1,
-      "explanation": "taxRate（稅率）和 storeName（店名）在程式執行中不會改變，應該用 const。totalItems（商品數量）會隨著加入商品而改變，要用 let。cartItems 雖然是陣列，但之後可能會被重新指定為新陣列（例如清空購物車 cartItems = []），所以用 let 更有彈性。"
+      "explanation": "taxRate（稅率）和 storeName（店名）在程式執行中不會改變，應該用 const。totalItems（商品數量）會隨著加入商品而改變，要用 let。cartItems 雖然是陣列，但之後可能會被重新指定為新陣列（例如清空購物車 cartItems = []），所以用 let 更有彈性。",
+      "isNew": true
     },
     {
       "id": "ch02-q14",
@@ -223,7 +275,8 @@
       "statement": "const arr = [1, 2, 3]; arr.push(4); 這段程式碼會報錯，因為 const 不能被修改",
       "question": "這個說法正確嗎？",
       "correctAnswer": false,
-      "explanation": "這段程式碼不會報錯！const 限制的是「不能重新賦值」（不能用 = 指定新的值），但不限制「修改內容」。arr.push(4) 是在原本的陣列裡面加東西，並沒有把 arr 指向新的陣列，所以完全合法。如果寫 arr = [1, 2, 3, 4] 才會報錯，因為這是重新賦值。"
+      "explanation": "這段程式碼不會報錯！const 限制的是「不能重新賦值」（不能用 = 指定新的值），但不限制「修改內容」。arr.push(4) 是在原本的陣列裡面加東西，並沒有把 arr 指向新的陣列，所以完全合法。如果寫 arr = [1, 2, 3, 4] 才會報錯，因為這是重新賦值。",
+      "isNew": true
     },
     {
       "id": "ch02-q15",
@@ -233,7 +286,56 @@
       "blank": "___",
       "question": "let 在宣告前就被使用會報錯，這個機制叫做什麼？（填入英文縮寫，三個字母）",
       "correctAnswer": "TDZ",
-      "explanation": "TDZ 是 Temporal Dead Zone（暫時死區）的縮寫。let 和 const 雖然有 hoisting，但從區塊開始到宣告語句之間的這段區域就是 TDZ，在這個區域內存取變數會直接拋出 ReferenceError。這個機制讓 let/const 比 var 更安全，能幫你及早發現「還沒宣告就使用」的錯誤。"
+      "explanation": "TDZ 是 Temporal Dead Zone（暫時死區）的縮寫。let 和 const 雖然有 hoisting，但從區塊開始到宣告語句之間的這段區域就是 TDZ，在這個區域內存取變數會直接拋出 ReferenceError。這個機制讓 let/const 比 var 更安全，能幫你及早發現「還沒宣告就使用」的錯誤。",
+      "isNew": true
+    },
+    {
+      "id": "ch02-q16",
+      "type": "coding-challenge",
+      "difficulty": 1,
+      "question": "用 let 和 const 宣告變數，計算含稅價並用 console.log 印出",
+      "explanation": "taxRate 不會改變所以用 const，price 和 total 可能改變用 let。含稅價 = 500 * 1.05 = 525。",
+      "starterCode": "// 請宣告以下變數：\n// 1. 用 const 宣告 taxRate，值為 0.05\n// 2. 用 let 宣告 price，值為 500\n// 3. 用 let 宣告 total，計算含稅價 price * (1 + taxRate)\n// 4. 用 console.log 印出 total\n\n",
+      "testCases": [
+        {
+          "mode": "output",
+          "expected": "525",
+          "description": "含稅價應為 525"
+        }
+      ],
+      "hints": ["稅率不會變，用 const", "含稅價公式：price * (1 + taxRate)"]
+    },
+    {
+      "id": "ch02-q17",
+      "type": "coding-challenge",
+      "difficulty": 2,
+      "question": "寫一個函式 getAdvice，接收一個字串參數，判斷適合用 const 還是 let",
+      "explanation": "不會改變的值（稅率、圓周率）用 const，會改變的值用 let。",
+      "starterCode": "// 寫一個函式 getAdvice\n// 接收一個字串參數 scenario\n// 如果 scenario 是 '稅率' 或 '圓周率'，回傳 'const'\n// 其他情況回傳 'let'\n\nfunction getAdvice(scenario) {\n  // 在這裡寫你的程式碼\n}\n",
+      "testCases": [
+        {
+          "mode": "return",
+          "functionName": "getAdvice",
+          "input": ["稅率"],
+          "expected": "const",
+          "description": "稅率不會變，應回傳 const"
+        },
+        {
+          "mode": "return",
+          "functionName": "getAdvice",
+          "input": ["圓周率"],
+          "expected": "const",
+          "description": "圓周率不會變，應回傳 const"
+        },
+        {
+          "mode": "return",
+          "functionName": "getAdvice",
+          "input": ["分數"],
+          "expected": "let",
+          "description": "分數會變，應回傳 let"
+        }
+      ],
+      "hints": ["用 if 判斷 scenario 的值", "可以用 === 來比較字串"]
     }
   ]
 }

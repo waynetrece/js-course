@@ -88,7 +88,8 @@
       "tips": [
         "能用 && 合併的情況：兩個條件都要成立才執行同一件事",
         "不能合併的情況：兩個分支要做不同的事"
-      ]
+      ],
+      "isNew": true
     },
     {
       "id": "ch15-c07",
@@ -103,7 +104,8 @@
       "tips": [
         "Guard Clause 口訣：先擋掉不行的，最後才是可以的",
         "巢狀不超過 3 層，超過就考慮扁平化或 Guard Clause"
-      ]
+      ],
+      "isNew": true
     }
   ],
   "quizzes": [
@@ -226,7 +228,8 @@
         "結果不同，寫法B會同時檢查兩個條件"
       ],
       "correctIndex": 1,
-      "explanation": "兩種寫法的結果完全相同，都是「a 和 b 都成立時才會印出 OK」。寫法A用巢狀 if 逐層判斷，寫法B用 && 把兩個條件合併成一層。差別只在可讀性，結果是一樣的。"
+      "explanation": "兩種寫法的結果完全相同，都是「a 和 b 都成立時才會印出 OK」。寫法A用巢狀 if 逐層判斷，寫法B用 && 把兩個條件合併成一層。差別只在可讀性，結果是一樣的。",
+      "isNew": true
     },
     {
       "id": "ch15-q12",
@@ -235,7 +238,8 @@
       "code": "let isMember = false;\nlet total = 1500;\n\nif (isMember) {\n  if (total >= 1000) {\n    console.log(\"VIP 折扣\");\n  } else {\n    console.log(\"會員折扣\");\n  }\n} else {\n  console.log(\"原價\");\n}",
       "question": "console.log 會印出什麼？",
       "correctAnswer": "原價",
-      "explanation": "isMember 是 false，所以外層 if 條件不成立，直接進入 else 區塊，印出「原價」。即使 total 是 1500（>= 1000），但因為外層條件就不成立了，內層的金額判斷根本不會執行。這跟 q01 的概念一樣：外層不過，內層不執行。"
+      "explanation": "isMember 是 false，所以外層 if 條件不成立，直接進入 else 區塊，印出「原價」。即使 total 是 1500（>= 1000），但因為外層條件就不成立了，內層的金額判斷根本不會執行。這跟 q01 的概念一樣：外層不過，內層不執行。",
+      "isNew": true
     },
     {
       "id": "ch15-q13",
@@ -244,7 +248,8 @@
       "code": "let age = 20;\nlet hasID = true;\nlet hasTicket = false;\n\nif (age < 18) {\n  console.log(\"未成年\");\n} else if (!hasID) {\n  console.log(\"請出示證件\");\n} else if (!hasTicket) {\n  console.log(\"請先購票\");\n} else {\n  console.log(\"可以進場\");\n}",
       "question": "console.log 會印出什麼？",
       "correctAnswer": "請先購票",
-      "explanation": "這是 Guard Clause 模式，從上往下逐一檢查。age 是 20，20 < 18 不成立，跳過。hasID 是 true，!hasID 是 false，不成立，跳過。hasTicket 是 false，!hasTicket 是 true，成立，印出「請先購票」。年齡和證件都通過了，但沒有票所以被擋下來。"
+      "explanation": "這是 Guard Clause 模式，從上往下逐一檢查。age 是 20，20 < 18 不成立，跳過。hasID 是 true，!hasID 是 false，不成立，跳過。hasTicket 是 false，!hasTicket 是 true，成立，印出「請先購票」。年齡和證件都通過了，但沒有票所以被擋下來。",
+      "isNew": true
     },
     {
       "id": "ch15-q14",
@@ -253,7 +258,8 @@
       "statement": "巢狀 if 層數越多，程式碼越好讀，因為每個條件都分得很清楚。",
       "question": "這個說法正確嗎？",
       "correctAnswer": false,
-      "explanation": "巢狀 if 層數越多，程式碼反而越難讀，因為縮排會越來越深，形成所謂的「箭頭地獄」。雖然每個條件確實分得很清楚，但人類閱讀多層巢狀時容易搞混哪個 else 對應哪個 if。層數太多時，可以考慮用 && 合併或 Guard Clause 來扁平化。"
+      "explanation": "巢狀 if 層數越多，程式碼反而越難讀，因為縮排會越來越深，形成所謂的「箭頭地獄」。雖然每個條件確實分得很清楚，但人類閱讀多層巢狀時容易搞混哪個 else 對應哪個 if。層數太多時，可以考慮用 && 合併或 Guard Clause 來扁平化。",
+      "isNew": true
     },
     {
       "id": "ch15-q15",
@@ -262,7 +268,79 @@
       "code": "let hasTicket = true;\nlet height = 115;\nlet hasParent = true;\n\nif (hasTicket) {\n  if (height >= 120) {\n    console.log(\"可以獨自搭乘\");\n  } else if (hasParent) {\n    console.log(\"需要家長陪同\");\n  } else {\n    console.log(\"無法搭乘\");\n  }\n} else {\n  console.log(\"請先購票\");\n}",
       "question": "console.log 會印出什麼？",
       "correctAnswer": "需要家長陪同",
-      "explanation": "hasTicket 是 true，進入外層 if 區塊。height 是 115，115 >= 120 不成立，跳到 else if。hasParent 是 true，成立，印出「需要家長陪同」。這個範例的內層用了 if-else if-else 三段式判斷：身高夠可以自己玩、身高不夠但有家長可以陪同、身高不夠又沒家長就無法搭乘。"
+      "explanation": "hasTicket 是 true，進入外層 if 區塊。height 是 115，115 >= 120 不成立，跳到 else if。hasParent 是 true，成立，印出「需要家長陪同」。這個範例的內層用了 if-else if-else 三段式判斷：身高夠可以自己玩、身高不夠但有家長可以陪同、身高不夠又沒家長就無法搭乘。",
+      "isNew": true
+    },
+    {
+      "id": "ch15-q16",
+      "type": "coding-challenge",
+      "difficulty": 2,
+      "question": "用 guard clause 改寫巢狀 if",
+      "explanation": "Guard clause 是「提前離開」的寫法：先把異常情況用 if + return 處理掉，最後留下正常流程。這樣不需要巢狀，程式碼更扁平好讀。",
+      "starterCode": "// 以下是一個巢狀 if 的函式，請用 guard clause（提前 return）改寫\n// 讓程式碼更扁平、更好讀\n//\n// 原始版本（不要動這段，只是讓你參考）：\n// function processOrder(order) {\n//   if (order) {\n//     if (order.isPaid) {\n//       if (order.items.length > 0) {\n//         return '處理訂單';\n//       } else {\n//         return '訂單沒有商品';\n//       }\n//     } else {\n//       return '尚未付款';\n//     }\n//   } else {\n//     return '訂單不存在';\n//   }\n// }\n\nfunction processOrder(order) {\n  // 用 guard clause 改寫，提前 return 異常情況\n}\n",
+      "testCases": [
+        {
+          "mode": "return",
+          "functionName": "processOrder",
+          "input": [null],
+          "expected": "訂單不存在",
+          "description": "null 訂單"
+        },
+        {
+          "mode": "return",
+          "functionName": "processOrder",
+          "input": [{"isPaid": false, "items": []}],
+          "expected": "尚未付款",
+          "description": "未付款"
+        },
+        {
+          "mode": "return",
+          "functionName": "processOrder",
+          "input": [{"isPaid": true, "items": []}],
+          "expected": "訂單沒有商品",
+          "description": "空訂單"
+        },
+        {
+          "mode": "return",
+          "functionName": "processOrder",
+          "input": [{"isPaid": true, "items": ["a"]}],
+          "expected": "處理訂單",
+          "description": "正常訂單"
+        }
+      ],
+      "hints": ["先判斷 !order，如果成立就 return", "再判斷 !order.isPaid", "再判斷 order.items.length === 0", "最後 return 處理訂單"]
+    },
+    {
+      "id": "ch15-q17",
+      "type": "coding-challenge",
+      "difficulty": 1,
+      "question": "用三元運算子簡化簡單的 if/else",
+      "explanation": "三元運算子是簡化版的 if/else，格式為 condition ? trueValue : falseValue。適合用在簡單的二選一判斷。",
+      "starterCode": "// 寫一個函式 getStatus\n// 接收一個參數 score\n// 如果 score >= 60 回傳 '及格'，否則回傳 '不及格'\n// 請用三元運算子（? :）一行搞定\n\nfunction getStatus(score) {\n  // 用三元運算子寫（一行）\n}\n",
+      "testCases": [
+        {
+          "mode": "return",
+          "functionName": "getStatus",
+          "input": [80],
+          "expected": "及格",
+          "description": "80 分及格"
+        },
+        {
+          "mode": "return",
+          "functionName": "getStatus",
+          "input": [60],
+          "expected": "及格",
+          "description": "60 分剛好及格"
+        },
+        {
+          "mode": "return",
+          "functionName": "getStatus",
+          "input": [45],
+          "expected": "不及格",
+          "description": "45 分不及格"
+        }
+      ],
+      "hints": ["三元運算子格式：條件 ? 值A : 值B", "return score >= 60 ? ... : ..."]
     }
   ]
 }
