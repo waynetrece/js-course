@@ -23,10 +23,19 @@ export function createSession(chapterId: string, quizzes: Quiz[]): QuizSession {
   };
 }
 
+function normalize(s: string): string {
+  return s
+    .replace(/\s*和\s*/g, " ")
+    .replace(/[""]/g, '"')
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+}
+
 export function checkAnswer(quiz: Quiz, userAnswer: string | number | boolean): boolean {
   switch (quiz.type) {
     case "code-prediction":
-      return String(userAnswer).trim() === String(quiz.correctAnswer).trim();
+      return normalize(String(userAnswer)) === normalize(String(quiz.correctAnswer));
     case "fill-in-blank":
       return String(userAnswer).trim().toLowerCase() === quiz.correctAnswer.toLowerCase();
     case "multiple-choice":
