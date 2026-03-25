@@ -38,3 +38,5 @@ next-env.d.ts
 screenshots/
 scripts/generate-icons.mjs
 scripts/screenshots.mjs
+.spectra/
+openspec/.vector-search.db*

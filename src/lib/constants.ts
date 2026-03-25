@@ -18,6 +18,7 @@ export const NAV_ITEMS = [
   { href: "/", label: "首頁" },
   { href: "/chapters", label: "章節" },
   { href: "/review", label: "弱點複習" },
+  { href: "/highlights", label: "重點筆記" },
   { href: "/playground", label: "練習場" },
   { href: "/progress", label: "統計" },
 ] as const;

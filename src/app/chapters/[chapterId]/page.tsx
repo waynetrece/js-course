@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -14,7 +14,9 @@ import { ChapterProgress } from "@/types/progress";
 
 export default function ChapterDetailPage() {
   const params = useParams();
+  const searchParams = useSearchParams();
   const chapterId = params.chapterId as string;
+  const focusConcept = searchParams.get("concept");
   const [chapter, setChapter] = useState<ChapterData | null>(null);
   const [chapterProgress, setChapterProgress] = useState<ChapterProgress | null>(null);
   const [loading, setLoading] = useState(true);
@@ -104,7 +106,14 @@ export default function ChapterDetailPage() {
         <h2 className="mb-4 text-lg font-semibold">觀念摘要</h2>
         <div className="space-y-3">
           {chapter.concepts.map((concept, i) => (
-            <ConceptBlock key={concept.id} concept={concept} index={i} />
+            <ConceptBlock
+              key={concept.id}
+              concept={concept}
+              index={i}
+              chapterId={chapterId}
+              chapterTitle={chapter.title}
+              defaultOpen={focusConcept === concept.id}
+            />
           ))}
         </div>
       </div>

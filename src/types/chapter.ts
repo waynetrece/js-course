@@ -25,6 +25,7 @@ export interface Concept {
   explanation: string;
   codeExamples: CodeExample[];
   tips: string[];
+  isNew?: boolean;
 }
 
 export interface ChapterData {
