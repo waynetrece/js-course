@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -13,7 +13,7 @@ import { CodingChallenge } from "./CodingChallenge";
 import { QuizFeedback } from "./QuizFeedback";
 import { Quiz, QuizSession, QuizResult } from "@/types/quiz";
 import { createSession, calculateResult } from "@/lib/quiz-engine";
-import { saveQuizResult } from "@/lib/progress-store";
+import { saveQuizResult, saveQuizSession, loadQuizSession, clearQuizSession } from "@/lib/progress-store";
 
 interface QuizShellProps {
   chapterId: string;
@@ -22,40 +22,124 @@ interface QuizShellProps {
   onComplete?: (result: QuizResult) => void;
 }
 
+type Phase = "checking" | "resume" | "active";
+
 export function QuizShell({ chapterId, chapterTitle, quizzes, onComplete }: QuizShellProps) {
-  const [session, setSession] = useState<QuizSession>(() =>
-    createSession(chapterId, quizzes)
-  );
+  const [phase, setPhase] = useState<Phase>("checking");
+  const [session, setSession] = useState<QuizSession | null>(null);
+  const [savedSession, setSavedSession] = useState<QuizSession | null>(null);
   const [feedback, setFeedback] = useState<{ correct: boolean; explanation: string } | null>(null);
   const [result, setResult] = useState<QuizResult | null>(null);
 
-  const currentQuiz = session.quizzes[session.currentIndex];
-  const progressPercent = Math.round(
-    (session.currentIndex / session.quizzes.length) * 100
-  );
+  // mount 時檢查 localStorage 是否有未完成的 session
+  useEffect(() => {
+    const saved = loadQuizSession(chapterId);
+    if (saved) {
+      const answeredCount = Object.keys(saved.answers).length;
+      if (answeredCount >= saved.quizzes.length) {
+        // 已完成的測驗 — 恢復結果畫面
+        const quizResult = calculateResult(saved);
+        setSession(saved);
+        setResult(quizResult);
+        setPhase("active");
+      } else if (answeredCount > 0) {
+        // 未完成 — 詢問繼續或重新開始
+        setSavedSession(saved);
+        setPhase("resume");
+      } else {
+        // 空 session — 直接開始
+        setSession(saved);
+        setPhase("active");
+      }
+    } else {
+      const s = createSession(chapterId, quizzes);
+      saveQuizSession(s);
+      setSession(s);
+      setPhase("active");
+    }
+  }, [chapterId, quizzes]);
+
+  const handleResume = () => {
+    setSession(savedSession);
+    setSavedSession(null);
+    setPhase("active");
+  };
+
+  const handleRestart = () => {
+    clearQuizSession(chapterId);
+    const s = createSession(chapterId, quizzes);
+    saveQuizSession(s);
+    setSession(s);
+    setSavedSession(null);
+    setPhase("active");
+  };
 
   const handleAnswer = (answer: string | number | boolean, correct: boolean) => {
+    if (!session) return;
+    const currentQuiz = session.quizzes[session.currentIndex];
     const updatedAnswers = {
       ...session.answers,
       [currentQuiz.id]: { answer: String(answer), correct },
     };
-    setSession({ ...session, answers: updatedAnswers });
+    const updated = { ...session, answers: updatedAnswers };
+    setSession(updated);
+    saveQuizSession(updated);
     setFeedback({ correct, explanation: currentQuiz.explanation });
   };
 
   const handleNext = () => {
+    if (!session) return;
     const nextIndex = session.currentIndex + 1;
     setFeedback(null);
 
     if (nextIndex >= session.quizzes.length) {
       const quizResult = calculateResult(session);
       saveQuizResult(quizResult);
+      // session 保留在 localStorage，重新整理可恢復結果畫面
       setResult(quizResult);
       onComplete?.(quizResult);
     } else {
-      setSession({ ...session, currentIndex: nextIndex });
+      const updated = { ...session, currentIndex: nextIndex };
+      setSession(updated);
+      saveQuizSession(updated);
     }
   };
+
+  // 檢查中（極短暫）
+  if (phase === "checking" || (!session && phase !== "resume")) {
+    return null;
+  }
+
+  // 恢復對話框
+  if (phase === "resume" && savedSession) {
+    const answered = Object.keys(savedSession.answers).length;
+    const total = savedSession.quizzes.length;
+    return (
+      <div className="mx-auto max-w-lg px-4 py-12">
+        <Card>
+          <CardContent className="py-6 text-center">
+            <h2 className="mb-2 text-lg font-bold">發現未完成的測驗</h2>
+            <p className="mb-6 text-muted-foreground">
+              上次答到第 {answered} / {total} 題，要繼續嗎？
+            </p>
+            <div className="flex justify-center gap-3">
+              <Button onClick={handleResume}>繼續上次</Button>
+              <Button variant="outline" onClick={handleRestart}>
+                重新開始
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  if (!session) return null;
+
+  const currentQuiz = session.quizzes[session.currentIndex];
+  const progressPercent = Math.round(
+    (session.currentIndex / session.quizzes.length) * 100
+  );
 
   // Result screen
   if (result) {
@@ -98,7 +182,10 @@ export function QuizShell({ chapterId, chapterTitle, quizzes, onComplete }: Quiz
         <div className="flex justify-center gap-3">
           <Button
             onClick={() => {
-              setSession(createSession(chapterId, quizzes));
+              clearQuizSession(chapterId);
+              const s = createSession(chapterId, quizzes);
+              saveQuizSession(s);
+              setSession(s);
               setResult(null);
               setFeedback(null);
             }}

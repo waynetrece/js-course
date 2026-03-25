@@ -1,7 +1,8 @@
 import { UserProgress, ChapterProgress, DEFAULT_PROGRESS } from "@/types/progress";
-import { QuizResult } from "@/types/quiz";
+import { QuizResult, QuizSession } from "@/types/quiz";
 
 const STORAGE_KEY = "js-review-progress";
+const SESSION_PREFIX = "js-review-session-";
 
 export function getProgress(): UserProgress {
   if (typeof window === "undefined") return DEFAULT_PROGRESS;
@@ -79,4 +80,27 @@ export function removeCorrectFromWeak(correctIds: string[]): UserProgress {
 export function resetProgress(): void {
   if (typeof window === "undefined") return;
   localStorage.removeItem(STORAGE_KEY);
+}
+
+// --- Quiz Session 自動儲存 ---
+
+export function saveQuizSession(session: QuizSession): void {
+  if (typeof window === "undefined") return;
+  localStorage.setItem(SESSION_PREFIX + session.chapterId, JSON.stringify(session));
+}
+
+export function loadQuizSession(chapterId: string): QuizSession | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = localStorage.getItem(SESSION_PREFIX + chapterId);
+    if (!raw) return null;
+    return JSON.parse(raw) as QuizSession;
+  } catch {
+    return null;
+  }
+}
+
+export function clearQuizSession(chapterId: string): void {
+  if (typeof window === "undefined") return;
+  localStorage.removeItem(SESSION_PREFIX + chapterId);
 }
