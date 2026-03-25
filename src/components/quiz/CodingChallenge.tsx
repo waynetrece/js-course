@@ -4,6 +4,7 @@ import { useState, useCallback } from "react";
 import dynamic from "next/dynamic";
 import { CodingChallengeQuiz } from "@/types/quiz";
 import { runTestCases, TestResult } from "@/lib/code-executor";
+import { detectGeneralError } from "@/lib/error-hints";
 import { cn } from "@/lib/utils";
 
 const CodeMirror = dynamic(() => import("@uiw/react-codemirror"), {
@@ -23,6 +24,7 @@ interface CodingChallengeProps {
 export function CodingChallenge({ quiz, onAnswer }: CodingChallengeProps) {
   const [code, setCode] = useState(quiz.starterCode);
   const [results, setResults] = useState<TestResult[] | null>(null);
+  const [generalError, setGeneralError] = useState<string | null>(null);
   const [running, setRunning] = useState(false);
   const [attempts, setAttempts] = useState(0);
   const [showHints, setShowHints] = useState(false);
@@ -33,6 +35,7 @@ export function CodingChallenge({ quiz, onAnswer }: CodingChallengeProps) {
     try {
       const testResults = await runTestCases(code, quiz.testCases);
       setResults(testResults);
+      setGeneralError(detectGeneralError(testResults));
       setAttempts((a) => a + 1);
 
       const allPassed = testResults.every((r) => r.passed);
@@ -125,6 +128,16 @@ export function CodingChallenge({ quiz, onAnswer }: CodingChallengeProps) {
           <p className="text-xs font-medium text-muted-foreground">
             測試結果（{results.filter((r) => r.passed).length} / {results.length} 通過）
           </p>
+
+          {generalError && !results.every((r) => r.passed) && (
+            <div className="rounded-md border border-amber-300 bg-amber-50 p-3 text-sm text-amber-800 dark:border-amber-700 dark:bg-amber-950/50 dark:text-amber-200">
+              <div className="flex items-start gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+                <span>{generalError}</span>
+              </div>
+            </div>
+          )}
+
           {results.map((r, i) => (
             <div
               key={i}
@@ -144,15 +157,22 @@ export function CodingChallenge({ quiz, onAnswer }: CodingChallengeProps) {
                 <span className="font-medium">{r.description}</span>
               </div>
               {!r.passed && (
-                <div className="mt-2 space-y-0.5 text-xs font-mono">
-                  <p>
-                    <span className="text-muted-foreground">預期：</span>
-                    <span className="text-success">{r.expected}</span>
-                  </p>
-                  <p>
-                    <span className="text-muted-foreground">實際：</span>
-                    <span className="text-destructive">{r.actual}</span>
-                  </p>
+                <div className="mt-2 space-y-1 text-xs">
+                  <div className="space-y-0.5 font-mono">
+                    <p>
+                      <span className="text-muted-foreground">預期：</span>
+                      <span className="text-success">{r.expected}</span>
+                    </p>
+                    <p>
+                      <span className="text-muted-foreground">實際：</span>
+                      <span className="text-destructive">{r.actual}</span>
+                    </p>
+                  </div>
+                  {r.failureHint && (
+                    <p className="mt-1.5 rounded bg-amber-50 px-2 py-1 text-amber-800 dark:bg-amber-950/50 dark:text-amber-200">
+                      觀念提示：{r.failureHint}
+                    </p>
+                  )}
                 </div>
               )}
             </div>

@@ -10,6 +10,7 @@ export interface TestCase {
   input?: unknown[];
   expected: string;
   description: string;
+  failureHint?: string;
 }
 
 export interface TestResult {
@@ -17,6 +18,7 @@ export interface TestResult {
   passed: boolean;
   expected: string;
   actual: string;
+  failureHint?: string;
 }
 
 const TIMEOUT_MS = 3000;
@@ -139,14 +141,17 @@ export async function runTestCases(
           passed: false,
           expected: tc.expected,
           actual: `Error: ${exec.error}`,
+          failureHint: tc.failureHint,
         });
       } else {
         const actual = exec.logs.join("\n");
+        const passed = actual.trim() === tc.expected.trim();
         results.push({
           description: tc.description,
-          passed: actual.trim() === tc.expected.trim(),
+          passed,
           expected: tc.expected,
           actual,
+          failureHint: passed ? undefined : tc.failureHint,
         });
       }
     } else {
@@ -161,14 +166,17 @@ export async function runTestCases(
           passed: false,
           expected: tc.expected,
           actual: `Error: ${exec.error}`,
+          failureHint: tc.failureHint,
         });
       } else {
         const actual = exec.returnValue ?? "undefined";
+        const passed = actual.trim() === tc.expected.trim();
         results.push({
           description: tc.description,
-          passed: actual.trim() === tc.expected.trim(),
+          passed,
           expected: tc.expected,
           actual,
+          failureHint: passed ? undefined : tc.failureHint,
         });
       }
     }

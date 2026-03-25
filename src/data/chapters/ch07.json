@@ -296,7 +296,8 @@
         {
           "mode": "output",
           "expected": "[\"蘋果\",\"橘子\",\"芒果\"]",
-          "description": "陣列操作後結果正確"
+          "description": "陣列操作後結果正確",
+          "failureHint": "push 加到最後，splice(index, deleteCount) 可以移除元素"
         }
       ],
       "hints": ["push 會在陣列最後加入元素", "splice(1, 1) 會從索引 1 開始移除 1 個元素"]
@@ -314,14 +315,16 @@
           "functionName": "getFirstAndLast",
           "input": [[1, 2, 3]],
           "expected": "[1,3]",
-          "description": "[1,2,3] 的第一和最後元素是 [1,3]"
+          "description": "[1,2,3] 的第一和最後元素是 [1,3]",
+          "failureHint": "第一個用 [0]，最後一個用 [arr.length - 1]"
         },
         {
           "mode": "return",
           "functionName": "getFirstAndLast",
           "input": [["a", "b", "c", "d"]],
           "expected": "[\"a\",\"d\"]",
-          "description": "[a,b,c,d] 的第一和最後元素是 [a,d]"
+          "description": "[a,b,c,d] 的第一和最後元素是 [a,d]",
+          "failureHint": "同樣的索引邏輯，回傳新陣列 [first, last]"
         }
       ],
       "hints": ["第一個元素是 arr[0]", "最後一個元素是 arr[arr.length - 1]"]

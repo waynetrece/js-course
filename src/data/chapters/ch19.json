@@ -361,21 +361,24 @@
           "functionName": "sum",
           "input": [[1, 2, 3]],
           "expected": "6",
-          "description": "[1,2,3] 總和是 6"
+          "description": "[1,2,3] 總和是 6",
+          "failureHint": "用迴圈或 reduce 累加所有元素"
         },
         {
           "mode": "return",
           "functionName": "sum",
           "input": [[10, 20, 30, 40]],
           "expected": "100",
-          "description": "[10,20,30,40] 總和是 100"
+          "description": "[10,20,30,40] 總和是 100",
+          "failureHint": "同樣的累加邏輯，確認初始值設為 0"
         },
         {
           "mode": "return",
           "functionName": "sum",
           "input": [[]],
           "expected": "0",
-          "description": "空陣列總和是 0"
+          "description": "空陣列總和是 0",
+          "failureHint": "空陣列不會進入迴圈，total 維持初始值 0"
         }
       ],
       "hints": ["用 for 迴圈遍歷陣列", "宣告一個 total 變數從 0 開始累加"]
@@ -393,21 +396,24 @@
           "functionName": "findMax",
           "input": [[3, 1, 7, 2]],
           "expected": "7",
-          "description": "[3,1,7,2] 最大值是 7"
+          "description": "[3,1,7,2] 最大值是 7",
+          "failureHint": "用 Math.max(...arr) 或迴圈逐一比較"
         },
         {
           "mode": "return",
           "functionName": "findMax",
           "input": [[-5, -1, -10]],
           "expected": "-1",
-          "description": "[-5,-1,-10] 最大值是 -1"
+          "description": "[-5,-1,-10] 最大值是 -1",
+          "failureHint": "負數中最大的是 -1，初始值不能用 0"
         },
         {
           "mode": "return",
           "functionName": "findMax",
           "input": [[42]],
           "expected": "42",
-          "description": "[42] 只有一個元素"
+          "description": "[42] 只有一個元素",
+          "failureHint": "只有一個元素時，它就是最大值"
         }
       ],
       "hints": ["先假設第一個元素是最大值", "用 for 迴圈逐一比較", "如果找到更大的就更新 max"]
@@ -425,21 +431,24 @@
           "functionName": "filterEven",
           "input": [[1, 2, 3, 4, 5]],
           "expected": "[2,4]",
-          "description": "[1,2,3,4,5] 的偶數是 [2,4]"
+          "description": "[1,2,3,4,5] 的偶數是 [2,4]",
+          "failureHint": "用 filter 搭配 n % 2 === 0 篩選偶數"
         },
         {
           "mode": "return",
           "functionName": "filterEven",
           "input": [[10, 15, 20, 25]],
           "expected": "[10,20]",
-          "description": "[10,15,20,25] 的偶數是 [10,20]"
+          "description": "[10,15,20,25] 的偶數是 [10,20]",
+          "failureHint": "同樣用 % 2 === 0 判斷"
         },
         {
           "mode": "return",
           "functionName": "filterEven",
           "input": [[1, 3, 5]],
           "expected": "[]",
-          "description": "全是奇數，回傳空陣列"
+          "description": "全是奇數，回傳空陣列",
+          "failureHint": "filter 沒有符合條件的元素時回傳空陣列 []"
         }
       ],
       "hints": ["偶數的判斷：n % 2 === 0", "可以用 for 迴圈 + push", "也可以用 filter 方法"]

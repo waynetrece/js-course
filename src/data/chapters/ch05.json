@@ -287,7 +287,8 @@
         {
           "mode": "output",
           "expected": "大家好，我是 Wayne，今年 25 歲",
-          "description": "使用樣板字面值組合字串"
+          "description": "使用樣板字面值組合字串",
+          "failureHint": "樣板字面值用反引號包裹，變數用 ${} 嵌入"
         }
       ],
       "hints": ["樣板字面值用反引號 ` 包住", "變數用 ${變數名} 插入"]
@@ -305,14 +306,16 @@
           "functionName": "getStringInfo",
           "input": ["Hello"],
           "expected": "長度：5，第一個字：H",
-          "description": "Hello 長度 5，第一個字 H"
+          "description": "Hello 長度 5，第一個字 H",
+          "failureHint": "字串的 .length 取得長度，[0] 取得第一個字元"
         },
         {
           "mode": "return",
           "functionName": "getStringInfo",
           "input": ["JavaScript"],
           "expected": "長度：10，第一個字：J",
-          "description": "JavaScript 長度 10，第一個字 J"
+          "description": "JavaScript 長度 10，第一個字 J",
+          "failureHint": "同樣用 .length 和 [0]，注意樣板字面值的格式"
         }
       ],
       "hints": ["用 str.length 取得字串長度", "用 str[0] 取得第一個字元"]

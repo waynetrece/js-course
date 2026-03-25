@@ -284,28 +284,32 @@
           "functionName": "processOrder",
           "input": [null],
           "expected": "訂單不存在",
-          "description": "null 訂單"
+          "description": "null 訂單",
+          "failureHint": "Guard clause 第一步：先檢查 order 是否為 null 並提早 return"
         },
         {
           "mode": "return",
           "functionName": "processOrder",
           "input": [{"isPaid": false, "items": []}],
           "expected": "尚未付款",
-          "description": "未付款"
+          "description": "未付款",
+          "failureHint": "第二個 guard：檢查 isPaid 是否為 false"
         },
         {
           "mode": "return",
           "functionName": "processOrder",
           "input": [{"isPaid": true, "items": []}],
           "expected": "訂單沒有商品",
-          "description": "空訂單"
+          "description": "空訂單",
+          "failureHint": "第三個 guard：檢查 items 陣列是否為空（length === 0）"
         },
         {
           "mode": "return",
           "functionName": "processOrder",
           "input": [{"isPaid": true, "items": ["a"]}],
           "expected": "處理訂單",
-          "description": "正常訂單"
+          "description": "正常訂單",
+          "failureHint": "所有 guard 都通過後，執行主邏輯"
         }
       ],
       "hints": ["先判斷 !order，如果成立就 return", "再判斷 !order.isPaid", "再判斷 order.items.length === 0", "最後 return 處理訂單"]
@@ -323,21 +327,24 @@
           "functionName": "getStatus",
           "input": [80],
           "expected": "及格",
-          "description": "80 分及格"
+          "description": "80 分及格",
+          "failureHint": "三元運算子：score >= 60 ? '及格' : '不及格'"
         },
         {
           "mode": "return",
           "functionName": "getStatus",
           "input": [60],
           "expected": "及格",
-          "description": "60 分剛好及格"
+          "description": "60 分剛好及格",
+          "failureHint": "60 是邊界值，>= 60 要算及格"
         },
         {
           "mode": "return",
           "functionName": "getStatus",
           "input": [45],
           "expected": "不及格",
-          "description": "45 分不及格"
+          "description": "45 分不及格",
+          "failureHint": "小於 60 走三元運算子的 : 後面部分"
         }
       ],
       "hints": ["三元運算子格式：條件 ? 值A : 值B", "return score >= 60 ? ... : ..."]

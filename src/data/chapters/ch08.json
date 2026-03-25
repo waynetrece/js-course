@@ -270,7 +270,8 @@
         {
           "mode": "output",
           "expected": "小明\n20\nA",
-          "description": "依序印出 name、age、grade"
+          "description": "依序印出 name、age、grade",
+          "failureHint": "中括號讀取用 obj['key']，記得依序 console.log 三個值"
         }
       ],
       "hints": ["物件用 {} 建立", "中括號語法：student['name'] 或 student[key]", "可以用迴圈或手動一個一個印"]
@@ -288,14 +289,16 @@
           "functionName": "getValues",
           "input": [{"a": 1, "b": 2}],
           "expected": "[1,2]",
-          "description": "{a:1, b:2} 的值是 [1,2]"
+          "description": "{a:1, b:2} 的值是 [1,2]",
+          "failureHint": "Object.values() 可以取得物件所有屬性值組成的陣列"
         },
         {
           "mode": "return",
           "functionName": "getValues",
           "input": [{"name": "Wayne"}],
           "expected": "[\"Wayne\"]",
-          "description": "{name:'Wayne'} 的值是 ['Wayne']"
+          "description": "{name:'Wayne'} 的值是 ['Wayne']",
+          "failureHint": "Object.values() 回傳值的陣列，單一屬性也是陣列"
         }
       ],
       "hints": ["可以用 Object.values()", "或用 for...in 迴圈搭配 push"]

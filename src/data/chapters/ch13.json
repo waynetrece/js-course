@@ -329,28 +329,32 @@
           "functionName": "checkTemperature",
           "input": [38.2],
           "expected": "發燒",
-          "description": "38.2 度是發燒"
+          "description": "38.2 度是發燒",
+          "failureHint": "37.5 度以上算發燒，用 >= 37.5 判斷"
         },
         {
           "mode": "return",
           "functionName": "checkTemperature",
           "input": [36.8],
           "expected": "正常",
-          "description": "36.8 度是正常"
+          "description": "36.8 度是正常",
+          "failureHint": "36~37.4 度算正常範圍"
         },
         {
           "mode": "return",
           "functionName": "checkTemperature",
           "input": [35.5],
           "expected": "偏低",
-          "description": "35.5 度是偏低"
+          "description": "35.5 度是偏低",
+          "failureHint": "低於 36 度算偏低，放在最後的條件"
         },
         {
           "mode": "return",
           "functionName": "checkTemperature",
           "input": [37.5],
           "expected": "發燒",
-          "description": "37.5 度算發燒"
+          "description": "37.5 度算發燒",
+          "failureHint": "37.5 是邊界值，>= 37.5 要算發燒"
         }
       ],
       "hints": ["先判斷 >= 37.5", "再判斷 >= 36", "剩下的就是偏低"]
@@ -368,28 +372,32 @@
           "functionName": "getBMICategory",
           "input": [17],
           "expected": "過輕",
-          "description": "BMI 17 是過輕"
+          "description": "BMI 17 是過輕",
+          "failureHint": "BMI < 18.5 是過輕"
         },
         {
           "mode": "return",
           "functionName": "getBMICategory",
           "input": [22],
           "expected": "正常",
-          "description": "BMI 22 是正常"
+          "description": "BMI 22 是正常",
+          "failureHint": "18.5 <= BMI < 24 是正常"
         },
         {
           "mode": "return",
           "functionName": "getBMICategory",
           "input": [25],
           "expected": "過重",
-          "description": "BMI 25 是過重"
+          "description": "BMI 25 是過重",
+          "failureHint": "24 <= BMI < 27 是過重"
         },
         {
           "mode": "return",
           "functionName": "getBMICategory",
           "input": [30],
           "expected": "肥胖",
-          "description": "BMI 30 是肥胖"
+          "description": "BMI 30 是肥胖",
+          "failureHint": "BMI >= 27 是肥胖"
         }
       ],
       "hints": ["用 if / else if / else", "可以從小到大判斷，也可以從大到小"]

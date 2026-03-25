@@ -278,21 +278,24 @@
           "functionName": "checkValue",
           "input": [null],
           "expected": "null",
-          "description": "null 應回傳 'null'"
+          "description": "null 應回傳 'null'",
+          "failureHint": "用 === null 判斷 null，它不等於 undefined"
         },
         {
           "mode": "return",
           "functionName": "checkValue",
           "input": [42],
           "expected": "has value",
-          "description": "42 是有值的"
+          "description": "42 是有值的",
+          "failureHint": "數字 42 不是 null 也不是 undefined，屬於有值"
         },
         {
           "mode": "return",
           "functionName": "checkValue",
           "input": [0],
           "expected": "has value",
-          "description": "0 也算有值"
+          "description": "0 也算有值",
+          "failureHint": "0 雖然是 falsy，但它不是 null 或 undefined，仍算有值"
         }
       ],
       "hints": ["null 要用 === null 來判斷", "undefined 要用 === undefined 來判斷", "注意判斷順序：先判斷 null 和 undefined，最後才是 has value"]
@@ -308,7 +311,8 @@
         {
           "mode": "output",
           "expected": "boolean\nundefined\nobject\nnumber\nstring",
-          "description": "五個 typeof 結果都正確"
+          "description": "五個 typeof 結果都正確",
+          "failureHint": "typeof null 是 'object'（JS 歷史遺留），typeof undefined 是 'undefined'"
         }
       ],
       "hints": ["typeof null 的結果比較特殊", "每個 typeof 都用一個 console.log 印出"]

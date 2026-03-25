@@ -300,7 +300,8 @@
         {
           "mode": "output",
           "expected": "525",
-          "description": "含稅價應為 525"
+          "description": "含稅價應為 525",
+          "failureHint": "先算稅金（500 * 0.05），再加原價，記得用 console.log 印出結果"
         }
       ],
       "hints": ["稅率不會變，用 const", "含稅價公式：price * (1 + taxRate)"]
@@ -318,21 +319,24 @@
           "functionName": "getAdvice",
           "input": ["稅率"],
           "expected": "const",
-          "description": "稅率不會變，應回傳 const"
+          "description": "稅率不會變，應回傳 const",
+          "failureHint": "判斷關鍵是「會不會改變」，不會變的用 const"
         },
         {
           "mode": "return",
           "functionName": "getAdvice",
           "input": ["圓周率"],
           "expected": "const",
-          "description": "圓周率不會變，應回傳 const"
+          "description": "圓周率不會變，應回傳 const",
+          "failureHint": "圓周率是固定值，永遠不會改變"
         },
         {
           "mode": "return",
           "functionName": "getAdvice",
           "input": ["分數"],
           "expected": "let",
-          "description": "分數會變，應回傳 let"
+          "description": "分數會變，應回傳 let",
+          "failureHint": "分數會隨考試改變，需要 let 允許重新賦值"
         }
       ],
       "hints": ["用 if 判斷 scenario 的值", "可以用 === 來比較字串"]

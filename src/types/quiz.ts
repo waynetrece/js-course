@@ -41,6 +41,7 @@ export interface TestCase {
   input?: unknown[];
   expected: string;
   description: string;
+  failureHint?: string;
 }
 
 export interface CodingChallengeQuiz extends BaseQuiz {

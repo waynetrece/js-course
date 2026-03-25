@@ -307,21 +307,24 @@
           "functionName": "canPurchase",
           "input": [20, 200],
           "expected": "true",
-          "description": "20歲、200元可以購買"
+          "description": "20歲、200元可以購買",
+          "failureHint": "兩個條件都要滿足，用 && 連接：age >= 18 && balance >= 100"
         },
         {
           "mode": "return",
           "functionName": "canPurchase",
           "input": [16, 200],
           "expected": "false",
-          "description": "16歲不滿18，不能購買"
+          "description": "16歲不滿18，不能購買",
+          "failureHint": "年齡不足 18，&& 的第一個條件就不成立"
         },
         {
           "mode": "return",
           "functionName": "canPurchase",
           "input": [20, 50],
           "expected": "false",
-          "description": "餘額不足100，不能購買"
+          "description": "餘額不足100，不能購買",
+          "failureHint": "年齡夠但餘額不足，&& 需要兩邊都 true"
         }
       ],
       "hints": ["用 && 表示「且」", "age >= 18 && balance >= 100"]
@@ -339,28 +342,32 @@
           "functionName": "getGrade",
           "input": [95],
           "expected": "A",
-          "description": "95 分是 A"
+          "description": "95 分是 A",
+          "failureHint": "90 分以上是 A，用 >= 90 判斷"
         },
         {
           "mode": "return",
           "functionName": "getGrade",
           "input": [85],
           "expected": "B",
-          "description": "85 分是 B"
+          "description": "85 分是 B",
+          "failureHint": "80~89 分是 B，注意 else if 的順序"
         },
         {
           "mode": "return",
           "functionName": "getGrade",
           "input": [72],
           "expected": "C",
-          "description": "72 分是 C"
+          "description": "72 分是 C",
+          "failureHint": "60~79 分是 C"
         },
         {
           "mode": "return",
           "functionName": "getGrade",
           "input": [50],
           "expected": "F",
-          "description": "50 分是 F"
+          "description": "50 分是 F",
+          "failureHint": "60 分以下是 F，放在最後的 else"
         }
       ],
       "hints": ["用 if / else if / else 來判斷", "從最高分開始判斷"]

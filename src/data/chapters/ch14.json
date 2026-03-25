@@ -293,28 +293,32 @@
           "functionName": "recommendDrink",
           "input": [true, true],
           "expected": "熱可可",
-          "description": "熱+甜=熱可可"
+          "description": "熱+甜=熱可可",
+          "failureHint": "第一層判斷冷熱，第二層判斷甜不甜"
         },
         {
           "mode": "return",
           "functionName": "recommendDrink",
           "input": [true, false],
           "expected": "熱茶",
-          "description": "熱+不甜=熱茶"
+          "description": "熱+不甜=熱茶",
+          "failureHint": "isHot 為 true 但 isSweet 為 false"
         },
         {
           "mode": "return",
           "functionName": "recommendDrink",
           "input": [false, true],
           "expected": "奶茶",
-          "description": "冰+甜=奶茶"
+          "description": "冰+甜=奶茶",
+          "failureHint": "isHot 為 false，進入 else 分支再判斷甜度"
         },
         {
           "mode": "return",
           "functionName": "recommendDrink",
           "input": [false, false],
           "expected": "冰水",
-          "description": "冰+不甜=冰水"
+          "description": "冰+不甜=冰水",
+          "failureHint": "兩個都是 false 的情況"
         }
       ],
       "hints": ["先判斷 hot，再在裡面判斷 sweet", "也可以用 && 組合兩個條件"]
@@ -332,28 +336,32 @@
           "functionName": "getTicketPrice",
           "input": [4, false],
           "expected": "0",
-          "description": "4歲免費"
+          "description": "4歲免費",
+          "failureHint": "先判斷年齡 < 6，票價為 0"
         },
         {
           "mode": "return",
           "functionName": "getTicketPrice",
           "input": [10, false],
           "expected": "150",
-          "description": "10歲半票 150"
+          "description": "10歲半票 150",
+          "failureHint": "6~12 歲是兒童半票 150"
         },
         {
           "mode": "return",
           "functionName": "getTicketPrice",
           "input": [20, true],
           "expected": "200",
-          "description": "20歲學生票 200"
+          "description": "20歲學生票 200",
+          "failureHint": "超過 12 歲，再判斷是否為學生"
         },
         {
           "mode": "return",
           "functionName": "getTicketPrice",
           "input": [20, false],
           "expected": "300",
-          "description": "20歲全票 300"
+          "description": "20歲全票 300",
+          "failureHint": "超過 12 歲且非學生，全票 300"
         }
       ],
       "hints": ["先判斷年齡 < 6", "再判斷 <= 12", "再看是否是學生"]
