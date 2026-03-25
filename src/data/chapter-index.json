@@ -103,9 +103,9 @@
     "number": 18,
     "title": "陣列與物件整合運用",
     "category": "資料結構篇",
-    "status": "in-progress",
-    "conceptCount": 0,
-    "quizCount": 0
+    "status": "completed",
+    "conceptCount": 7,
+    "quizCount": 17
   },
   {
     "id": "ch19",

@@ -1,0 +1,304 @@
+{
+  "id": "ch18",
+  "number": 18,
+  "title": "陣列與物件整合運用",
+  "category": "資料結構篇",
+  "concepts": [
+    {
+      "id": "ch18-c01",
+      "title": "陣列裡面放物件",
+      "explanation": "實務上最常見的資料結構就是「陣列包物件」。外層用陣列 [] 管理多筆資料，每一筆是結構相同的物件 {}。例如商品列表、學生名單都是這種結構。",
+      "codeExamples": [
+        {
+          "code": "let market = [\n  { bossName: \"Tom\", banana: 6, apple: 5 },\n  { bossName: \"John\", banana: 4, apple: 8 }\n];\n\nconsole.log(market);",
+          "output": "[{bossName: \"Tom\", banana: 6, apple: 5}, {bossName: \"John\", banana: 4, apple: 8}]"
+        }
+      ],
+      "tips": [
+        "外層 [] 是陣列，裡面每筆 {} 是物件",
+        "每個物件之間用逗號 , 隔開",
+        "每個物件的結構通常相同（都有相同的屬性名稱）"
+      ]
+    },
+    {
+      "id": "ch18-c02",
+      "title": "陣列[索引].屬性 讀取法",
+      "explanation": "讀取陣列中的物件屬性分兩步：先用 [索引] 取出哪一筆物件，再用 .屬性 取出值。這是整合運用最核心的語法。",
+      "codeExamples": [
+        {
+          "code": "let market = [\n  { bossName: \"Tom\", banana: 6 },\n  { bossName: \"John\", banana: 4 }\n];\n\nconsole.log(market[0].bossName);\nconsole.log(market[1].banana);",
+          "output": "Tom\n4"
+        }
+      ],
+      "tips": [
+        "先 [] 再 . ：先決定是第幾筆，再決定要哪個屬性",
+        "market[0] 取出的是整個物件 { bossName: \"Tom\", banana: 6 }",
+        "索引從 0 開始，第二筆是 [1] 不是 [2]"
+      ]
+    },
+    {
+      "id": "ch18-c03",
+      "title": "修改陣列中物件的屬性值",
+      "explanation": "找到路徑後，直接用 = 重新賦值就可以修改。不需要重新建立整個物件。",
+      "codeExamples": [
+        {
+          "code": "let market = [\n  { bossName: \"Tom\", banana: 6 },\n  { bossName: \"John\", banana: 4 }\n];\n\nmarket[0].banana = 10;\nconsole.log(market[0].banana);",
+          "output": "10"
+        }
+      ],
+      "tips": [
+        "讀取的路徑和修改的路徑一模一樣，差別只在最後用 = 賦值",
+        "也可以新增原本不存在的屬性：market[0].cherry = 3"
+      ]
+    },
+    {
+      "id": "ch18-c04",
+      "title": "物件裡面包物件（巢狀物件）",
+      "explanation": "物件的屬性值也可以是另一個物件，形成巢狀結構。好處是把相關資料「群組化」，讓結構更清楚。讀取時一層一層用 . 往下取。",
+      "codeExamples": [
+        {
+          "code": "let home = {\n  mother: { name: \"Mary\", age: 50 },\n  father: { name: \"Tom\", age: 55 }\n};\n\nconsole.log(home.mother.name);\nconsole.log(home.father.age);",
+          "output": "Mary\n55"
+        }
+      ],
+      "tips": [
+        "一層一層點下去：home → .mother → .name",
+        "群組化的好處：屬性不會混在一起，資料更有結構",
+        "層數再多也一樣，就是多加 ."
+      ]
+    },
+    {
+      "id": "ch18-c05",
+      "title": "JSON 格式",
+      "explanation": "JSON（JavaScript Object Notation）是資料交換格式，長得跟 JavaScript 物件很像，但有嚴格規定：屬性名稱和字串值都必須用雙引號，不能有結尾逗號。",
+      "codeExamples": [
+        {
+          "code": "// JavaScript 物件\nlet obj = { name: 'Tom', age: 30 };\n\n// JSON 格式（屬性名稱和字串都用雙引號）\n// { \"name\": \"Tom\", \"age\": 30 }",
+          "output": ""
+        }
+      ],
+      "tips": [
+        "JSON 屬性名稱必須加雙引號，JS 物件可以不加",
+        "JSON 字串值只能用雙引號，JS 物件單雙引號都行",
+        "JSON 不允許結尾逗號（trailing comma）"
+      ]
+    },
+    {
+      "id": "ch18-c06",
+      "title": "物件取值搭配 if 判斷",
+      "explanation": "從物件或陣列取出的值，可以直接拿來當 if 的判斷條件。常見用法：根據物件屬性的值（布林、數字、字串）來決定要執行什麼程式。",
+      "codeExamples": [
+        {
+          "code": "let market = [\n  { bossName: \"Tom\", isClose: false },\n  { bossName: \"John\", isClose: true }\n];\n\nif (market[0].isClose === false) {\n  console.log(market[0].bossName + \" 營業中\");\n} else {\n  console.log(market[0].bossName + \" 已打烊\");\n}",
+          "output": "Tom 營業中"
+        }
+      ],
+      "tips": [
+        "取值路徑放在 if 的小括號裡當條件",
+        "常搭配 ===、>、< 等比較運算子",
+        "先確認取值路徑正確，再寫 if 判斷"
+      ]
+    },
+    {
+      "id": "ch18-c07",
+      "title": "陣列物件搭配 if 流程判斷（綜合）",
+      "explanation": "綜合運用陣列讀取 [] + 物件讀取 . + if 判斷，處理多筆資料中特定那筆的條件邏輯。這是 Day 10 打卡任務的核心技能。",
+      "codeExamples": [
+        {
+          "code": "let students = [\n  { name: \"小明\", score: 85, isAbsent: false },\n  { name: \"小美\", score: 45, isAbsent: false }\n];\n\nif (students[1].isAbsent === true) {\n  console.log(students[1].name + \" 未到考\");\n} else if (students[1].score >= 60) {\n  console.log(students[1].name + \" 及格\");\n} else {\n  console.log(students[1].name + \" 不及格\");\n}",
+          "output": "小美 不及格"
+        }
+      ],
+      "tips": [
+        "先確認要判斷的是哪一筆（索引幾號）",
+        "再決定要判斷哪個屬性",
+        "多條件用 else if 串接，順序很重要"
+      ]
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "ch18-q01",
+      "type": "code-prediction",
+      "difficulty": 1,
+      "code": "let market = [\n  { bossName: \"Tom\", banana: 6 },\n  { bossName: \"John\", banana: 4 }\n];\n\nconsole.log(market[0].bossName);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "Tom",
+      "explanation": "market[0] 取出第一筆物件 { bossName: \"Tom\", banana: 6 }，再用 .bossName 取得 \"Tom\"。",
+      "conceptId": "ch18-c02"
+    },
+    {
+      "id": "ch18-q02",
+      "type": "code-prediction",
+      "difficulty": 1,
+      "code": "let market = [\n  { bossName: \"Tom\", banana: 6 },\n  { bossName: \"John\", banana: 4 }\n];\n\nconsole.log(market[1].banana);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "4",
+      "explanation": "market[1] 取出第二筆物件（索引從 0 開始），再用 .banana 取得 4。",
+      "conceptId": "ch18-c02"
+    },
+    {
+      "id": "ch18-q03",
+      "type": "code-prediction",
+      "difficulty": 1,
+      "code": "let home = {\n  mother: { name: \"Mary\", age: 50 },\n  father: { name: \"Tom\", age: 55 }\n};\n\nconsole.log(home.father.name);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "Tom",
+      "explanation": "先取 home.father 得到 { name: \"Tom\", age: 55 }，再取 .name 得到 \"Tom\"。巢狀物件一層一層用 . 取。",
+      "conceptId": "ch18-c04"
+    },
+    {
+      "id": "ch18-q04",
+      "type": "code-prediction",
+      "difficulty": 1,
+      "code": "let products = [\n  { name: \"蘋果\", price: 30 },\n  { name: \"香蕉\", price: 20 }\n];\n\nconsole.log(products.length);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "2",
+      "explanation": "products 是一個陣列，裡面有 2 筆物件，所以 .length 是 2。",
+      "conceptId": "ch18-c01"
+    },
+    {
+      "id": "ch18-q05",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "let market = [\n  { bossName: \"Tom\", banana: 6 },\n  { bossName: \"John\", banana: 4 }\n];\n\nmarket[1].banana = 10;\nconsole.log(market[1].banana);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "10",
+      "explanation": "market[1].banana = 10 把第二筆物件的 banana 從 4 改成 10，所以印出 10。",
+      "conceptId": "ch18-c03"
+    },
+    {
+      "id": "ch18-q06",
+      "type": "fill-in-blank",
+      "difficulty": 1,
+      "code": "let users = [\n  { name: \"Alice\", age: 25 },\n  { name: \"Bob\", age: 30 }\n];\n\nlet bobAge = ___;\nconsole.log(bobAge); // 30",
+      "blank": "___",
+      "question": "填入什麼可以取得 Bob 的年齡 30？",
+      "correctAnswer": "users[1].age",
+      "explanation": "Bob 是第二筆（索引 1），年齡屬性是 age，所以路徑是 users[1].age。",
+      "conceptId": "ch18-c02"
+    },
+    {
+      "id": "ch18-q07",
+      "type": "fill-in-blank",
+      "difficulty": 2,
+      "code": "let order = {\n  customer: \"Wayne\",\n  coupon: { title: \"五折券\", percent: 0.5 }\n};\n\nlet discount = ___;\nconsole.log(discount); // 0.5",
+      "blank": "___",
+      "question": "填入什麼可以取得折扣百分比 0.5？",
+      "correctAnswer": "order.coupon.percent",
+      "explanation": "先取 order.coupon 得到 { title: \"五折券\", percent: 0.5 }，再取 .percent 得到 0.5。",
+      "conceptId": "ch18-c04"
+    },
+    {
+      "id": "ch18-q08",
+      "type": "multiple-choice",
+      "difficulty": 1,
+      "question": "以下哪個是「陣列包物件」的正確寫法？",
+      "options": [
+        "[{ name: \"Tom\" }, { name: \"John\" }]",
+        "{{ name: \"Tom\" }, { name: \"John\" }}",
+        "{ [name: \"Tom\"], [name: \"John\"] }",
+        "[[ name: \"Tom\" ], [ name: \"John\" ]]"
+      ],
+      "correctIndex": 0,
+      "explanation": "陣列包物件：外層用 []，裡面每筆用 {} 包起來，物件之間用逗號隔開。",
+      "conceptId": "ch18-c01"
+    },
+    {
+      "id": "ch18-q09",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "let home = {\n  mother: { name: \"Mary\", age: 50 },\n  father: { name: \"Tom\", age: 55 }\n};\n\nhome.father.age = 56;\nconsole.log(home.father.age);",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "56",
+      "explanation": "home.father.age = 56 把 father 的 age 從 55 改成 56。巢狀物件的修改方式和讀取路徑一樣，只是最後用 = 賦值。",
+      "conceptId": "ch18-c04"
+    },
+    {
+      "id": "ch18-q10",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "let store = {\n  name: \"水果店\",\n  apple: 0,\n  banana: 15\n};\n\nif (store.apple === 0) {\n  console.log(\"蘋果已售完\");\n} else {\n  console.log(\"蘋果剩 \" + store.apple + \" 個\");\n}",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "蘋果已售完",
+      "explanation": "store.apple 是 0，符合 === 0 的條件，所以印出「蘋果已售完」。",
+      "conceptId": "ch18-c06"
+    },
+    {
+      "id": "ch18-q11",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "let market = [\n  { bossName: \"Tom\", isClose: false },\n  { bossName: \"John\", isClose: true }\n];\n\nif (market[1].isClose === false) {\n  console.log(market[1].bossName + \" 營業中\");\n} else {\n  console.log(market[1].bossName + \" 已打烊\");\n}",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "John 已打烊",
+      "explanation": "market[1].isClose 是 true，不等於 false，所以走 else 分支，印出「John 已打烊」。",
+      "conceptId": "ch18-c06"
+    },
+    {
+      "id": "ch18-q12",
+      "type": "true-false",
+      "difficulty": 1,
+      "statement": "JSON 格式的屬性名稱可以不加引號，跟 JavaScript 物件一樣。",
+      "question": "這個說法正確嗎？",
+      "correctAnswer": false,
+      "explanation": "JSON 格式的屬性名稱必須加雙引號，這是 JSON 和 JavaScript 物件的重要差異。",
+      "conceptId": "ch18-c05"
+    },
+    {
+      "id": "ch18-q13",
+      "type": "fill-in-blank",
+      "difficulty": 2,
+      "code": "let productInfo = {\n  price: 1000,\n  coupons: [\n    { id: 123, percent: 0.8, title: \"八折\" },\n    { id: 456, percent: 0.5, title: \"五折\" }\n  ]\n};\n\nlet title = ___;\nconsole.log(title); // \"五折\"",
+      "blank": "___",
+      "question": "填入什麼可以取得 id 456 的 title？",
+      "correctAnswer": "productInfo.coupons[1].title",
+      "explanation": "id 456 是 coupons 陣列的第二筆（索引 1）。路徑：productInfo → .coupons → [1] → .title。",
+      "conceptId": "ch18-c02"
+    },
+    {
+      "id": "ch18-q14",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "let company = {\n  name: \"好公司\",\n  employees: [\n    { name: \"Alice\", isOnLeave: false },\n    { name: \"Bob\", isOnLeave: true }\n  ]\n};\n\nif (company.employees[1].isOnLeave === true) {\n  console.log(company.employees[1].name + \" 今天請假\");\n} else {\n  console.log(company.employees[1].name + \" 今天上班\");\n}",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "Bob 今天請假",
+      "explanation": "company.employees[1] 是 Bob，他的 isOnLeave 是 true，符合條件，所以印出「Bob 今天請假」。",
+      "conceptId": "ch18-c07"
+    },
+    {
+      "id": "ch18-q15",
+      "type": "code-prediction",
+      "difficulty": 3,
+      "code": "let productInfo = {\n  price: 1000,\n  coupons: [\n    { id: 123, is_enabled: 0, percent: 0.8 },\n    { id: 456, is_enabled: 1, percent: 0.5 }\n  ]\n};\n\nlet coupon = productInfo.coupons[1];\nif (coupon.is_enabled === 1) {\n  console.log(productInfo.price * coupon.percent);\n} else {\n  console.log(\"未啟用\");\n}",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "500",
+      "explanation": "coupons[1] 的 is_enabled 是 1，符合條件。price 1000 * percent 0.5 = 500。這就是 Day 10 打卡任務的核心邏輯。",
+      "conceptId": "ch18-c07"
+    },
+    {
+      "id": "ch18-q16",
+      "type": "multiple-choice",
+      "difficulty": 2,
+      "question": "如何讀取以下結構中 rainFall 裡「鼓山」的值？\n\nlet weather = {\n  rainFall: { 鼓山: 400, 鹽埕: 300 }\n};",
+      "options": [
+        "weather.rainFall.鼓山",
+        "weather[rainFall][鼓山]",
+        "weather.鼓山.rainFall",
+        "rainFall.鼓山"
+      ],
+      "correctIndex": 0,
+      "explanation": "巢狀物件從外往內取：先 weather.rainFall 得到 { 鼓山: 400, 鹽埕: 300 }，再 .鼓山 得到 400。",
+      "conceptId": "ch18-c04"
+    },
+    {
+      "id": "ch18-q17",
+      "type": "code-prediction",
+      "difficulty": 3,
+      "code": "let students = [\n  { name: \"小明\", score: 85, isAbsent: false },\n  { name: \"小王\", score: 90, isAbsent: true }\n];\n\nif (students[1].isAbsent === true) {\n  console.log(students[1].name + \" 未到考\");\n} else if (students[1].score >= 60) {\n  console.log(students[1].name + \" 及格\");\n} else {\n  console.log(students[1].name + \" 不及格\");\n}",
+      "question": "console.log 會印出什麼？",
+      "correctAnswer": "小王 未到考",
+      "explanation": "小王的 isAbsent 是 true，第一個 if 就成立了，直接印出「小王 未到考」。即使他 score 90 分，因為 if 已經匹配就不會繼續往下判斷。",
+      "conceptId": "ch18-c07"
+    }
+  ]
+}
