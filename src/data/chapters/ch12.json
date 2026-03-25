@@ -62,13 +62,44 @@
         {
           "code": "let a = 1;\nlet b = \"1\";\nconsole.log(a == b);\nconsole.log(a === b);",
           "output": "true\nfalse"
+        },
+        {
+          "code": "// == 自動轉型的常見情況\nconsole.log(4 == \"4\");         // 字串 \"4\" 轉成數字 4\nconsole.log(0 == false);       // false 轉成 0\nconsole.log(\"\" == false);      // 兩邊都轉成 0\nconsole.log(null == undefined); // JS 特殊規則",
+          "output": "true\ntrue\ntrue\ntrue"
+        },
+        {
+          "code": "// === 不轉型，型別不同直接 false\nconsole.log(4 === \"4\");\nconsole.log(0 === false);\nconsole.log(\"\" === false);",
+          "output": "false\nfalse\nfalse"
         }
       ],
       "tips": [
         "雙等號像問「內容一樣嗎？」，不管包裝（型別）",
         "三等號像問「內容和包裝都一樣嗎？」，更嚴格",
-        "實務上建議一律用三等號（===），避免自動轉型的意外"
+        "實務上建議一律用三等號（===），避免自動轉型的意外",
+        "常見陷阱：0 == false 是 true、\"\" == false 是 true、null == undefined 是 true"
       ]
+    },
+    {
+      "id": "ch12-c04b",
+      "title": "算術運算的自動轉型",
+      "explanation": "JavaScript 在做算術運算時也會自動轉型。減號（-）、乘號（*）、除號（/）只能做數學，所以會把字串自動轉成數字。但加號（+）是例外：它有兩個身份，看到字串就變成「拼接」而不是「加法」。記法：加號是牆頭草，看到字串就跳槽去做拼接；其他符號很專一，只做數學。",
+      "codeExamples": [
+        {
+          "code": "// 減、乘、除：字串自動轉成數字\nconsole.log(2 * \"5\");     // \"5\" → 5，2 * 5\nconsole.log(\"10\" - 3);    // \"10\" → 10，10 - 3\nconsole.log(\"20\" / \"4\");  // 兩邊都轉數字",
+          "output": "10\n7\n5"
+        },
+        {
+          "code": "// 加號例外：看到字串就變拼接\nconsole.log(2 + \"5\");        // 不是 7！\nconsole.log(\"hello\" + 3);    // 字串拼接\nconsole.log(1 + 2 + \"3\");   // 先算 1+2=3，再拼 \"3\"",
+          "output": "25\nhello3\n33"
+        }
+      ],
+      "tips": [
+        "減、乘、除只能做數學 → 強迫字串變數字",
+        "加號有兩個身份：兩邊都是數字 → 加法；任一邊是字串 → 拼接",
+        "1 + 2 + \"3\" 會從左到右算：先 1+2=3（數字加法），再 3+\"3\"=\"33\"（字串拼接）",
+        "第二週第 2 題的 g * h 就是這個觀念：8 * \"8\" → 64"
+      ],
+      "isNew": true
     },
     {
       "id": "ch12-c05",
@@ -371,6 +402,46 @@
         }
       ],
       "hints": ["用 if / else if / else 來判斷", "從最高分開始判斷"]
+    },
+    {
+      "id": "ch12-q18",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "console.log(2 * \"5\");\nconsole.log(2 + \"5\");",
+      "question": "兩個 console.log 分別會印出什麼？",
+      "correctAnswer": "10\n25",
+      "explanation": "第一行：乘號只能做數學，\"5\" 自動轉成數字 5，所以 2 * 5 = 10。第二行：加號看到字串就變拼接，所以 2 + \"5\" 變成字串拼接 \"25\"，不是數字 7。",
+      "isNew": true
+    },
+    {
+      "id": "ch12-q19",
+      "type": "code-prediction",
+      "difficulty": 2,
+      "code": "let g = 8;\nlet h = \"8\";\nconsole.log(g * h == 88);\nconsole.log(g * h == 64);\nconsole.log(g * h === 64);",
+      "question": "三個 console.log 分別會印出什麼？",
+      "correctAnswer": "false\ntrue\ntrue",
+      "explanation": "g * h：乘號會把字串 \"8\" 轉成數字 8，所以 8 * 8 = 64。第一行：64 == 88 是 false。第二行：64 == 64 是 true。第三行：64 === 64，值和型別（都是 number）都相同，所以也是 true。",
+      "isNew": true
+    },
+    {
+      "id": "ch12-q20",
+      "type": "code-prediction",
+      "difficulty": 3,
+      "code": "console.log(1 + 2 + \"3\");\nconsole.log(\"1\" + 2 + 3);",
+      "question": "兩個 console.log 分別會印出什麼？",
+      "correctAnswer": "33\n123",
+      "explanation": "第一行：從左到右算，先 1 + 2 = 3（兩邊都是數字，做加法），再 3 + \"3\" = \"33\"（遇到字串，變拼接）。第二行：\"1\" + 2，左邊是字串，變拼接得到 \"12\"，再 \"12\" + 3 繼續拼接得到 \"123\"。加號一旦遇到字串就回不去數學了。",
+      "isNew": true
+    },
+    {
+      "id": "ch12-q21",
+      "type": "true-false",
+      "difficulty": 2,
+      "statement": "在 JavaScript 中，\"10\" - 3 的結果是 \"7\"（字串）。",
+      "question": "這個說法正確嗎？",
+      "correctAnswer": false,
+      "explanation": "錯誤。減號只能做數學運算，所以會把字串 \"10\" 自動轉成數字 10，然後 10 - 3 = 7（數字，不是字串）。只有加號遇到字串才會變成拼接，其他運算子（-、*、/）都會把字串轉成數字。",
+      "isNew": true
     }
   ]
 }
